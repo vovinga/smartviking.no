@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<id>NitroPack Journal2 Compatibility</id>
+	<version>1.8.12</version>
+	<vqmver>2.x</vqmver>
+	<author>iSenseLabs | http://isenselabs.com</author>
+
+    <file path="system/engine/front.php">
+        <operation error="skip">
+            <search limit="1"><![CDATA[require_once(DIR_SYSTEM . 'journal2/startup.php');]]></search>
+            <add position="after"><![CDATA[
+        if (isset($_COOKIE["save_image_dimensions"]) && defined('JOURNAL_INSTALLED')) {
+            $this->registry->get('journal2')->cache->setDeveloperMode(true);
+        }
+            ]]></add>
+        </operation>
+    </file>
+
+    <file error="skip" name="catalog/view/theme/journal2/template/common/footer.tpl">
+        <operation error="skip">
+            <search position="replace"><![CDATA[if ($user->isLogged())]]></search>
+            <add><![CDATA[if ($user->isLogged() && function_exists('passesPageCacheValidation') && !passesPageCacheValidation())]]></add>
+        </operation>
+
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php if ($this->journal2->html_classes->hasClass('is-admin')): ?>]]></search>
+            <add><![CDATA[<?php if ($this->journal2->html_classes->hasClass('is-admin') && function_exists('passesPageCacheValidation') && !passesPageCacheValidation()): ?>]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/model/tool/image.php">
+        <operation info="Overriding the Journal mod" error="skip">
+            <search position="replace"><![CDATA[return (defined('HTTP_STATIC_CDN') ? HTTP_STATIC_CDN : $this->config->get('config_url')) . 'image/' . $new_image;]]></search>
+            <add><![CDATA[
+                $default_link = $this->config->get('config_url') .'image/'.$new_image;
+                $cdn_link = $this->cdn_rewrite($this->config->get('config_url'), 'image/' . $new_image);
+                if ($default_link == $cdn_link) {
+                    return (defined('HTTP_STATIC_CDN') ? HTTP_STATIC_CDN : $this->config->get('config_url')) . 'image/' . $new_image;
+                } else {
+                    return $cdn_link;
+                }
+            ]]></add>
+        </operation>
+        <operation info="Overriding the Journal mod" error="skip">
+        <search position="replace"><![CDATA[return (defined('HTTPS_STATIC_CDN') ? HTTPS_STATIC_CDN : $this->config->get('config_ssl')) . 'image/' . $new_image;]]></search>
+            <add><![CDATA[
+                $default_link = $this->config->get('config_ssl') .'image/'.$new_image;
+                $cdn_link = $this->cdn_rewrite($this->config->get('config_ssl'), 'image/' . $new_image);
+                if ($default_link == $cdn_link) {
+                    return (defined('HTTPS_STATIC_CDN') ? HTTPS_STATIC_CDN : $this->config->get('config_ssl')) . 'image/' . $new_image;
+                } else {
+                    return $cdn_link;
+                }
+            ]]></add>
+        </operation>
+    </file>
+</modification>

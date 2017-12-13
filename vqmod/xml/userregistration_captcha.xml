@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Add captcha to registrations</id>
+	<version>1.4.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>support@ocdev.eu</author>
+        
+	<!-- register affiliate captcha -->
+        <file name="catalog/controller/affiliate/register.php">
+        
+            <operation>
+                <search position="after"><![CDATA[
+                        $this->data['entry_confirm'] = $this->language->get('entry_confirm');
+                ]]></search>
+                <add><![CDATA[
+    $this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                ]]></add>
+            </operation>
+
+            <operation>
+            <search position="before"><![CDATA[
+            $this->data['action'] = $this->url->link('affiliate/register', '', 'SSL');
+            ]]></search>
+            <add><![CDATA[
+ 		if (isset($this->error['captcha'])) {
+			$this->data['error_captcha'] = $this->error['captcha'];
+		} else {
+			$this->data['error_captcha'] = '';
+		}      
+            ]]>
+            </add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+                $this->language->load('affiliate/register');
+                ]]></search>
+                <add>
+		$this->language->load('information/contact');
+                </add>
+            </operation>
+            
+            <operation>
+                <search position="after"><![CDATA[
+                function validate()
+                ]]></search>
+                <add><![CDATA[
+                if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+                    $this->error['captcha'] = $this->language->get('error_captcha');
+                    $this->error['warning'] = $this->language->get('error_captcha');
+        	}
+		
+             ]]></add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+                public function index() {
+                ]]></search>
+                <add><![CDATA[
+                	public function captcha() {
+		$this->load->library('captcha');
+		
+		$captcha = new Captcha();
+		
+		$this->session->data['captcha'] = $captcha->getCode();
+		
+		$captcha->showImage();
+	}
+                ]]></add>
+            </operation>
+
+            <operation>
+                <search position="before"><![CDATA[
+if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/affiliate/register.tpl')) {                
+                ]]></search>
+                <add><![CDATA[
+                		
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}		
+
+                ]]>
+                </add>
+            </operation>   
+        </file>
+        
+        <file name="catalog/view/theme/*/template/affiliate/register.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php if ($text_agree) { ?>]]></search>
+                <add><![CDATA[
+                <table>
+                    <tr>
+                        <td><?php echo $entry_captcha; ?></td>
+                        <td><input type="text" name="captcha" value="<?php echo $captcha; ?>" /></td>
+                    </tr>
+                    <td></td>
+                    <td>
+    <img src="index.php?route=affiliate/register/captcha" alt="" />
+    <?php if ($error_captcha) { ?>
+    <span class="error"><?php echo $error_captcha; ?></span>
+    <?php } ?>
+                </td>
+                </tr>
+                </table>
+    ]]></add>
+                </operation>
+        </file>
+	<!-- register affiliate captcha end -->
+        <!-- register account captcha -->
+        <file name="catalog/controller/account/register.php">
+            <operation>
+                <search position="after"><![CDATA[
+                        $this->data['entry_confirm'] = $this->language->get('entry_confirm');
+                ]]></search>
+                <add><![CDATA[
+    $this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                ]]></add>
+            </operation>
+            <operation>
+            <search position="before"><![CDATA[
+            $this->data['action'] = $this->url->link('account/register', '', 'SSL');
+            ]]></search>
+            <add><![CDATA[
+ 		if (isset($this->error['captcha'])) {
+			$this->data['error_captcha'] = $this->error['captcha'];
+		} else {
+			$this->data['error_captcha'] = '';
+		}      
+            ]]>
+            </add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+                $this->language->load('account/register');
+                ]]></search>
+                <add>
+		$this->language->load('information/contact');
+                </add>
+            </operation>
+            
+            <operation>
+                <search position="after"><![CDATA[
+                function validate()
+                ]]></search>
+                <add><![CDATA[
+                if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+                    $this->error['captcha'] = $this->language->get('error_captcha');
+                    $this->error['warning'] = $this->language->get('error_captcha');
+        	}
+		
+             ]]></add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+                public function index() {
+                ]]></search>
+                <add><![CDATA[
+                	public function captcha() {
+		$this->load->library('captcha');
+		
+		$captcha = new Captcha();
+		
+		$this->session->data['captcha'] = $captcha->getCode();
+		
+		$captcha->showImage();
+	}
+                ]]></add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {                
+                ]]></search>
+                <add><![CDATA[
+                		
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}		
+
+                ]]>
+                </add>
+            </operation>
+        </file>
+        
+        <file name="catalog/view/theme/*/template/account/register.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php if ($text_agree) { ?>]]></search>
+                <add><![CDATA[
+                <table>
+                    <tr>
+                        <td><?php echo $entry_captcha; ?></td>
+                        <td><input type="text" name="captcha" value="<?php echo $captcha; ?>" /></td>
+                    </tr>
+                    <td></td>
+                    <td>
+    <img src="index.php?route=account/register/captcha" alt="" />
+    <?php if ($error_captcha) { ?>
+    <span class="error"><?php echo $error_captcha; ?></span>
+    <?php } ?>
+                </td>
+                </tr>
+                </table>
+    ]]></add>
+                </operation>
+        </file>
+        <!-- register account captcha end -->
+        <!-- forgoten password captcha begin -->
+	<file name="catalog/controller/checkout/register.php">
+		<operation>
+			<search position="after"><![CDATA[
+			$this->data['entry_shipping'] = $this->language->get('entry_shipping');
+			]]></search>
+			<add><![CDATA[
+			$this->data['entry_captcha'] = $this->language->get('entry_captcha');
+			]]></add>
+		</operation>
+	</file>
+        <file name="catalog/view/theme/*/template/account/forgotten.tpl">
+            <operation>
+                <search position="before"><![CDATA[<div class="buttons">]]></search>
+                <add><![CDATA[
+                <div class="content">
+                <table>
+                    <tr>
+                        <td><?php echo $entry_captcha; ?></td>
+                    <td><input type="text" name="captcha" value="<?php echo $captcha; ?>" /></td>
+                </tr>
+                <td></td>
+                <td>
+    <img src="index.php?route=account/forgotten/captcha" alt="" />
+    <?php if ($error_captcha) { ?>
+    <span class="error"><?php echo $error_captcha; ?></span>
+    <?php } ?></div>
+                </td>
+                </tr>
+                </table>
+                ]]></add>
+                </operation>
+        </file>
+        
+        <file name="catalog/controller/account/forgotten.php">
+            <operation>
+                 <search position="before"><![CDATA[
+                public function index() {
+                ]]></search>
+                <add><![CDATA[
+                	public function captcha() {
+		$this->load->library('captcha');
+		
+		$captcha = new Captcha();
+		
+		$this->session->data['captcha'] = $captcha->getCode();
+		
+		$captcha->showImage();
+	}
+                ]]></add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+                $this->language->load('account/forgotten');
+                ]]></search>
+                <add>
+		$this->language->load('information/contact');
+                </add>
+            </operation>
+            
+            
+            <operation>
+                <search position="after"><![CDATA[
+                        $this->data['button_back'] = $this->language->get('button_back');
+                ]]></search>
+                <add><![CDATA[
+    $this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                ]]></add>
+            </operation>
+            
+           <operation>
+            <search position="before"><![CDATA[
+            $this->data['entry_email'] = $this->language->get('entry_email');
+            ]]></search>
+            <add><![CDATA[
+ 		if (isset($this->error['captcha'])) {
+			$this->data['error_captcha'] = $this->error['captcha'];
+		} else {
+			$this->data['error_captcha'] = '';
+		}      
+            ]]>
+            </add>
+            </operation>
+            
+            <operation>
+                <search position="after"><![CDATA[
+                function validate()
+                ]]></search>
+                <add><![CDATA[
+                if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+                    $this->error['captcha'] = $this->language->get('error_captcha');
+                    $this->error['warning'] = $this->language->get('error_captcha');
+        	}
+		
+             ]]></add>
+            </operation>
+            
+            <operation>
+                <search position="before"><![CDATA[
+$this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');              
+                ]]></search>
+                <add><![CDATA[
+                		
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}		
+
+                ]]>
+                </add>
+            </operation>
+            
+        </file>
+	<!-- forgotten password captcha end -->
+	<!-- checkout account registration captcha begin -->
+	<file name="catalog/controller/checkout/checkout.php">
+		<operation>
+			<search position="before"><![CDATA[
+			public function country() {
+			]]></search>
+			<add><![CDATA[
+				public function captcha() {
+					$this->load->library('captcha');
+					$captcha = new Captcha();
+					$this->session->data['captcha'] = $captcha->getCode();
+					$captcha->showImage();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/checkout/register.php">
+            <operation>
+                <search position="before"><![CDATA[
+                $this->language->load('checkout/checkout');
+                ]]></search>
+                <add>
+		$this->language->load('information/contact');
+                </add>
+            </operation>
+            <operation>
+                <search position="after"><![CDATA[
+                    $this->data['button_continue'] = $this->language->get('button_continue');
+                ]]></search>
+                <add><![CDATA[
+                    $this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                ]]></add>
+            </operation>
+            <operation>
+                <search position="before"><![CDATA[
+                $this->data['shipping_required'] = $this->cart->hasShipping();
+                ]]></search>
+                <add><![CDATA[
+                		
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}		
+
+                ]]>
+                </add>
+            </operation>
+            <operation>
+                <search position="before"><![CDATA[
+                if ($this->config->get('config_account_id')) {
+                ]]></search>
+                <add><![CDATA[
+                if (empty($this->session->data['captcha']) || !key_exists("captcha", $this->request->post) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+                    $json['error']['captcha'] = $this->language->get('error_captcha');
+        	}
+		
+             ]]></add>
+            </operation>
+	</file>
+	<file name="catalog/view/theme/*/template/checkout/checkout.tpl">
+		<operation>
+			<search position="before" index="1"><![CDATA[
+			if (json['error']['confirm']) {
+			]]></search>
+			<add><![CDATA[
+			if (json['error']['captcha']) {
+			    $('#payment-address input[name=\'captcha\'] + br').after('<span class="error">' + json['error']['captcha'] + '</span>');
+			}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/checkout/register.tpl">
+		<operation>
+		<search position="after"><![CDATA[
+		<input type="password" name="confirm" value="" class="large-field" />
+		]]></search>
+		<add><![CDATA[
+		<br />
+		<br />
+		<br />
+                
+                <span class="required">*</span><?php echo $entry_captcha; ?>
+                <input type="text" name="captcha" value="" /><br />
+                <img src="index.php?route=checkout/checkout/captcha" alt="" />
+		]]></add>
+		</operation>
+	</file>
+	<!-- checkout account registration captcha end -->
+        <!-- checkout guest captcha begin -->
+        <file name="catalog/controller/checkout/guest.php">
+            <operation>
+                <search position="before"><![CDATA[
+                $this->language->load('checkout/checkout');
+                ]]></search>
+                <add>
+		$this->language->load('information/contact');
+                </add>
+            </operation>
+            <operation>
+                <search position="after"><![CDATA[
+                    $this->data['button_continue'] = $this->language->get('button_continue');
+                ]]></search>
+                <add><![CDATA[
+                    $this->data['entry_captcha'] = $this->language->get('entry_captcha');
+                ]]></add>
+            </operation>
+            <operation>
+                <search position="before"><![CDATA[
+                $this->load->model('account/customer_group');
+                ]]></search>
+                <add><![CDATA[
+                		
+		if (isset($this->request->post['captcha'])) {
+			$this->data['captcha'] = $this->request->post['captcha'];
+		} else {
+			$this->data['captcha'] = '';
+		}		
+
+                ]]>
+                </add>
+            </operation>
+            <operation>
+                <search position="before"><![CDATA[
+                $this->request->post['zone_id'] == ''
+                ]]></search>
+                <add><![CDATA[
+                if (empty($this->session->data['captcha']) || !key_exists("captcha", $this->request->post) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
+                    $json['error']['captcha'] = $this->language->get('error_captcha');
+        	}
+		
+             ]]></add>
+            </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/checkout/checkout.tpl">
+            <operation>
+                <search position="before" index="4"><![CDATA[
+                if (json['error']['zone']) {
+                ]]></search>
+                <add><![CDATA[
+                    if (json['error']['captcha']) {
+			$('#payment-address input[name=\'captcha\'] + br').after('<span class="error">' + json['error']['captcha'] + '</span>');
+		    }
+                ]]></add>
+            </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/checkout/guest.tpl">
+            <operation>
+                <search position="after"><![CDATA[
+                <input type="text" name="fax" value="<?php echo $fax; ?>" class="large-field" />
+                ]]></search>
+                <add><![CDATA[
+                    <br />
+                    <br />
+                    <br />
+                    <span class="required">*</span><?php echo $entry_captcha; ?>
+                    <input type="text" name="captcha" value="" /><br />
+                    <img src="index.php?route=checkout/checkout/captcha" alt="" />
+                ]]></add>
+            </operation>
+        </file>
+        <!-- checkout guest captcha end -->
+</modification>

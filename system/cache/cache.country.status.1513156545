@@ -1,0 +1,11 @@
+a:4:{i:0;a:7:{s:10:"country_id";s:2:"57";s:4:"name";s:7:"Denmark";s:10:"iso_code_2";s:2:"DK";s:10:"iso_code_3";s:3:"DNK";s:14:"address_format";s:88:"{company}
+{firstname} {lastname}
+{address_1}
+{address_2}
+{postcode} {city}
+{countr}";s:17:"postcode_required";s:1:"1";s:6:"status";s:1:"1";}i:1;a:7:{s:10:"country_id";s:2:"72";s:4:"name";s:7:"Finland";s:10:"iso_code_2";s:2:"FI";s:10:"iso_code_3";s:3:"FIN";s:14:"address_format";s:0:"";s:17:"postcode_required";s:1:"0";s:6:"status";s:1:"1";}i:2;a:7:{s:10:"country_id";s:3:"160";s:4:"name";s:6:"Norway";s:10:"iso_code_2";s:2:"NO";s:10:"iso_code_3";s:3:"NOR";s:14:"address_format";s:0:"";s:17:"postcode_required";s:1:"0";s:6:"status";s:1:"1";}i:3;a:7:{s:10:"country_id";s:3:"203";s:4:"name";s:6:"Sweden";s:10:"iso_code_2";s:2:"SE";s:10:"iso_code_3";s:3:"SWE";s:14:"address_format";s:89:"{company}
+{firstname} {lastname}
+{address_1}
+{address_2}
+{postcode} {city}
+{country}";s:17:"postcode_required";s:1:"1";s:6:"status";s:1:"1";}}

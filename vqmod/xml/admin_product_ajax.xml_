@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+<id>Ajax Product Editor (Admin) </id>
+<version>1.1.0</version>
+<vqmver>2.1.5</vqmver>
+<author>luismaf: www.tecnoadictos.com.ar</author>
+
+<file name="admin/view/template/catalog/product_list.tpl" error="log">
+	/*Name*/
+	<operation>
+		<search position="replace" index="1"><![CDATA[<td class="left"><?php echo $product['name']; ?></td>]]></search>
+		<add><![CDATA[           
+		<td class="left">
+		<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+			<span class="ajax_text" id="name-<?php echo $product['product_id']; ?>" value="<?php echo $product['product_id']; ?>">
+			<input type="text" style="text-align: left; float:left; width:98%; margin-left: 1px; cursor: text;" value="<?php echo $product['name']; ?>"><br><br>
+			<a onclick="save_name(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/save.png" title="<?php echo $text_save; ?>"></a>&nbsp&nbsp
+			<a onclick="close_name(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/undo.png" title="<?php echo $text_close; ?>"></a>
+		</span>
+		<?php } ?>
+		<span style="color: #000000;"><?php echo $product['name']; ?></td>
+		]]></add>
+	</operation>
+	
+	/*Model*/
+	<operation>
+		<search position="replace" index="1"><![CDATA[<td class="left"><?php echo $product['model']; ?></td>]]></search>
+		<add><![CDATA[           
+		<td class="left">
+		<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+			<span class="ajax_text" id="model-<?php echo $product['product_id']; ?>" value="<?php echo $product['product_id']; ?>">
+			<input type="text" style="text-align: left; float:left; width:80%; margin-left: 1px; cursor: text;" value="<?php echo $product['model']; ?>"><br><br>
+			<a onclick="save_model(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/save.png" title="<?php echo $text_save; ?>"></a>&nbsp&nbsp
+			<a onclick="close_model(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/undo.png" title="<?php echo $text_close; ?>"></a>
+		</span>
+		<?php } ?>
+		<span style="color: #000000;"><?php echo $product['model']; ?></td>
+		]]></add>
+	</operation>
+		
+	/*Price*/
+	<operation>
+			<search position="replace" index="1"><![CDATA[<td class="left"><?php if ($product['special']) { ?>]]></search>
+			<add><![CDATA[
+			<td class="right">
+			<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+				<span class="ajax_text" id="price-<?php echo $product['product_id']; ?>" value="<?php echo $product['product_id']; ?>">
+				<input type="text" style="text-align: right; float:right; width:60%; margin-left: 1px; cursor: text;" value="<?php echo $product['price']; ?>"><br><br>
+				<a onclick="save_price(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/save.png" title="<?php echo $text_save; ?>"></a>&nbsp&nbsp
+				<a onclick="close_price(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/undo.png" title="<?php echo $text_close; ?>"></a>
+			</span>
+			<?php } ?><?php if (!$product['special']) { ?>
+				<span style="color: #000000;"><?php echo $product['price']; ?></span>
+				<?php } else { ?>
+                <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
+                <span style="color: #b00;"><?php echo $product['special']; ?></span>
+                <?php } ?></td>
+				<?php /*?>
+		]]></add>
+	</operation>
+		
+	/*Quantity*/
+	<operation>
+		<search position="replace" index="1"><![CDATA[<td class="right"><?php if ($product['quantity'] <= 0) { ?>]]></search>
+		<add><![CDATA[           
+			<?php */?>
+			<td class="right">
+			<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+				<span class="ajax_text" column="quantity" id="quantity-<?php echo $product['product_id']; ?>" value="<?php echo $product['product_id']; ?>">
+				<input type="text" style="text-align: right; float:right; width:60%; margin-left: 1px; cursor: text;" value="<?php echo $product['quantity']; ?>"><br><br>
+				<a onclick="save_quantity(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/save.png" title="<?php echo $text_save; ?>"></a>&nbsp&nbsp
+				<a onclick="close_quantity(<?php echo $product['product_id']; ?>)"><img border=0 src="../admin/view/image/undo.png" title="<?php echo $text_close; ?>"></a>
+				</span>
+			<?php } ?>
+			<?php if ($product['quantity'] <= 0) { ?>
+			]]></add>
+	</operation>
+	/* Status */	
+	<operation>
+		<search position="replace" index="1"><![CDATA[<?php echo $product['status']; ?>]]></search>
+		<add><![CDATA[
+		<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+			<a class="ajax_link" id="status-<?php echo $product['product_id']; ?>" value="<?php echo $product['status']; ?>"><?php echo $product['status']; ?></a>
+		<?php } else { ?>
+		<?php echo $product['status']; ?>
+		<?php } ?>
+		]]></add>
+	</operation>
+	/* fix key mistake/issue: form --> filter */ 
+	<operation>
+		<search position="replace" index="1"><![CDATA[$('#form input').keydown(function(e) {]]></search>
+		<add><![CDATA[$('.filter').keydown(function(e) {]]></add>
+	</operation>
+	
+	<operation>
+		<search position="before" index="1" ><![CDATA[<script type="text/javascript"><!--]]></search>
+		<add><![CDATA[
+	<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+	<style>
+	.ajax_text {
+	   display:none;
+	}
+	.ajax_text +span {
+	   cursor: pointer;
+	}
+	</style>
+	<?php } ?>]]>
+		</add>
+	</operation>
+	<operation>
+		<search position="after" index="1" ><![CDATA[<script type="text/javascript"><!--]]></search>
+		<add><![CDATA[<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+		$(document).ready(function()
+		{
+			$('.ajax_text').each(function(index, wrapper)
+			{
+				$(this).siblings().click(function() {
+					$(wrapper).show();
+					$(wrapper).siblings().hide();
+					$('.ajax_text input').focus();
+				})
+				$('.ajax_text').keydown(function(e) {
+					if(e.which == 13)
+					{
+						var object_id = $(this).attr('id');
+						save_attribute(object_id);
+						return false;
+					}
+				})
+		   });
+		})
+		function close_name(id) {
+			 $('.ajax_text input').blur();
+			 $('#name-'+id).siblings().show(200);
+			 $('#name-'+id).hide(150);
+		}
+		function close_model(id) {
+			 $('.ajax_text input').blur();
+			 $('#model-'+id).siblings().show(200);
+			 $('#model-'+id).hide(150);
+		}
+		function close_price(id) {
+			 $('.ajax_text input').blur();
+			 $('#price-'+id).siblings().show(200);
+			 $('#price-'+id).hide(150);
+		}
+		function close_quantity(id) {
+			 $('.ajax_text input').blur();
+			 $('#quantity-'+id).siblings().show(200);
+			 $('#quantity-'+id).hide(150);
+		}
+		function save_name(id) {
+			$('#'+id+' input').attr('value', encodeURIComponent($('#'+id+' input').attr('value')));
+			save_attribute('name-'+id);
+		}
+		function save_model(id) {
+			$('#'+id+' input').attr('value', encodeURIComponent($('#'+id+' input').attr('value')));
+			save_attribute('model-'+id); 
+		}
+		function save_price(id) {
+			save_attribute('price-'+id); 
+		}
+		function save_quantity(id) {
+			save_attribute('quantity-'+id); 
+		}
+		function save_attribute(object_id) {
+			var input_object = $('#'+object_id+' input');
+			var value = $(input_object).attr('value');
+			$.ajax({
+				url: 'index.php?route=catalog/product/saveAttribute&value='+value+'&token=<?php echo $token; ?>',
+				type: 'get',
+				data: {object_id:object_id},
+				dataType: 'html',
+				success: function(html) {
+					$('#'+object_id).attr('value', html);
+					$('#'+object_id).next().html(html);
+					$(input_object).blur();
+					$('#'+object_id).siblings().show(200);
+					$('#'+object_id).hide(150);
+					}
+			});
+			$(input_object).css('cursor','default');
+		}
+		$('.ajax_link').click(function() {
+			var object_id = $(this).attr('id');
+			var value = $(this).attr('value');
+			$.ajax({
+				url: 'index.php?route=catalog/product/saveAttribute&value='+value+'&token=<?php echo $token; ?>',
+				type: 'get',
+				data: {object_id:object_id},
+				dataType: 'html',
+				success: function(html) {
+					$('#'+object_id).attr('value', html);
+					$('#'+object_id).value = html;
+					$('#'+object_id).html(html);
+				}
+			});
+		})
+		<?php } ?>
+		]]>
+		</add>
+	</operation>
+</file>
+	
+<file name="admin/controller/catalog/product.php" error="log">
+	<operation>
+	<search position="before" index="1" ><![CDATA[public function autocomplete() {]]></search>
+	<add><![CDATA[
+	public function saveAttribute() {
+		$this->load->language('catalog/product');
+		$this->load->model('catalog/product');
+		$output=0;
+		if(isset($this->request->get['object_id']))
+		{
+			$value = $this->request->get['value'];
+			$request = explode('-',$this->request->get['object_id']);
+			if(count($request)==2)
+			{
+				$db_column_name = $request[0];
+				$product_id = (int)$request[1];
+				switch ($db_column_name)
+				{
+					case 'name':
+						$output = $this->model_catalog_product->saveName($product_id,$value);
+						$output = $output=='0' ? ' 0' : $output;
+						break;
+					case 'model':
+						$output = $this->model_catalog_product->saveAttribute($product_id,$db_column_name,$value);
+						$output = $output=='0' ? ' 0' : $output;
+						break;
+					case 'price':
+						$output = number_format($this->model_catalog_product->saveAttribute($product_id,$db_column_name,(float)str_replace(",","",$value)),2,".",","); 
+						break;
+					case 'quantity':
+						$output = (int)$this->model_catalog_product->saveAttribute($product_id,$db_column_name,(int)$value);
+						$output = $output=='0' ? ' 0' : $output;
+						break;
+					case 'status':
+						$output = $this->model_catalog_product->saveAttribute($product_id,$db_column_name,$this->language->get('text_enabled') == $value ? 0 : 1) == 0 ? $this->language->get('text_disabled'): $this->language->get('text_enabled');
+						break;
+				}
+			}
+		}
+	$this->response->setOutput($output);
+	}
+	]]>
+	</add>
+	</operation>
+	/* Buttons: 'help text' */
+	<operation>
+		<search position="after" index="1" ><![CDATA[$this->data['heading_title'] = $this->language->get('heading_title');]]></search>
+		<add><![CDATA[
+			$this->data['text_save'] = $this->language->get('text_save');
+			if($this->data['text_save'] == 'text_save') $this->data['text_save'] = 'Save';
+
+			$this->data['text_close'] = $this->language->get('text_close');
+			if($this->data['text_close'] == 'text_close') $this->data['text_close'] = 'Close';]]>
+		</add>
+    </operation>
+	/* Specials: 2 decimals correction */
+	<operation>
+		<search position="replace" index="1" ><![CDATA[$special = $product_special['price'];]]></search>
+		<add><![CDATA[$special = number_format($product_special['price'],2,".",",");]]>
+		</add>
+	</operation>
+	/* Prices: 2 decimals correction */
+	<operation>
+		<search position="replace" index="1" ><![CDATA['price'      => $result['price'],]]></search>
+		<add><![CDATA['price'      => number_format($result['price'],2,".",","),]]>
+		</add>
+	</operation>
+</file>
+
+<file name="admin/model/catalog/product.php" error="log">
+	<operation>
+		<search position="before" index="1" ><![CDATA[public function editProduct($product_id, $data) {]]></search>
+		<add><![CDATA[
+	public function saveName($product_id,$value)
+	{
+		if($this->db->query("UPDATE " . DB_PREFIX . "product SET date_modified = NOW() WHERE product_id = '$product_id'") and $this->db->query("UPDATE " . DB_PREFIX . "product_description SET name = '" . $this->db->escape($value). "' WHERE product_id = '$product_id'"))
+		{
+			$this->cache->delete('product');
+			return $value; 
+		}
+		else {return "[DB ERROR]";}
+	}
+	public function saveAttribute($product_id, $db_column_name, $value)
+	{
+		if($this->db->query("UPDATE " . DB_PREFIX . "product SET " . $db_column_name . " = '" . $this->db->escape($value). "', date_modified = NOW() WHERE product_id = '$product_id'"))
+		{
+			$this->cache->delete('product');
+			return (string)$value;
+		}
+		else {return "[DB ERROR]";}		
+	}
+	]]>
+	</add>
+	</operation>
+</file>
+</modification>
+

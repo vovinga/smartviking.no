@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<id>NitroPack System Cache of OpenCart</id>
+	<version>1.8.12</version>
+	<vqmver>2.x</vqmver>
+	<author>iSenseLabs | http://isenselabs.com</author>
+
+	<file name="system/library/cache.php">
+		<operation info="Overriding the default OpenCart settings" error="log">
+			<search position="after"><![CDATA[$this->delete($key);]]></search>
+			<add><![CDATA[
+				require_once DIR_SYSTEM.'nitro/core/core.php';
+				
+				if (getNitroPersistence('Enabled') && getNitroPersistence('OpenCartCache.Enabled')) {
+				  $nitro_expire = getNitroPersistence('OpenCartCache.ExpireTime');
+				  $this->expire = !empty($nitro_expire) ? $nitro_expire : 0;
+				}
+			]]></add>
+		</operation>
+		<operation info="Clearing the stat cache" error="log">
+			<search position="after"><![CDATA[unlink]]></search>
+			<add><![CDATA[
+				clearstatcache();
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,1 @@
+22:43:40 - Error (2): file_get_contents(/customers/d/d/e/smartviking.no/httpd.www/assets/js/0-nitro-combined-d66a4136106f43c619dd204530f0b87c.js): failed to open stream: No such file or directory in file /customers/d/d/e/smartviking.no/httpd.www/assets/script.php on line 31

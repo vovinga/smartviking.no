@@ -1,0 +1,417 @@
+body,
+li {
+	font-size: 12px;
+	line-height: inherit;
+}
+a.btn-success:visited,
+a.btn-inverse:visited,
+a.btn-danger:visited,
+a.btn-primary:visited {
+	color: white;
+}
+
+.buttons {
+	border: none;
+	text-align: right;
+	padding: 1px 0 0 0;
+	margin: 0;
+	float: right;
+}
+
+.buttons .btn {
+	padding: 3px 12px;
+	font-weight: normal;
+}
+
+.box-content {
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	padding: 25px;
+}
+#content > .box > form > .navbar,
+#content > .box > form > .navbar .navbar-inner,
+#content > .box > .navbar,
+#content > .box > .navbar .navbar-inner {
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-top-left-radius: 4px;
+	border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+}
+#content > .box > form > .navbar, #content > .box > .navbar {
+	margin-bottom: 0;
+}
+#content > .box > form > .navbar .navbar-inner, #content > .box > .navbar .navbar-inner {
+	padding-right: 10px;
+	border-bottom: none;
+}
+.navbar .brand {
+	padding-left: 10px;
+}
+.navbar a.brand {
+	padding-top: 10px;
+	padding-bottom: 0px;
+}
+.navbar .brand i {
+	display: inline-block; margin-right: 5px; margin-top: 5px;
+}
+.form-horizontal .control-label {
+	padding-top: 8px;
+	width: 160px;
+	text-align: left;
+}
+.form-horizontal .controls {
+	margin-left: 170px;
+}
+.form-horizontal .control-group {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+.control-group > .controls > input, .control-group > .controls > a, .control-group > .controls > select {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.control-group a[data-tofbke='tooltip'] {
+	margin-left: 0;
+}
+span.error {
+	color: #b94a48;
+}
+span.success_text {
+	color: #468847;
+}
+.authenticated, .brought-to-office-dependable {
+	display: none;
+}
+.box-content .row h4 i, .box-content .row-fluid h4 i {
+	display: inline-block; margin-right: 5px; margin-top: 3px;
+}
+.column-box {
+	webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 20px;
+	border: 1px solid #CCCCCC;
+}
+.right {
+	float: right;
+}
+.column-box .column-item {
+	padding: 10px 0;
+}
+
+.column-box .column-item:not(:last-child) {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.left-entry-item {
+	margin-top: 7px;
+	float: left;
+}
+
+.language_folder, .language_file.top_file {
+	margin: 0;
+	margin-left: 20px;
+}
+
+.language_file {
+	margin: 0;
+	margin-left: 40px;
+}
+
+.language_file a.current {
+	text-decoration: underline;
+}
+
+.language_field input {
+	padding: 0 10px;
+	margin: 3px 0;
+	font-family: Consolas, 'Courier New', sans-serif;
+}
+
+.language_field textarea {
+	margin: 3px 0;
+	height: 15px;
+	min-width: 400px;
+	font-family: Consolas, 'Courier New', sans-serif;
+	transition: height 0.2s;
+	-webkit-transition: height 0.2s;
+	-moz-transition: height 0.2s;
+}
+
+div.language_buttons {
+	margin: 20px 0;
+}
+
+.remove_entry {
+	padding: 1px 6px;
+	margin-left: 5px;
+}
+
+.control-group {
+	padding: 0;
+}
+
+.control-group .control-label {
+	width: 150px;
+	padding: 8px 0 0 0;
+	margin: 0;
+}
+
+.control-group .controls {
+	margin-left: 160px;
+}
+
+.navbar .navbar-inner .nav-tabs {
+	border-bottom: none;
+	margin-top: 5px;
+}
+
+.navbar .navbar-inner .nav-tabs a {
+	padding: 7px 15px;
+}
+
+#module thead {
+	background-color: #eee;
+}
+
+#module td {
+	vertical-align: middle;
+}
+
+td select, td input {
+	margin-top: 5px;
+}
+
+td input[type="number"] {
+	width: 80px;
+}
+
+.module-row-label {
+	float: left;
+	width: 100px;
+	margin-top: 12px;
+}
+
+.leftBoxTitle {
+	display:inline-block;	
+	margin-right: 10px;
+}
+
+.leftBoxTitle label {
+	margin: 0;
+}
+
+.leftBoxInput input {
+	margin: 0;
+}
+
+.leftBoxInput {
+	display:inline-block;	
+	margin-right: 3px;
+	margin-left: 9px;
+}
+
+.buttonPositionOpenCart {
+	display:inline-block;
+	min-width: 128px;
+	padding-left: 14px;	
+}
+
+.buttonPositionOpenCart:first-child {
+	padding-left: 0px;	
+}
+
+/* -- Facebook Standard Login Button -- */
+
+a.fbkStandardBtn {
+	display: inline-block;
+	text-decoration: none;
+	font-family: Tahoma, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #fff;
+	height: 19px;
+	line-height: 18px;
+	text-align: center;
+	padding: 0 10px 0 31px;
+	background-color: #5f78ab;
+	border-top: 1px solid #879ac0;
+	outline: 1px solid #29447e;
+	position: relative;
+}
+
+a.fbkStandardBtn span {
+	width: 21px;
+	height: 20px;
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: -1px;
+	position: absolute;
+	background: url("../../image/facebooklogin/fbkIconStandardBtn.png") no-repeat left top;	
+}
+
+a.fbkStandardBtn:active {
+	background-color: #4f6aa3;
+	border-top: 1px solid #50609c;
+}
+
+
+/* -- End -- */
+
+
+/* -- Facebook Metro Style Login Button -- */
+
+a.fbkMetroStyleBtn {
+	display: inline-block;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #fff;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	padding: 0 20px 0 58px;
+	background-color: #3b5998;
+	position: relative;
+	transition: background-color 700ms ease-in-out;
+	-moz-transition: background-color 700ms ease-in-out;
+	-webkit-transition: background-color 700ms ease-in-out;
+	-o-transition: background-color 700ms ease-in-out;
+}
+
+a.fbkMetroStyleBtn span {
+	width: 38px;
+	height: 36px;
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: 0;
+	position: absolute;
+	background: url("../../image/facebooklogin/fbkIconMetroBtn.png") no-repeat left top;
+}
+
+a.fbkMetroStyleBtn:hover {
+	background-color: #2e4b89;
+}
+
+
+/* -- End -- */
+
+
+/* -- Facebook Rounded Login Button -- */
+
+a.fbkRoundedBtn {
+	display: inline-block;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 11px;
+	color: #fff;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	padding: 0 20px 0 57px;
+	background: url("../../image/facebooklogin/roundedBtnBg.png") repeat-x left 0;
+	border: 1px solid #264076;
+	border-radius: 4px;
+	position: relative;
+}
+
+a.fbkRoundedBtn span {
+	width: 37px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: 0;
+	position: absolute;
+	background: url("../../image/facebooklogin/fbkIconRoundedBtn.png") no-repeat left top;
+}
+
+a.fbkRoundedBtn:hover {
+	background: url("../../image/facebooklogin/roundedBtnBg.png") repeat-x left -30px;
+}
+
+a.fbkRoundedBtn:active {
+	background: url("../../image/facebooklogin/roundedBtnBg.png") repeat-x left -60px;
+}
+
+
+/* -- End -- */
+
+.buttonPreview {
+	display:inline-block;	
+}
+
+.buttonPreview .box .box-heading {
+	-webkit-border-radius: 7px 7px 0px 0px;
+	-moz-border-radius: 7px 7px 0px 0px;
+	-khtml-border-radius: 7px 7px 0px 0px;
+	border-radius: 7px 7px 0px 0px;
+	border: 1px solid #DBDEE1;
+	background: url('../../image/facebooklogin/widgetbackground.png') repeat-x;
+	padding: 8px 10px 7px 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #333;	
+}
+
+.buttonPreview .box .box-content {
+	background: #FFFFFF;
+	-webkit-border-radius: 0px 0px 7px 7px;
+	-moz-border-radius: 0px 0px 7px 7px;
+	-khtml-border-radius: 0px 0px 7px 7px;
+	border-radius: 0px 0px 7px 7px;
+	border-left: 1px solid #DBDEE1;
+	border-right: 1px solid #DBDEE1;
+	border-bottom: 1px solid #DBDEE1;
+	padding: 10px;
+}
+
+.noBoxWrapper .box-heading {
+	display:none;
+}
+
+.noBoxWrapper .box .box-content { 
+	border: none;
+}
+
+.extraFields label {
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.extraFields input {
+	margin: 0;
+}
+
+.htabs a {
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	background: #FFFFFF url('../../image/tab.png') repeat-x;
+	padding: 7px 15px 6px 15px;
+	float: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	color: #000000;
+	margin-right: 2px;
+	display: none;
+}

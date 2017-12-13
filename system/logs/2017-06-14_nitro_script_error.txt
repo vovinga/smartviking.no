@@ -1,0 +1,1 @@
+22:22:39 - Error (8): Undefined index: HTTP_ACCEPT_ENCODING in file /customers/d/d/e/smartviking.no/httpd.www/assets/script.php on line 63

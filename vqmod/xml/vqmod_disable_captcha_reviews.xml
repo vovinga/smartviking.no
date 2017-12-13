@@ -1,0 +1,35 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Disable Captcha For Reviews]]></id>
+	<version><![CDATA[1.5.5.1]]></version>
+	<vqmver><![CDATA[2.3.2]]></vqmver>
+	<author><![CDATA[Randy Hasson  http://www.fixmybrick.biz]]></author>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {]]></search>
+			<add><![CDATA[/*]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[if (!isset($json['error'])) { ]]></search>
+			<add><![CDATA[*/]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[public function captcha() { ]]></search>
+			<add><![CDATA[/*]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[public function upload() { ]]></search>
+			<add><![CDATA[*/]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/metroshop/template/product/product.tpl">
+		<operation>
+			<search position="before"><![CDATA[<b><?php echo $entry_captcha; ?></b><br />]]></search>
+			<add><![CDATA[<!--]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<img src="index.php?route=product/product/captcha" alt="" id="captcha" /><br />]]></search>
+			<add><![CDATA[-->]]></add>
+		</operation>
+	</file>
+</modification>

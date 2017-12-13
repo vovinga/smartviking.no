@@ -1,0 +1,1519 @@
+.facebook-login-modal form {
+  margin: 0 0 20px;
+}
+.facebook-login-modal fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.facebook-login-modal legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 40px;
+  color: #333333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.facebook-login-modal legend small {
+  font-size: 15px;
+  color: #999999;
+}
+.facebook-login-modal label,
+.facebook-login-modal input,
+.facebook-login-modal button,
+.facebook-login-modal select,
+.facebook-login-modal textarea {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+}
+.facebook-login-modal input,
+.facebook-login-modal button,
+.facebook-login-modal select,
+.facebook-login-modal textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.facebook-login-modal label {
+  display: block;
+  margin-bottom: 5px;
+}
+.facebook-login-modal select,
+.facebook-login-modal textarea,
+.facebook-login-modal input[type="text"],
+.facebook-login-modal input[type="password"],
+.facebook-login-modal input[type="datetime"],
+.facebook-login-modal input[type="datetime-local"],
+.facebook-login-modal input[type="date"],
+.facebook-login-modal input[type="month"],
+.facebook-login-modal input[type="time"],
+.facebook-login-modal input[type="week"],
+.facebook-login-modal input[type="number"],
+.facebook-login-modal input[type="email"],
+.facebook-login-modal input[type="url"],
+.facebook-login-modal input[type="search"],
+.facebook-login-modal input[type="tel"],
+.facebook-login-modal input[type="color"],
+.facebook-login-modal .uneditable-input {
+  display: inline-block;
+  height: 20px;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+.facebook-login-modal input,
+.facebook-login-modal textarea,
+.facebook-login-modal .uneditable-input {
+  width: 206px;
+}
+.facebook-login-modal textarea {
+  height: auto;
+}
+.facebook-login-modal textarea,
+.facebook-login-modal input[type="text"],
+.facebook-login-modal input[type="password"],
+.facebook-login-modal input[type="datetime"],
+.facebook-login-modal input[type="datetime-local"],
+.facebook-login-modal input[type="date"],
+.facebook-login-modal input[type="month"],
+.facebook-login-modal input[type="time"],
+.facebook-login-modal input[type="week"],
+.facebook-login-modal input[type="number"],
+.facebook-login-modal input[type="email"],
+.facebook-login-modal input[type="url"],
+.facebook-login-modal input[type="search"],
+.facebook-login-modal input[type="tel"],
+.facebook-login-modal input[type="color"],
+.facebook-login-modal .uneditable-input {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+}
+.facebook-login-modal textarea:focus,
+.facebook-login-modal input[type="text"]:focus,
+.facebook-login-modal input[type="password"]:focus,
+.facebook-login-modal input[type="datetime"]:focus,
+.facebook-login-modal input[type="datetime-local"]:focus,
+.facebook-login-modal input[type="date"]:focus,
+.facebook-login-modal input[type="month"]:focus,
+.facebook-login-modal input[type="time"]:focus,
+.facebook-login-modal input[type="week"]:focus,
+.facebook-login-modal input[type="number"]:focus,
+.facebook-login-modal input[type="email"]:focus,
+.facebook-login-modal input[type="url"]:focus,
+.facebook-login-modal input[type="search"]:focus,
+.facebook-login-modal input[type="tel"]:focus,
+.facebook-login-modal input[type="color"]:focus,
+.facebook-login-modal .uneditable-input:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+.facebook-login-modal input[type="radio"],
+.facebook-login-modal input[type="checkbox"] {
+  margin: 4px 0 0;
+  *margin-top: 0;
+  /* IE7 */
+
+  margin-top: 1px \9;
+  /* IE8-9 */
+
+  line-height: normal;
+}
+.facebook-login-modal input[type="file"],
+.facebook-login-modal input[type="image"],
+.facebook-login-modal input[type="submit"],
+.facebook-login-modal input[type="reset"],
+.facebook-login-modal input[type="button"],
+.facebook-login-modal input[type="radio"],
+.facebook-login-modal input[type="checkbox"] {
+  width: auto;
+}
+.facebook-login-modal select,
+.facebook-login-modal input[type="file"] {
+  height: 30px;
+  /* In IE7, the height of the select element cannot be changed by height, only font-size */
+
+  *margin-top: 4px;
+  /* For IE7, add top margin to align select with labels */
+
+  line-height: 30px;
+}
+.facebook-login-modal select {
+  width: 220px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+}
+.facebook-login-modal select[multiple],
+.facebook-login-modal select[size] {
+  height: auto;
+}
+.facebook-login-modal select:focus,
+.facebook-login-modal input[type="file"]:focus,
+.facebook-login-modal input[type="radio"]:focus,
+.facebook-login-modal input[type="checkbox"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.facebook-login-modal .uneditable-input,
+.facebook-login-modal .uneditable-textarea {
+  color: #999999;
+  background-color: #fcfcfc;
+  border-color: #cccccc;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+  cursor: not-allowed;
+}
+.facebook-login-modal .uneditable-input {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.facebook-login-modal .uneditable-textarea {
+  width: auto;
+  height: auto;
+}
+.facebook-login-modal input:-moz-placeholder,
+.facebook-login-modal textarea:-moz-placeholder {
+  color: #999999;
+}
+.facebook-login-modal input:-ms-input-placeholder,
+.facebook-login-modal textarea:-ms-input-placeholder {
+  color: #999999;
+}
+.facebook-login-modal input::-webkit-input-placeholder,
+.facebook-login-modal textarea::-webkit-input-placeholder {
+  color: #999999;
+}
+.facebook-login-modal .radio,
+.facebook-login-modal .checkbox {
+  min-height: 20px;
+  padding-left: 20px;
+}
+.facebook-login-modal .radio input[type="radio"],
+.facebook-login-modal .checkbox input[type="checkbox"] {
+  float: left;
+  margin-left: -20px;
+}
+.facebook-login-modal .controls > .radio:first-child,
+.facebook-login-modal .controls > .checkbox:first-child {
+  padding-top: 5px;
+}
+.facebook-login-modal .radio.inline,
+.facebook-login-modal .checkbox.inline {
+  display: inline-block;
+  padding-top: 5px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.facebook-login-modal .radio.inline + .radio.inline,
+.facebook-login-modal .checkbox.inline + .checkbox.inline {
+  margin-left: 10px;
+}
+.facebook-login-modal .input-mini {
+  width: 60px;
+}
+.facebook-login-modal .input-small {
+  width: 90px;
+}
+.facebook-login-modal .input-medium {
+  width: 150px;
+}
+.facebook-login-modal .input-large {
+  width: 210px;
+}
+.facebook-login-modal .input-xlarge {
+  width: 270px;
+}
+.facebook-login-modal .input-xxlarge {
+  width: 530px;
+}
+.facebook-login-modal input[class*="span"],
+.facebook-login-modal select[class*="span"],
+.facebook-login-modal textarea[class*="span"],
+.facebook-login-modal .uneditable-input[class*="span"],
+.facebook-login-modal .row-fluid input[class*="span"],
+.facebook-login-modal .row-fluid select[class*="span"],
+.facebook-login-modal .row-fluid textarea[class*="span"],
+.facebook-login-modal .row-fluid .uneditable-input[class*="span"] {
+  float: none;
+  margin-left: 0;
+}
+.facebook-login-modal .input-append input[class*="span"],
+.facebook-login-modal .input-append .uneditable-input[class*="span"],
+.facebook-login-modal .input-prepend input[class*="span"],
+.facebook-login-modal .input-prepend .uneditable-input[class*="span"],
+.facebook-login-modal .row-fluid input[class*="span"],
+.facebook-login-modal .row-fluid select[class*="span"],
+.facebook-login-modal .row-fluid textarea[class*="span"],
+.facebook-login-modal .row-fluid .uneditable-input[class*="span"],
+.facebook-login-modal .row-fluid .input-prepend [class*="span"],
+.facebook-login-modal .row-fluid .input-append [class*="span"] {
+  display: inline-block;
+}
+.facebook-login-modal input,
+.facebook-login-modal textarea,
+.facebook-login-modal .uneditable-input {
+  margin-left: 0;
+}
+.facebook-login-modal .controls-row [class*="span"] + [class*="span"] {
+  margin-left: 20px;
+}
+.facebook-login-modal input.span12,
+.facebook-login-modal textarea.span12,
+.facebook-login-modal .uneditable-input.span12 {
+  width: 926px;
+}
+.facebook-login-modal input.span11,
+.facebook-login-modal textarea.span11,
+.facebook-login-modal .uneditable-input.span11 {
+  width: 846px;
+}
+.facebook-login-modal input.span10,
+.facebook-login-modal textarea.span10,
+.facebook-login-modal .uneditable-input.span10 {
+  width: 766px;
+}
+.facebook-login-modal input.span9,
+.facebook-login-modal textarea.span9,
+.facebook-login-modal .uneditable-input.span9 {
+  width: 686px;
+}
+.facebook-login-modal input.span8,
+.facebook-login-modal textarea.span8,
+.facebook-login-modal .uneditable-input.span8 {
+  width: 606px;
+}
+.facebook-login-modal input.span7,
+.facebook-login-modal textarea.span7,
+.facebook-login-modal .uneditable-input.span7 {
+  width: 526px;
+}
+.facebook-login-modal input.span6,
+.facebook-login-modal textarea.span6,
+.facebook-login-modal .uneditable-input.span6 {
+  width: 446px;
+}
+.facebook-login-modal input.span5,
+.facebook-login-modal textarea.span5,
+.facebook-login-modal .uneditable-input.span5 {
+  width: 366px;
+}
+.facebook-login-modal input.span4,
+.facebook-login-modal textarea.span4,
+.facebook-login-modal .uneditable-input.span4 {
+  width: 286px;
+}
+.facebook-login-modal input.span3,
+.facebook-login-modal textarea.span3,
+.facebook-login-modal .uneditable-input.span3 {
+  width: 206px;
+}
+.facebook-login-modal input.span2,
+.facebook-login-modal textarea.span2,
+.facebook-login-modal .uneditable-input.span2 {
+  width: 126px;
+}
+.facebook-login-modal input.span1,
+.facebook-login-modal textarea.span1,
+.facebook-login-modal .uneditable-input.span1 {
+  width: 46px;
+}
+.facebook-login-modal .controls-row {
+  *zoom: 1;
+}
+.facebook-login-modal .controls-row:before,
+.facebook-login-modal .controls-row:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.facebook-login-modal .controls-row:after {
+  clear: both;
+}
+.facebook-login-modal .controls-row [class*="span"],
+.facebook-login-modal .row-fluid .controls-row [class*="span"] {
+  float: left;
+}
+.facebook-login-modal .controls-row .checkbox[class*="span"],
+.facebook-login-modal .controls-row .radio[class*="span"] {
+  padding-top: 5px;
+}
+.facebook-login-modal input[disabled],
+.facebook-login-modal select[disabled],
+.facebook-login-modal textarea[disabled],
+.facebook-login-modal input[readonly],
+.facebook-login-modal select[readonly],
+.facebook-login-modal textarea[readonly] {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+}
+.facebook-login-modal input[type="radio"][disabled],
+.facebook-login-modal input[type="checkbox"][disabled],
+.facebook-login-modal input[type="radio"][readonly],
+.facebook-login-modal input[type="checkbox"][readonly] {
+  background-color: transparent;
+}
+.facebook-login-modal .control-group.warning .control-label,
+.facebook-login-modal .control-group.warning .help-block,
+.facebook-login-modal .control-group.warning .help-inline {
+  color: #c09853;
+}
+.facebook-login-modal .control-group.warning .checkbox,
+.facebook-login-modal .control-group.warning .radio,
+.facebook-login-modal .control-group.warning input,
+.facebook-login-modal .control-group.warning select,
+.facebook-login-modal .control-group.warning textarea {
+  color: #c09853;
+}
+.facebook-login-modal .control-group.warning input,
+.facebook-login-modal .control-group.warning select,
+.facebook-login-modal .control-group.warning textarea {
+  border-color: #c09853;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.facebook-login-modal .control-group.warning input:focus,
+.facebook-login-modal .control-group.warning select:focus,
+.facebook-login-modal .control-group.warning textarea:focus {
+  border-color: #a47e3c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+}
+.facebook-login-modal .control-group.warning .input-prepend .add-on,
+.facebook-login-modal .control-group.warning .input-append .add-on {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #c09853;
+}
+.facebook-login-modal .control-group.error .control-label,
+.facebook-login-modal .control-group.error .help-block,
+.facebook-login-modal .control-group.error .help-inline {
+  color: #b94a48;
+}
+.facebook-login-modal .control-group.error .checkbox,
+.facebook-login-modal .control-group.error .radio,
+.facebook-login-modal .control-group.error input,
+.facebook-login-modal .control-group.error select,
+.facebook-login-modal .control-group.error textarea {
+  color: #b94a48;
+}
+.facebook-login-modal .control-group.error input,
+.facebook-login-modal .control-group.error select,
+.facebook-login-modal .control-group.error textarea {
+  border-color: #b94a48;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.facebook-login-modal .control-group.error input:focus,
+.facebook-login-modal .control-group.error select:focus,
+.facebook-login-modal .control-group.error textarea:focus {
+  border-color: #953b39;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+.facebook-login-modal .control-group.error .input-prepend .add-on,
+.facebook-login-modal .control-group.error .input-append .add-on {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #b94a48;
+}
+.facebook-login-modal .control-group.success .control-label,
+.facebook-login-modal .control-group.success .help-block,
+.facebook-login-modal .control-group.success .help-inline {
+  color: #468847;
+}
+.facebook-login-modal .control-group.success .checkbox,
+.facebook-login-modal .control-group.success .radio,
+.facebook-login-modal .control-group.success input,
+.facebook-login-modal .control-group.success select,
+.facebook-login-modal .control-group.success textarea {
+  color: #468847;
+}
+.facebook-login-modal .control-group.success input,
+.facebook-login-modal .control-group.success select,
+.facebook-login-modal .control-group.success textarea {
+  border-color: #468847;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.facebook-login-modal .control-group.success input:focus,
+.facebook-login-modal .control-group.success select:focus,
+.facebook-login-modal .control-group.success textarea:focus {
+  border-color: #356635;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+}
+.facebook-login-modal .control-group.success .input-prepend .add-on,
+.facebook-login-modal .control-group.success .input-append .add-on {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #468847;
+}
+.facebook-login-modal .control-group.info .control-label,
+.facebook-login-modal .control-group.info .help-block,
+.facebook-login-modal .control-group.info .help-inline {
+  color: #3a87ad;
+}
+.facebook-login-modal .control-group.info .checkbox,
+.facebook-login-modal .control-group.info .radio,
+.facebook-login-modal .control-group.info input,
+.facebook-login-modal .control-group.info select,
+.facebook-login-modal .control-group.info textarea {
+  color: #3a87ad;
+}
+.facebook-login-modal .control-group.info input,
+.facebook-login-modal .control-group.info select,
+.facebook-login-modal .control-group.info textarea {
+  border-color: #3a87ad;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.facebook-login-modal .control-group.info input:focus,
+.facebook-login-modal .control-group.info select:focus,
+.facebook-login-modal .control-group.info textarea:focus {
+  border-color: #2d6987;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7ab5d3;
+}
+.facebook-login-modal .control-group.info .input-prepend .add-on,
+.facebook-login-modal .control-group.info .input-append .add-on {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #3a87ad;
+}
+.facebook-login-modal input:focus:invalid,
+.facebook-login-modal textarea:focus:invalid,
+.facebook-login-modal select:focus:invalid {
+  color: #b94a48;
+  border-color: #ee5f5b;
+}
+.facebook-login-modal input:focus:invalid:focus,
+.facebook-login-modal textarea:focus:invalid:focus,
+.facebook-login-modal select:focus:invalid:focus {
+  border-color: #e9322d;
+  -webkit-box-shadow: 0 0 6px #f8b9b7;
+  -moz-box-shadow: 0 0 6px #f8b9b7;
+  box-shadow: 0 0 6px #f8b9b7;
+}
+.facebook-login-modal .form-actions {
+  padding: 19px 20px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+  *zoom: 1;
+}
+.facebook-login-modal .form-actions:before,
+.facebook-login-modal .form-actions:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.facebook-login-modal .form-actions:after {
+  clear: both;
+}
+.facebook-login-modal .help-block,
+.facebook-login-modal .help-inline {
+  color: #595959;
+}
+.facebook-login-modal .help-block {
+  display: block;
+  margin-bottom: 10px;
+}
+.facebook-login-modal .help-inline {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+
+  *zoom: 1;
+  vertical-align: middle;
+  padding-left: 5px;
+}
+.facebook-login-modal .input-append,
+.facebook-login-modal .input-prepend {
+  display: inline-block;
+  margin-bottom: 10px;
+  vertical-align: middle;
+  font-size: 0;
+  white-space: nowrap;
+}
+.facebook-login-modal .input-append input,
+.facebook-login-modal .input-prepend input,
+.facebook-login-modal .input-append select,
+.facebook-login-modal .input-prepend select,
+.facebook-login-modal .input-append .uneditable-input,
+.facebook-login-modal .input-prepend .uneditable-input,
+.facebook-login-modal .input-append .dropdown-menu,
+.facebook-login-modal .input-prepend .dropdown-menu,
+.facebook-login-modal .input-append .popover,
+.facebook-login-modal .input-prepend .popover {
+  font-size: 14px;
+}
+.facebook-login-modal .input-append input,
+.facebook-login-modal .input-prepend input,
+.facebook-login-modal .input-append select,
+.facebook-login-modal .input-prepend select,
+.facebook-login-modal .input-append .uneditable-input,
+.facebook-login-modal .input-prepend .uneditable-input {
+  position: relative;
+  margin-bottom: 0;
+  *margin-left: 0;
+  vertical-align: top;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+.facebook-login-modal .input-append input:focus,
+.facebook-login-modal .input-prepend input:focus,
+.facebook-login-modal .input-append select:focus,
+.facebook-login-modal .input-prepend select:focus,
+.facebook-login-modal .input-append .uneditable-input:focus,
+.facebook-login-modal .input-prepend .uneditable-input:focus {
+  z-index: 2;
+}
+.facebook-login-modal .input-append .add-on,
+.facebook-login-modal .input-prepend .add-on {
+  display: inline-block;
+  width: auto;
+  height: 20px;
+  min-width: 16px;
+  padding: 4px 5px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  text-align: center;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+}
+.facebook-login-modal .input-append .add-on,
+.facebook-login-modal .input-prepend .add-on,
+.facebook-login-modal .input-append .btn,
+.facebook-login-modal .input-prepend .btn,
+.facebook-login-modal .input-append .btn-group > .dropdown-toggle,
+.facebook-login-modal .input-prepend .btn-group > .dropdown-toggle {
+  vertical-align: top;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.facebook-login-modal .input-append .active,
+.facebook-login-modal .input-prepend .active {
+  background-color: #a9dba9;
+  border-color: #46a546;
+}
+.facebook-login-modal .input-prepend .add-on,
+.facebook-login-modal .input-prepend .btn {
+  margin-right: -1px;
+}
+.facebook-login-modal .input-prepend .add-on:first-child,
+.facebook-login-modal .input-prepend .btn:first-child {
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+.facebook-login-modal .input-append input,
+.facebook-login-modal .input-append select,
+.facebook-login-modal .input-append .uneditable-input {
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+.facebook-login-modal .input-append input + .btn-group .btn:last-child,
+.facebook-login-modal .input-append select + .btn-group .btn:last-child,
+.facebook-login-modal .input-append .uneditable-input + .btn-group .btn:last-child {
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+.facebook-login-modal .input-append .add-on,
+.facebook-login-modal .input-append .btn,
+.facebook-login-modal .input-append .btn-group {
+  margin-left: -1px;
+}
+.facebook-login-modal .input-append .add-on:last-child,
+.facebook-login-modal .input-append .btn:last-child,
+.facebook-login-modal .input-append .btn-group:last-child > .dropdown-toggle {
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+.facebook-login-modal .input-prepend.input-append input,
+.facebook-login-modal .input-prepend.input-append select,
+.facebook-login-modal .input-prepend.input-append .uneditable-input {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.facebook-login-modal .input-prepend.input-append input + .btn-group .btn,
+.facebook-login-modal .input-prepend.input-append select + .btn-group .btn,
+.facebook-login-modal .input-prepend.input-append .uneditable-input + .btn-group .btn {
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+.facebook-login-modal .input-prepend.input-append .add-on:first-child,
+.facebook-login-modal .input-prepend.input-append .btn:first-child {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+.facebook-login-modal .input-prepend.input-append .add-on:last-child,
+.facebook-login-modal .input-prepend.input-append .btn:last-child {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+.facebook-login-modal .input-prepend.input-append .btn-group:first-child {
+  margin-left: 0;
+}
+.facebook-login-modal input.search-query {
+  padding-right: 14px;
+  padding-right: 4px \9;
+  padding-left: 14px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+  margin-bottom: 0;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+/* Allow for input prepend/append in search forms */
+.facebook-login-modal .form-search .input-append .search-query,
+.facebook-login-modal .form-search .input-prepend .search-query {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.facebook-login-modal .form-search .input-append .search-query {
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px;
+}
+.facebook-login-modal .form-search .input-append .btn {
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0;
+}
+.facebook-login-modal .form-search .input-prepend .search-query {
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0;
+}
+.facebook-login-modal .form-search .input-prepend .btn {
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px;
+}
+.facebook-login-modal .form-search input,
+.facebook-login-modal .form-inline input,
+.facebook-login-modal .form-horizontal input,
+.facebook-login-modal .form-search textarea,
+.facebook-login-modal .form-inline textarea,
+.facebook-login-modal .form-horizontal textarea,
+.facebook-login-modal .form-search select,
+.facebook-login-modal .form-inline select,
+.facebook-login-modal .form-horizontal select,
+.facebook-login-modal .form-search .help-inline,
+.facebook-login-modal .form-inline .help-inline,
+.facebook-login-modal .form-horizontal .help-inline,
+.facebook-login-modal .form-search .uneditable-input,
+.facebook-login-modal .form-inline .uneditable-input,
+.facebook-login-modal .form-horizontal .uneditable-input,
+.facebook-login-modal .form-search .input-prepend,
+.facebook-login-modal .form-inline .input-prepend,
+.facebook-login-modal .form-horizontal .input-prepend,
+.facebook-login-modal .form-search .input-append,
+.facebook-login-modal .form-inline .input-append,
+.facebook-login-modal .form-horizontal .input-append {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+
+  *zoom: 1;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.facebook-login-modal .form-search .hide,
+.facebook-login-modal .form-inline .hide,
+.facebook-login-modal .form-horizontal .hide {
+  display: none;
+}
+.facebook-login-modal .form-search label,
+.facebook-login-modal .form-inline label,
+.facebook-login-modal .form-search .btn-group,
+.facebook-login-modal .form-inline .btn-group {
+  display: inline-block;
+}
+.facebook-login-modal .form-search .input-append,
+.facebook-login-modal .form-inline .input-append,
+.facebook-login-modal .form-search .input-prepend,
+.facebook-login-modal .form-inline .input-prepend {
+  margin-bottom: 0;
+}
+.facebook-login-modal .form-search .radio,
+.facebook-login-modal .form-search .checkbox,
+.facebook-login-modal .form-inline .radio,
+.facebook-login-modal .form-inline .checkbox {
+  padding-left: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.facebook-login-modal .form-search .radio input[type="radio"],
+.facebook-login-modal .form-search .checkbox input[type="checkbox"],
+.facebook-login-modal .form-inline .radio input[type="radio"],
+.facebook-login-modal .form-inline .checkbox input[type="checkbox"] {
+  float: left;
+  margin-right: 3px;
+  margin-left: 0;
+}
+.facebook-login-modal .control-group {
+  margin-bottom: 10px;
+}
+.facebook-login-modal legend + .control-group {
+  margin-top: 20px;
+  -webkit-margin-top-collapse: separate;
+}
+.facebook-login-modal .form-horizontal .control-group {
+  margin-bottom: 20px;
+  *zoom: 1;
+}
+.facebook-login-modal .form-horizontal .control-group:before,
+.facebook-login-modal .form-horizontal .control-group:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.facebook-login-modal .form-horizontal .control-group:after {
+  clear: both;
+}
+.facebook-login-modal .form-horizontal .control-label {
+  float: left;
+  width: 160px;
+  padding-top: 5px;
+  text-align: right;
+}
+.facebook-login-modal .form-horizontal .controls {
+  *display: inline-block;
+  *padding-left: 20px;
+  margin-left: 180px;
+  *margin-left: 0;
+}
+.facebook-login-modal .form-horizontal .controls:first-child {
+  *padding-left: 180px;
+}
+.facebook-login-modal .form-horizontal .help-block {
+  margin-bottom: 0;
+}
+.facebook-login-modal .form-horizontal input + .help-block,
+.facebook-login-modal .form-horizontal select + .help-block,
+.facebook-login-modal .form-horizontal textarea + .help-block,
+.facebook-login-modal .form-horizontal .uneditable-input + .help-block,
+.facebook-login-modal .form-horizontal .input-prepend + .help-block,
+.facebook-login-modal .form-horizontal .input-append + .help-block {
+  margin-top: 10px;
+}
+.facebook-login-modal .form-horizontal .form-actions {
+  padding-left: 180px;
+}
+.facebook-login-modal .btn {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+
+  *zoom: 1;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #333333;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #e6e6e6;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-bottom-color: #b3b3b3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  *margin-left: .3em;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+.facebook-login-modal .btn:hover,
+.facebook-login-modal .btn:focus,
+.facebook-login-modal .btn:active,
+.facebook-login-modal .btn.active,
+.facebook-login-modal .btn.disabled,
+.facebook-login-modal .btn[disabled] {
+  color: #333333;
+  background-color: #e6e6e6;
+  *background-color: #d9d9d9;
+}
+.facebook-login-modal .btn:active,
+.facebook-login-modal .btn.active {
+  background-color: #cccccc \9;
+}
+.facebook-login-modal .btn:first-child {
+  *margin-left: 0;
+}
+.facebook-login-modal .btn:hover,
+.facebook-login-modal .btn:focus {
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+  -moz-transition: background-position 0.1s linear;
+  -o-transition: background-position 0.1s linear;
+  transition: background-position 0.1s linear;
+}
+.facebook-login-modal .btn:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.facebook-login-modal .btn.active,
+.facebook-login-modal .btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+}
+.facebook-login-modal .btn.disabled,
+.facebook-login-modal .btn[disabled] {
+  cursor: default;
+  background-image: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.facebook-login-modal .btn-large {
+  padding: 11px 19px;
+  font-size: 17.5px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.facebook-login-modal .btn-large [class^="icon-"],
+.facebook-login-modal .btn-large [class*=" icon-"] {
+  margin-top: 4px;
+}
+.facebook-login-modal .btn-small {
+  padding: 2px 10px;
+  font-size: 11.9px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.facebook-login-modal .btn-small [class^="icon-"],
+.facebook-login-modal .btn-small [class*=" icon-"] {
+  margin-top: 0;
+}
+.facebook-login-modal .btn-mini [class^="icon-"],
+.facebook-login-modal .btn-mini [class*=" icon-"] {
+  margin-top: -1px;
+}
+.facebook-login-modal .btn-mini {
+  padding: 0 6px;
+  font-size: 10.5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.facebook-login-modal .btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.facebook-login-modal .btn-block + .btn-block {
+  margin-top: 5px;
+}
+.facebook-login-modal input[type="submit"].btn-block,
+.facebook-login-modal input[type="reset"].btn-block,
+.facebook-login-modal input[type="button"].btn-block {
+  width: 100%;
+}
+.facebook-login-modal .btn-primary.active,
+.facebook-login-modal .btn-warning.active,
+.facebook-login-modal .btn-danger.active,
+.facebook-login-modal .btn-success.active,
+.facebook-login-modal .btn-info.active,
+.facebook-login-modal .btn-inverse.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.facebook-login-modal .btn-primary {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #006dcc;
+  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+  border-color: #0044cc #0044cc #002a80;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #0044cc;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-primary:hover,
+.facebook-login-modal .btn-primary:focus,
+.facebook-login-modal .btn-primary:active,
+.facebook-login-modal .btn-primary.active,
+.facebook-login-modal .btn-primary.disabled,
+.facebook-login-modal .btn-primary[disabled] {
+  color: #ffffff;
+  background-color: #0044cc;
+  *background-color: #003bb3;
+}
+.facebook-login-modal .btn-primary:active,
+.facebook-login-modal .btn-primary.active {
+  background-color: #003399 \9;
+}
+.facebook-login-modal .btn-warning {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #faa732;
+  background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+  background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background-image: -o-linear-gradient(top, #fbb450, #f89406);
+  background-image: linear-gradient(to bottom, #fbb450, #f89406);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+  border-color: #f89406 #f89406 #ad6704;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #f89406;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-warning:hover,
+.facebook-login-modal .btn-warning:focus,
+.facebook-login-modal .btn-warning:active,
+.facebook-login-modal .btn-warning.active,
+.facebook-login-modal .btn-warning.disabled,
+.facebook-login-modal .btn-warning[disabled] {
+  color: #ffffff;
+  background-color: #f89406;
+  *background-color: #df8505;
+}
+.facebook-login-modal .btn-warning:active,
+.facebook-login-modal .btn-warning.active {
+  background-color: #c67605 \9;
+}
+.facebook-login-modal .btn-danger {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #da4f49;
+  background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+  background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+  background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+  border-color: #bd362f #bd362f #802420;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #bd362f;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-danger:hover,
+.facebook-login-modal .btn-danger:focus,
+.facebook-login-modal .btn-danger:active,
+.facebook-login-modal .btn-danger.active,
+.facebook-login-modal .btn-danger.disabled,
+.facebook-login-modal .btn-danger[disabled] {
+  color: #ffffff;
+  background-color: #bd362f;
+  *background-color: #a9302a;
+}
+.facebook-login-modal .btn-danger:active,
+.facebook-login-modal .btn-danger.active {
+  background-color: #942a25 \9;
+}
+.facebook-login-modal .btn-success {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #5bb75b;
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top, #62c462, #51a351);
+  background-image: linear-gradient(to bottom, #62c462, #51a351);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+  border-color: #51a351 #51a351 #387038;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #51a351;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-success:hover,
+.facebook-login-modal .btn-success:focus,
+.facebook-login-modal .btn-success:active,
+.facebook-login-modal .btn-success.active,
+.facebook-login-modal .btn-success.disabled,
+.facebook-login-modal .btn-success[disabled] {
+  color: #ffffff;
+  background-color: #51a351;
+  *background-color: #499249;
+}
+.facebook-login-modal .btn-success:active,
+.facebook-login-modal .btn-success.active {
+  background-color: #408140 \9;
+}
+.facebook-login-modal .btn-info {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #49afcd;
+  background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+  background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
+  border-color: #2f96b4 #2f96b4 #1f6377;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #2f96b4;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-info:hover,
+.facebook-login-modal .btn-info:focus,
+.facebook-login-modal .btn-info:active,
+.facebook-login-modal .btn-info.active,
+.facebook-login-modal .btn-info.disabled,
+.facebook-login-modal .btn-info[disabled] {
+  color: #ffffff;
+  background-color: #2f96b4;
+  *background-color: #2a85a0;
+}
+.facebook-login-modal .btn-info:active,
+.facebook-login-modal .btn-info.active {
+  background-color: #24748c \9;
+}
+.facebook-login-modal .btn-inverse {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #363636;
+  background-image: -moz-linear-gradient(top, #444444, #222222);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
+  background-image: -webkit-linear-gradient(top, #444444, #222222);
+  background-image: -o-linear-gradient(top, #444444, #222222);
+  background-image: linear-gradient(to bottom, #444444, #222222);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+  border-color: #222222 #222222 #000000;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #222222;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.facebook-login-modal .btn-inverse:hover,
+.facebook-login-modal .btn-inverse:focus,
+.facebook-login-modal .btn-inverse:active,
+.facebook-login-modal .btn-inverse.active,
+.facebook-login-modal .btn-inverse.disabled,
+.facebook-login-modal .btn-inverse[disabled] {
+  color: #ffffff;
+  background-color: #222222;
+  *background-color: #151515;
+}
+.facebook-login-modal .btn-inverse:active,
+.facebook-login-modal .btn-inverse.active {
+  background-color: #080808 \9;
+}
+.facebook-login-modal button.btn,
+.facebook-login-modal input[type="submit"].btn {
+  *padding-top: 3px;
+  *padding-bottom: 3px;
+}
+.facebook-login-modal button.btn::-moz-focus-inner,
+.facebook-login-modal input[type="submit"].btn::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+.facebook-login-modal button.btn.btn-large,
+.facebook-login-modal input[type="submit"].btn.btn-large {
+  *padding-top: 7px;
+  *padding-bottom: 7px;
+}
+.facebook-login-modal button.btn.btn-small,
+.facebook-login-modal input[type="submit"].btn.btn-small {
+  *padding-top: 3px;
+  *padding-bottom: 3px;
+}
+.facebook-login-modal button.btn.btn-mini,
+.facebook-login-modal input[type="submit"].btn.btn-mini {
+  *padding-top: 1px;
+  *padding-bottom: 1px;
+}
+.facebook-login-modal .btn-link,
+.facebook-login-modal .btn-link:active,
+.facebook-login-modal .btn-link[disabled] {
+  background-color: transparent;
+  background-image: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.facebook-login-modal .btn-link {
+  border-color: transparent;
+  cursor: pointer;
+  color: #0088cc;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.facebook-login-modal .btn-link:hover,
+.facebook-login-modal .btn-link:focus {
+  color: #005580;
+  text-decoration: underline;
+  background-color: transparent;
+}
+.facebook-login-modal .btn-link[disabled]:hover,
+.facebook-login-modal .btn-link[disabled]:focus {
+  color: #333333;
+  text-decoration: none;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+.modal-backdrop.fade {
+  opacity: 0;
+}
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.facebook-login-modal .modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050;
+  width: 560px;
+  margin-left: -280px;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  /* IE6-7 */
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: none;
+}
+.facebook-login-modal .modal.fade {
+  -webkit-transition: opacity .3s linear, top .3s ease-out;
+  -moz-transition: opacity .3s linear, top .3s ease-out;
+  -o-transition: opacity .3s linear, top .3s ease-out;
+  transition: opacity .3s linear, top .3s ease-out;
+  top: -25%;
+}
+.facebook-login-modal .modal.fade.in {
+  top: 10%;
+}
+.facebook-login-modal .modal-header {
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+}
+.facebook-login-modal .modal-header .close {
+  margin-top: 2px;
+}
+.facebook-login-modal .modal-header h3 {
+  margin: 0;
+  line-height: 30px;
+}
+.facebook-login-modal .modal-body {
+  position: relative;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 15px;
+}
+.facebook-login-modal .modal-form {
+  margin-bottom: 0;
+}
+.facebook-login-modal .modal-footer {
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+  -moz-box-shadow: inset 0 1px 0 #ffffff;
+  box-shadow: inset 0 1px 0 #ffffff;
+  *zoom: 1;
+}
+.facebook-login-modal .modal-footer:before,
+.facebook-login-modal .modal-footer:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.facebook-login-modal .modal-footer:after {
+  clear: both;
+}
+.facebook-login-modal .modal-footer .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+.facebook-login-modal .modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.facebook-login-modal .modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+.facebook-login-modal .hide {
+  display: none;
+}
+.facebook-login-modal .show {
+  display: block;
+}
+.facebook-login-modal .fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.facebook-login-modal .fade.in {
+  opacity: 1;
+}
+.facebook-login-modal .close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.facebook-login-modal .close:hover,
+.facebook-login-modal .close:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+.facebook-login-modal button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.facebook-login-modal .alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.facebook-login-modal .alert,
+.facebook-login-modal .alert h4 {
+  color: #c09853;
+}
+.facebook-login-modal .alert h4 {
+  margin: 0;
+}
+.facebook-login-modal .alert .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 20px;
+}
+.facebook-login-modal .alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+}
+.facebook-login-modal .alert-success h4 {
+  color: #468847;
+}
+.facebook-login-modal .alert-danger,
+.facebook-login-modal .alert-error {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+}
+.facebook-login-modal .alert-danger h4,
+.facebook-login-modal .alert-error h4 {
+  color: #b94a48;
+}
+.facebook-login-modal .alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #3a87ad;
+}
+.facebook-login-modal .alert-info h4 {
+  color: #3a87ad;
+}
+.facebook-login-modal .alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.facebook-login-modal .alert-block > p,
+.facebook-login-modal .alert-block > ul {
+  margin-bottom: 0;
+}
+.facebook-login-modal .alert-block p + p {
+  margin-top: 5px;
+}
+@media (max-width: 767px) {
+  .facebook-login-modal .input-large,
+  .facebook-login-modal .input-xlarge,
+  .facebook-login-modal .input-xxlarge,
+  .facebook-login-modal input[class*="span"],
+  .facebook-login-modal select[class*="span"],
+  .facebook-login-modal textarea[class*="span"],
+  .facebook-login-modal .uneditable-input {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .facebook-login-modal .input-prepend input,
+  .facebook-login-modal .input-append input,
+  .facebook-login-modal .input-prepend input[class*="span"],
+  .facebook-login-modal .input-append input[class*="span"] {
+    display: inline-block;
+    width: auto;
+  }
+  .facebook-login-modal .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 0;
+  }
+  .facebook-login-modal .modal {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    margin: 0;
+  }
+  .facebook-login-modal .modal.fade {
+    top: -100px;
+  }
+  .facebook-login-modal .modal.fade.in {
+    top: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .facebook-login-modal input[type="checkbox"],
+  .facebook-login-modal input[type="radio"] {
+    border: 1px solid #ccc;
+  }
+  .facebook-login-modal .form-horizontal .control-label {
+    float: none;
+    width: auto;
+    padding-top: 0;
+    text-align: left;
+  }
+  .facebook-login-modal .form-horizontal .controls {
+    margin-left: 0;
+  }
+  .facebook-login-modal .form-horizontal .control-list {
+    padding-top: 0;
+  }
+  .facebook-login-modal .form-horizontal .form-actions {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .facebook-login-modal .modal {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+  }
+  .facebook-login-modal .modal-header .close {
+    padding: 10px;
+    margin: -10px;
+  }
+}

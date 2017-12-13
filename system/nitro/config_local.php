@@ -1,0 +1,3 @@
+<?php
+
+if (!defined('NITRO_BASE_CSS_AUTO_REMOVE')) define('NITRO_BASE_CSS_AUTO_REMOVE', TRUE);

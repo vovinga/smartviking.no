@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<id>NitroPack CSS and JS minifier</id>
+	<version>1.8.12</version>
+	<vqmver>2.x</vqmver>
+	<author>iSenseLabs | http://isenselabs.com</author>
+
+	<file name="system/library/document.php">
+		<operation>
+			<search position="before"><![CDATA[return $this->styles;]]></search>
+			<add><![CDATA[
+				require_once DIR_SYSTEM . 'nitro/core/core.php';
+				require_once NITRO_INCLUDE_FOLDER . 'minify_css.php';
+
+				return nitro_minify_css($this->styles);
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="before"><![CDATA[return $this->scripts;]]></search>
+			<add><![CDATA[
+				require_once DIR_SYSTEM . 'nitro/core/core.php';
+				require_once NITRO_INCLUDE_FOLDER . 'minify_js.php';
+
+				return nitro_minify_js($this->scripts);
+			]]></add>
+		</operation>
+	</file>
+
+    <file name="catalog/controller/common/maintenance.php">
+		<operation>
+            <search position="replace"><![CDATA[if ($this->config->get('config_maintenance')) {]]></search>
+			<add><![CDATA[if ($this->config->get('config_maintenance') && empty($_COOKIE['nitro_no_maintenance'])) {]]></add>
+		</operation>
+	</file>
+</modification>

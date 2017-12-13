@@ -1,0 +1,9 @@
+.mainChekout table.chekoutTable input[type="radio"]{
+	margin-left: -3px;
+}
+input{
+ 	outline:none!important;
+ }
+ select{
+ 	outline:none!important;
+ }

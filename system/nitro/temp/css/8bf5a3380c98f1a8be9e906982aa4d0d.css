@@ -1,0 +1,7 @@
+
+ 
+@-moz-document url-prefix() {
+    #search {
+        margin-top:0px!important;
+    }
+}

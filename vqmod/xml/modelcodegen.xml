@@ -1,0 +1,326 @@
+<modification>
+
+	<id>Model Code Generator</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.7</vqmver>
+	<author>Modification: P.K Solutions; vQmod: P.K Solutions</author>
+
+	<file name="admin/controller/common/header.php">
+        <operation>
+            <search position="after"><![CDATA[
+		$this->data['text_zone'] = $this->language->get('text_zone');
+            ]]></search>
+            <add><![CDATA[
+			// Add
+			$this->load->language('catalog/modelcodegen');
+			$this->data['module_title'] = $this->language->get('module_title');			
+			// End add
+            ]]></add>
+        </operation>
+	
+		<operation>
+            <search position="after"><![CDATA[
+            $this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
+            ]]></search>
+            <add><![CDATA[
+			// Add 
+			$this->data['modelcodegen'] = $this->url->link('catalog/modelcodegen','token=' . $this->session->data['token'], 'SSL');
+			// End add
+            ]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/common/header.tpl">
+        <operation>
+            <search position="after"><![CDATA[
+            <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+			<li><a href="<?php echo $modelcodegen; ?>"><?php echo $module_title; ?></a></li>
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+            function getForm() {
+            ]]></search>
+            <add><![CDATA[
+		$this->load->language('catalog/modelcodegen');
+		$this->data['text_modelautogen'] = $this->language->get('text_modelautogen');	
+		$this->data['text_modeldialog'] = $this->language->get('text_modeldialog');	
+		$this->data['text_modelbtn'] = $this->language->get('text_modelbtn');	
+		$this->data['error_modelduplicate'] = $this->language->get('error_modelduplicate');			
+		if (isset($this->request->get['product_id'])) 
+		{$this->data['prodid'] = $this->request->get['product_id'];}
+		else
+		{$this->data['prodid'] = '';}
+				
+		$this->load->model('catalog/modelcodegen');	
+		$results = $this->model_catalog_modelcodegen->getLastProdId();
+		$this->data['modelcodegen_prodcode'] = $results['MAX(product_id)'];
+					
+		$results = $this->model_catalog_modelcodegen->getValues();		
+		$this->data['modelcodegen_condition1'] = $results['condition1'];	
+		$this->data['modelcodegen_condition2'] = $results['condition2'];
+		$this->data['modelcodegen_conditionUser'] = $results['conditionUser'];
+		$this->data['modelcodegen_sequential'] = $results['sequential'];
+		$this->data['modelcodegen_useHyphens'] = $results['useHyphens'];
+            ]]></add>
+        </operation>
+	</file>	
+	
+	<file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+  	public function insert() {	
+            ]]></search>
+            <add><![CDATA[
+			$this->session->data['submit']	= 'insert';	
+            ]]></add>
+        </operation>
+	</file>	
+	
+	<file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+  	public function update() {	
+            ]]></search>
+            <add><![CDATA[
+			$this->session->data['submit']	= 'update';	
+            ]]></add>
+        </operation>
+	</file>			
+	
+	<file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+  			protected function validateForm() { 
+            ]]></search>
+            <add><![CDATA[ 
+			$this->load->language('catalog/modelcodegen');			
+			if ($this->session->data['submit']	 == 'insert') {
+			$results = $this->model_catalog_product->checkModelCode($this->request->post);
+			
+			if (isset($results['product_id'])) {
+			if ($results['product_id'] > 0) {
+			
+      		$this->error['model'] = $this->language->get('error_modelduplicate');			
+			}			
+			}
+			}
+			else
+			{
+			$query = $this->db->query("SELECT model FROM " . DB_PREFIX . "product WHERE product_id = '" . $this->request->get['product_id']  . "'");			
+	
+			if ($this->request->post['model'] != $query->row['model']) {	
+		
+			$results = $this->model_catalog_product->checkModelCode($this->request->post);
+			
+			if (isset($results['product_id'])) {
+			if ($results['product_id'] > 0) {
+			
+      		$this->error['model'] = $this->language->get('error_modelduplicate');			
+    		}
+			}
+		else
+			{
+			$this->db->query("UPDATE " . DB_PREFIX . "pksolutions_modelcodegen SET sequential = sequential + 1");									
+			}
+			}
+			}
+			]]></add>
+        </operation>
+	</file>				
+	
+	<file name="admin/model/catalog/product.php">
+        <operation>
+            <search position="before"><![CDATA[
+            public function addProduct($data) {
+            ]]></search>
+            <add><![CDATA[
+			public function checkModelCode($data) {
+			$query = $this->db->query("SELECT product_id FROM " . DB_PREFIX . "product WHERE model = '" . $this->db->escape($data['model']) . "'");
+			return $query->row;
+			}
+            ]]></add>
+        </operation>
+	</file>			
+	
+	<file name="admin/model/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+            public function addProduct($data) {
+            ]]></search>
+            <add><![CDATA[
+			$this->db->query("UPDATE " . DB_PREFIX . "pksolutions_modelcodegen SET sequential = sequential + 1");
+            ]]></add>
+        </operation>
+	</file>	
+	
+	<file name="admin/model/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[
+			public function editProduct($product_id, $data) {
+            ]]></search>
+            <add><![CDATA[
+			$model = $this->db->query("SELECT model FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");	
+	
+			if ($this->db->escape($data['model']) != $model->row['model']) {	
+			$this->db->query("UPDATE " . DB_PREFIX . "pksolutions_modelcodegen SET sequential = sequential + 1");
+			}
+            ]]></add>
+        </operation>
+	</file>		
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[	
+      <div class="buttons"><a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div>	
+            ]]></search>
+            <add><![CDATA[
+      <div class="buttons" id="save"><a onclick="autoGenModel();" class="button"><?php echo $button_save; ?></a><a href="<?php echo $cancel; ?>" class="button"><?php echo $button_cancel; ?></a></div><input type="hidden" id="SKUInstalled" value="false" />
+            ]]></add>
+        </operation>
+	</file>		
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+              <td><input type="text" name="model" value="<?php echo $model; ?>" />
+            ]]></search>
+            <add><![CDATA[
+              <td><input type="text" id="model" name="model" value="<?php echo $model; ?>" /><button type="button" onclick="autoGenModelButton(); return false;"><?php echo $text_modelbtn; ?></button><span class="required"><?php echo $text_modelautogen; ?></span>
+            ]]></add>
+        </operation>
+	</file>	
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+                    <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
+            ]]></search>
+            <add><![CDATA[
+                    <input type="hidden" id="product_category[]" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
+            ]]></add>
+        </operation>
+	</file>		
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+		$('#product-category').append('<div id="product-category' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_category[]" value="' + ui.item.value + '" /></div>');
+            ]]></search>
+            <add><![CDATA[
+		$('#product-category').append('<div id="product-category' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" id="product_category[]" name="product_category[]" value="' + ui.item.value + '" /></div>');
+            ]]></add>
+        </operation>
+	</file>		
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="before"><![CDATA[
+			<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>
+            ]]></search>
+            <add><![CDATA[
+<script type="text/javascript">
+	function autoGenModel() {
+		if (document.getElementById('model').value > '') 
+		{}
+		else
+		{		
+		var prodid = "<?php echo $prodid; ?>" //get product id if editing product
+		if (prodid != '') { //this determines if user is inputting new product or editing existing
+		var prodcode = prodid;
+		}
+		else
+		{
+		var prodcode = <?php echo $modelcodegen_prodcode; ?> + 1; //get next product id
+		}
+		var condition1 = <?php echo $modelcodegen_condition1; ?>; //get value of condition1 (category code or product code first?)
+		var condition2 = <?php echo $modelcodegen_condition2; ?>; //get value of condition2 (category code or product code second?)
+		var conditionUser = "<?php echo $modelcodegen_conditionUser; ?>"; //get value of conditionUser (is it a set condition?)
+		var sequential = <?php echo $modelcodegen_sequential; ?>; //get the next value for end of code
+		var useHyphens = <?php echo $modelcodegen_useHyphens; ?>; //are we seperating code with hyphens?		
+		//var cb = document.getElementsByName('product_category[]');
+		for (var i=0; i<document.getElementsByName('product_category[]').length; i++) {		
+		var catlow = catcode; //set catlow value to existing catcode value
+		var catcode = document.getElementById('product_category[]').value; //get current category id value
+		//alert(catlow +'   '+ catcode);
+		if (catlow < catcode) {catcode = catlow;} else {catcode = catcode;} //check if existing catcode is lower than current catcode. set catcode variable to the lowest category_id	
+		}// end of for statement
+	if (conditionUser == '' && document.getElementsByName('product_category[]').length < 1) {//if not using conditionUser and no categories selected issue warning.
+	    alert('<?php echo $text_modeldialog; ?>');
+		return false;
+	}
+	else
+	{
+	if (useHyphens == 0) {var hyphen = ''} else {hyphen = '-'}//set value of hyphen char
+	if (condition1 == 1) { 
+		document.getElementById('model').value = catcode + hyphen + prodcode + hyphen + sequential;	
+	}
+	else
+	{
+		document.getElementById('model').value = prodcode + hyphen + catcode + hyphen + sequential;		
+	 }
+	if (conditionUser != '') //check if condition user value is set, if so this becomes priority
+	{
+		document.getElementById('model').value = conditionUser + hyphen + sequential; 
+	}
+	}//end of if statement
+	}//end of if model greater than nil
+	//if SKUGenerator installed then it will call submit
+	if (document.getElementById('SKUInstalled').value == "true") {} else 
+	{
+	$('#form').submit();
+	}	
+	}//end of function
+	
+	function autoGenModelButton() {	
+		var prodid = "<?php echo $prodid; ?>" //get product id if editing product
+		if (prodid != '') { //this determines if user is inputting new product or editing existing
+		var prodcode = prodid;
+		}
+		else
+		{
+		var prodcode = <?php echo $modelcodegen_prodcode; ?> + 1; //get next product id
+		}
+		var condition1 = <?php echo $modelcodegen_condition1; ?>; //get value of condition1 (category code or product code first?)
+		var condition2 = <?php echo $modelcodegen_condition2; ?>; //get value of condition2 (category code or product code second?)
+		var conditionUser = "<?php echo $modelcodegen_conditionUser; ?>"; //get value of conditionUser (is it a set condition?)
+		var sequential = <?php echo $modelcodegen_sequential; ?>; //get the next value for end of code
+		var useHyphens = <?php echo $modelcodegen_useHyphens; ?>; //are we seperating code with hyphens?		
+		//var cb = document.getElementsByName('product_category[]');
+		for (var i=0; i<document.getElementsByName('product_category[]').length; i++) {		
+		var catlow = catcode; //set catlow value to existing catcode value
+		var catcode = document.getElementById('product_category[]').value; //get current category id value
+		//alert(catlow +'   '+ catcode);
+		if (catlow < catcode) {catcode = catlow;} else {catcode = catcode;} //check if existing catcode is lower than current catcode. set catcode variable to the lowest category_id	
+		}// end of for statement
+	if (conditionUser == '' && document.getElementsByName('product_category[]').length < 1) {//if not using conditionUser and no categories selected issue warning.
+	    alert('<?php echo $text_modeldialog; ?>');
+		return false;
+	}
+	else
+	{
+	if (useHyphens == 0) {var hyphen = ''} else {hyphen = '-'}//set value of hyphen char
+	if (condition1 == 1) { 
+		document.getElementById('model').value = catcode + hyphen + prodcode + hyphen + sequential;	
+	}
+	else
+	{
+		document.getElementById('model').value = prodcode + hyphen + catcode + hyphen + sequential;		
+	 }
+	if (conditionUser != '') //check if condition user value is set, if so this becomes priority
+	{
+		document.getElementById('model').value = conditionUser + hyphen + sequential; 
+	}
+	}//end of if statement
+	}//end of function	
+</script>
+            ]]></add>
+        </operation>
+	</file>			
+	
+</modification>

@@ -1,0 +1,250 @@
+/* module */ 
+.iblog-box-content {
+	border-radius: 0px 0px 7px 7px;
+	border-left: 1px solid #DBDEE1;
+	border-right: 1px solid #DBDEE1;
+	border-bottom: 1px solid #DBDEE1;
+	padding: 10px;
+	display: inline-block;
+	width: 100%;
+	vertical-align: top;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.iblog-featured-image {
+	float:left;
+	display: inline-block;
+	padding: 10px;
+}	
+
+.iblog-featured-description {
+	padding: 10px 0 10px 0;
+	line-height: 130%;
+}
+
+/* post */
+.iblog-post-title h1 {
+	margin-bottom: 0px;	
+}
+
+.iblog-post-info {
+	overflow: auto;
+	margin-bottom: 20px;
+}
+
+.iblog-author-info {
+	padding: 6px 0 6px 0;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.iblog-author-data {
+	text-align: right;
+}
+	
+.iblog-post-description {
+	padding:10px 0 10px 0;
+}
+
+.iblog-post-image {
+	padding: 20px 0;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+/* listing */
+.iblog-filter {
+	border-bottom: 1px solid #EEEEEE;
+	padding-bottom: 5px;
+	overflow: auto;
+}
+
+.iblog-filter .display {
+	margin-right: 15px;
+	float: left;
+	padding-top: 4px;
+	color: #333;
+}
+
+.iblog-filter .limit {
+	margin-left: 15px;
+	float: right;
+	color: #333;
+}
+
+.iblog-filter .sort {
+	float: right;
+	color: #333;
+}
+
+.iblog-posts-list {
+	padding: 20px 0;
+}
+
+.iblog-posts-list > div {
+	display: inline-block;
+	width: 100%;
+	vertical-align: top;
+}
+
+.iblog-posts-list > div + div {
+	border-top: 1px solid #EEEEEE;
+	padding-top: 14px;
+	margin-top:15px;
+}
+
+.iblog-posts-list .right {
+	overflow:auto;
+}
+
+.iblog-posts-list .image {
+	float: left;
+	margin-right: 20px;
+}
+
+.iblog-posts-list .name {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.iblog-posts-list .name a {
+	font-size: 17px;
+	text-decoration: none;
+}
+
+.iblog-posts-list .description {
+	line-height: 120%;
+	margin-bottom: 20px;
+	color: #4D4D4D;
+	display:inline-block;
+	vertical-align:top;
+	width:100%;
+}
+
+.iblog-button {
+	margin: 5px;
+	float: right;
+}
+
+.iblog-posts-grid > div {
+	width: 130px;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+	margin-bottom: 15px;
+}
+
+.iblog-posts-grid .image {
+	display: block;
+	margin-bottom: 0px;
+}
+
+.iblog-posts-grid .description {
+	display: none;
+}
+
+.iblog-pagination {
+	border-top: 1px solid #EEEEEE;
+	padding-top: 8px;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.iblog-pagination .links {
+	float: left;
+}
+
+.iblog-pagination .links b {
+	display: inline-block;
+	border: 1px solid #269BC6;
+	padding: 4px 10px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #269BC6;
+	background: #FFFFFF;
+}
+
+.iblog-pagination .results {
+	float: right;
+	padding-top: 3px;
+}
+
+.iblog-pagination .links a {
+	display: inline-block;
+	border: 1px solid #EEEEEE;
+	padding: 4px 10px;
+	text-decoration: none;
+	color: #A3A3A3;
+}
+
+.iblog-search {
+	float:right;
+	padding:5px;	
+}
+
+.iblog-search .search-field {
+	margin: 0 5px 0 5px;	
+	width: 180px;
+}
+
+.iblog-header {
+	display:inline-block;
+	width:100%;
+	vertical-align:top;	
+}
+
+.iblog-keywords-string {
+	font-weight: bold;	
+}
+
+.iblog-share-links {
+	float: left;	
+}
+
+/* box nav */
+ul.box-nav,
+ul.box-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul.box-nav > li {
+	padding: 0;
+}
+ul.box-nav > li + li {
+	border-top: 1px solid #EEEEEE;
+}
+ul.box-nav > li > a {
+	text-decoration: none;
+	color: #333;
+	padding: 8px;
+	display: block;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+ul.box-nav > li > a:hover {
+	background-color: #f7f7f7;
+}
+ul.box-nav > li ul {
+	padding: 5px 0 0 5px;
+}
+ul.box-nav > li ul > li:last-child {
+	padding-bottom: 0;
+}
+ul.box-nav > li a.active {
+	font-weight: bold;
+}
+ul.box-nav > li a.active + ul {
+	display: block;
+}
+ul.box-nav > li ul > li > a {
+	text-decoration: none;
+	display: block;
+}
+ul.box-nav > li ul > li > a.active {
+	font-weight: bold;
+}

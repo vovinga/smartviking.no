@@ -1,0 +1,1805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>ADV Profit Reporting Preparation v3.0 for OpenCart v1.5.3.x, v1.5.4.x, v1.5.5.x, v1.5.6.x</id>
+	<version>3.0</version>
+	<vqmver>2.0.0</vqmver>
+	<author>ADV Reports and Statistics (cmerry)</author>
+	<email>opencart.reports@gmail.com</email>
+	<website>http://www.opencartreports.com</website>	
+	<file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after" offset="1"><![CDATA[
+				$url .= '&filter_price=' . $this->request->get['filter_price'];
+            ]]></search>
+            <add><![CDATA[
+			if (isset($this->request->get['filter_cost'])) {
+				$url .= '&filter_cost=' . $this->request->get['filter_cost'];
+			}
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after" offset="1"><![CDATA[
+			$filter_price = null;
+            ]]></search>
+            <add><![CDATA[
+		if (isset($this->request->get['filter_cost'])) {
+			$filter_cost = $this->request->get['filter_cost'];
+		} else {
+			$filter_cost = null;
+		}
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after"><![CDATA[
+			=> $filter_price,
+            ]]></search>
+            <add><![CDATA[
+			'filter_cost'	  => $filter_cost,
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after"><![CDATA[
+				=> $result['price'],
+            ]]></search>
+            <add><![CDATA[
+				'cost'       => $result['cost'],
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after"><![CDATA[
+		$this->data['column_price'] = $this->language->get('column_price');	
+            ]]></search>
+            <add><![CDATA[
+		$this->data['column_cost'] = $this->language->get('column_cost');	
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after"><![CDATA[
+		$this->data['sort_price'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.price' . $url, 'SSL');
+            ]]></search>
+            <add><![CDATA[
+		$this->data['sort_cost'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.cost' . $url, 'SSL');	
+            ]]></add>
+        </operation>
+        <operation>		
+            <search position="after"><![CDATA[
+		$this->data['filter_price'] = $filter_price;
+            ]]></search>
+            <add><![CDATA[
+		$this->data['filter_cost'] = $filter_cost;
+            ]]></add>
+        </operation>																										
+        <operation>
+            <search position="after"><![CDATA[
+    	$this->data['entry_price'] = $this->language->get('entry_price');
+            ]]></search>
+            <add><![CDATA[
+    	$this->data['entry_cost'] = $this->language->get('entry_cost');
+    	$this->data['entry_option_cost'] = $this->language->get('entry_option_cost');		
+    	$this->data['text_cost'] = $this->language->get('text_cost');
+    	$this->data['text_cost_amount'] = $this->language->get('text_cost_amount');
+    	$this->data['text_cost_or'] = $this->language->get('text_cost_or');		
+    	$this->data['text_cost_percentage'] = $this->language->get('text_cost_percentage');	
+    	$this->data['text_cost_additional'] = $this->language->get('text_cost_additional');	
+    	$this->data['text_cost_option_cost'] = $this->language->get('text_cost_option_cost');	
+    	$this->data['text_cost_option'] = $this->language->get('text_cost_option');	
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[
+		$this->load->model('localisation/tax_class');
+            ]]></search>
+            <add><![CDATA[
+		if (isset($this->request->post['cost'])) {
+      		$this->data['cost'] = $this->request->post['cost'];
+    	} else if (isset($product_info)) {
+			$this->data['cost'] = $product_info['cost'];
+		} else {
+      		$this->data['cost'] = 0;
+    	}
+
+		if (isset($this->request->post['cost_amount'])) {
+      		$this->data['cost_amount'] = $this->request->post['cost_amount'];
+    	} else if (isset($product_info) && $product_info['cost'] > 0 && $product_info['cost_amount'] == 0 && $product_info['cost_percentage'] == 0 && $product_info['cost_additional'] == 0) {
+			$this->data['cost_amount'] = $product_info['cost'];
+    	} else if (isset($product_info) && isset($product_info['cost_amount']) > 0 || isset($product_info['cost_percentage']) > 0 || isset($product_info['cost_additional']) > 0) {
+			$this->data['cost_amount'] = $product_info['cost_amount'];
+    	} else if (isset($product_info)) {
+			$this->data['cost_amount'] = $product_info['cost_amount'];			
+		} else {
+      		$this->data['cost_amount'] = 0;
+    	}
+		
+		if (isset($this->request->post['cost_percentage'])) {
+      		$this->data['cost_percentage'] = $this->request->post['cost_percentage'];
+    	} else if (isset($product_info)) {
+			$this->data['cost_percentage'] = $product_info['cost_percentage'];
+		} else {
+      		$this->data['cost_percentage'] = 0;
+    	}
+		
+		if (isset($this->request->post['cost_additional'])) {
+      		$this->data['cost_additional'] = $this->request->post['cost_additional'];
+    	} else if (isset($product_info)) {
+			$this->data['cost_additional'] = $product_info['cost_additional'];
+		} else {
+      		$this->data['cost_additional'] = 0;
+    	}	
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+						=> $product_option_value['price_prefix'],
+            ]]></search>
+            <add><![CDATA[
+						'cost'                    => $product_option_value['cost'],
+						'cost_prefix'             => $product_option_value['cost_prefix'],	
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="before"><![CDATA[
+								=> (float)$product_option_value['price'] ? $this->currency->format($product_option_value['price'], $this->config->get('config_currency')) : false,
+            ]]></search>
+            <add><![CDATA[
+								'cost'                    => (float)$product_option_value['cost'] ? $this->currency->format($product_option_value['cost'], $this->config->get('config_currency')) : false,
+								'cost_prefix'             => $product_option_value['cost_prefix'],
+            ]]></add>
+        </operation>			
+	</file>
+
+	<file name="admin/controller/sale/order.php">
+        <operation>
+            <search position="after"><![CDATA[
+		$this->data['column_price'] = $this->language->get('column_price');
+            ]]></search>
+            <add><![CDATA[
+		$this->data['entry_shipping_cost'] = $this->language->get('entry_shipping_cost');
+		$this->data['entry_payment_cost'] = $this->language->get('entry_payment_cost');				
+		$this->data['column_cost'] = $this->language->get('column_cost');
+		$this->data['text_save'] = $this->language->get('text_save');
+		$this->data['text_close'] = $this->language->get('text_close');	
+            ]]></add>
+        </operation>
+		<operation>
+			<search position="before"><![CDATA[
+ 		if (isset($this->error['shipping_firstname'])) {
+			]]></search>
+			<add><![CDATA[
+		if (isset($this->error['shipping_cost'])) {
+			$this->data['error_shipping_cost'] = $this->error['shipping_cost'];
+		} else {
+			$this->data['error_shipping_cost'] = '';
+		}
+		
+		if (isset($this->error['payment_cost'])) {
+			$this->data['error_payment_cost'] = $this->error['payment_cost'];
+		} else {
+			$this->data['error_payment_cost'] = '';
+		}		
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+		$this->data['countries'] = $this->model_localisation_country->getCountries();
+			]]></search>
+			<add><![CDATA[
+    	if (isset($this->request->post['shipping_cost'])) {
+      		$this->data['shipping_cost'] = $this->request->post['shipping_cost'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['shipping_cost'] = $order_info['shipping_cost'];
+		} else {
+      		$this->data['shipping_cost'] = '';
+    	}
+		
+    	if (isset($this->request->post['payment_cost'])) {
+      		$this->data['payment_cost'] = $this->request->post['payment_cost'];
+    	} elseif (!empty($order_info)) { 
+			$this->data['payment_cost'] = $order_info['payment_cost'];
+		} else {
+      		$this->data['payment_cost'] = '';
+    	}		
+			]]></add>	
+		</operation>		
+        <operation>
+            <search position="after"><![CDATA[
+				'price'            => $order_product['price'],
+            ]]></search>
+            <add><![CDATA[
+				'cost'             => $order_product['cost'],
+            ]]></add>
+        </operation>
+		<operation>
+			<search position="before"><![CDATA[
+    	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+			]]></search>
+			<add><![CDATA[		
+		if ((!is_numeric($this->request->post['shipping_cost']))) {
+			$this->error['shipping_cost'] = $this->language->get('error_shipping_cost');
+		}
+		
+		if ((!is_numeric($this->request->post['payment_cost']))) {
+			$this->error['payment_cost'] = $this->language->get('error_payment_cost');
+		}		
+			]]></add>
+		</operation>	
+		<operation>
+			<search position="after"><![CDATA[
+			$this->data['payment_country'] = $order_info['payment_country'];
+			]]></search>
+			<add><![CDATA[
+			$this->data['payment_cost'] = $order_info['payment_cost'];
+			$this->data['shipping_cost'] = $order_info['shipping_cost'];			
+			]]></add>
+		</operation>
+        <operation>
+            <search position="after"><![CDATA[
+					'price'    		   => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),					
+            ]]></search>
+            <add><![CDATA[
+					'cost'             => $product['cost'],
+            ]]></add>
+        </operation>				
+        <operation>
+            <search position="before"><![CDATA[
+	public function createInvoiceNo() {
+            ]]></search>
+            <add><![CDATA[
+    public function saveCost() {
+        $id  = $this->request->get['order_product_id'];
+        $cost = $this->request->get['cost'];
+
+        $this->load->model('sale/order');
+
+        $this->response->setOutput($this->model_sale_order->saveCost($id,$cost));
+    }
+	
+    public function savePaymentCost() {
+        $order_id  = $this->request->get['order_id'];
+        $payment_cost = $this->request->get['payment_cost'];
+
+        $this->load->model('sale/order');
+
+        $this->response->setOutput($this->model_sale_order->savePaymentCost($order_id,$payment_cost));
+    }
+	
+    public function saveShippingCost() {
+        $order_id  = $this->request->get['order_id'];
+        $shipping_cost = $this->request->get['shipping_cost'];
+
+        $this->load->model('sale/order');
+
+        $this->response->setOutput($this->model_sale_order->saveShippingCost($order_id,$shipping_cost));
+    }		
+            ]]></add>
+        </operation>			
+	</file>
+	
+	<file name="admin/language/*/catalog/product.php">
+        <operation>
+            <search position="before"><![CDATA[
+?>
+            ]]></search>
+            <add><![CDATA[
+$_['column_cost']            = 'Cost';
+$_['entry_cost']			 = 'Product Costs:<br/><span class="help">The product costs used for profit reporting</span>';
+$_['entry_option_cost']		 = 'Cost:';
+$_['text_cost']				 = 'Product Costs';
+$_['text_cost_amount']		 = 'Cost Price<br>(amount)';
+$_['text_cost_or']			 = 'and/or';
+$_['text_cost_percentage']	 = 'Commission<br>(percentage from sale price)';
+$_['text_cost_additional']	 = 'Additional Costs<br>(e.g. shipping)';
+$_['text_cost_option_cost']	 = 'Option Cost';
+$_['text_cost_option']	 	 = '(if options are used)';
+            ]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/language/*/sale/order.php">
+        <operation>
+            <search position="before"><![CDATA[
+?>
+            ]]></search>
+            <add><![CDATA[
+$_['entry_shipping_cost']                     = 'Shipping Costs:';
+$_['error_shipping_cost']                     = 'Shipping Costs must be a numeric value!';
+$_['entry_payment_cost']                      = 'Payment Costs:';
+$_['error_payment_cost']                      = 'Payment Costs must be a numeric value!';	
+$_['column_cost']                             = 'Cost';
+$_['text_save']                               = 'Save';
+$_['text_close']                              = 'Close';
+            ]]></add>
+        </operation>
+	</file>
+				
+	<file name="admin/model/catalog/product.php">
+        <operation>
+            <search position="replace"><![CDATA[
+, price = '" . (float)$data['price'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, price = '" . (float)$data['price'] . "', cost = '" . (float)$data['cost'] . "', cost_amount = '" . (float)$data['cost_amount'] . "', cost_percentage = '" . (float)$data['cost_percentage'] . "', cost_additional = '" . (float)$data['cost_additional'] . "'
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[
+, price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', cost = '" . (float)$product_option_value['cost'] . "', cost_prefix = '" . $this->db->escape($product_option_value['cost_prefix']) . "'
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[
+			if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+            ]]></search>
+            <add><![CDATA[
+			if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
+				$sql .= " AND p.cost LIKE '" . $this->db->escape($data['filter_cost']) . "%'";
+			}
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+				'p.price',
+            ]]></search>
+            <add><![CDATA[
+				'p.cost',
+            ]]></add>
+        </operation>		
+        <operation>
+            <search position="after"><![CDATA[
+						=> $product_option_value['price_prefix'],
+            ]]></search>
+            <add><![CDATA[
+						'cost'                    => $product_option_value['cost'],	
+						'cost_prefix'             => $product_option_value['cost_prefix'],	
+            ]]></add>
+        </operation>												
+	</file>
+
+	<file name="admin/model/sale/order.php">
+        <operation>
+            <search position="replace"><![CDATA[
+, reward = '" . (int)$order_product['reward'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, reward = '" . (int)$order_product['reward'] . "', cost = '" . (float)$order_product['cost'] . "'
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[
+	public function getTotalOrders($data = array()) {
+            ]]></search>
+            <add><![CDATA[
+    public function saveCost($order_product_id, $cost) {
+        $this->db->query("UPDATE " . DB_PREFIX . "order_product SET cost = '" . (float)$cost . "' WHERE order_product_id = '". $order_product_id . "'");
+
+        $query = $this->db->query("SELECT cost FROM " . DB_PREFIX . "order_product WHERE order_product_id = '". $order_product_id . "'");
+        $row = $query->row;
+
+        return $row['cost'];
+    }
+	
+    public function savePaymentCost($order_id, $payment_cost) {
+        $this->db->query("UPDATE `" . DB_PREFIX . "order` SET payment_cost = '" . (float)$payment_cost . "' WHERE order_id = '" . (int)$order_id . "'");
+
+        $query = $this->db->query("SELECT payment_cost FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
+        $row = $query->row;
+
+        return $row['payment_cost'];
+    }
+	
+    public function saveShippingCost($order_id, $shipping_cost) {
+        $this->db->query("UPDATE `" . DB_PREFIX . "order` SET shipping_cost = '" . (float)$shipping_cost . "' WHERE order_id = '" . (int)$order_id . "'");
+
+        $query = $this->db->query("SELECT shipping_cost FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
+        $row = $query->row;
+
+        return $row['shipping_cost'];
+    }		
+            ]]></add>
+        </operation>
+		<operation>
+			<search position="replace"><![CDATA[
+, payment_method = '" . $this->db->escape($data['payment_method']) . "'
+			]]></search>
+			<add trim="true"><![CDATA[
+, payment_method = '" . $this->db->escape($data['payment_method']) . "', shipping_cost = '" . $this->db->escape($data['shipping_cost']) . "', payment_cost = '" . $this->db->escape($data['payment_cost']) . "'
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+				'payment_method'          => $order_query->row['payment_method'],
+			]]></search>
+			<add><![CDATA[
+				'shipping_cost'           => $order_query->row['shipping_cost'],
+				'payment_cost'            => $order_query->row['payment_cost'],				
+			]]></add>
+		</operation>																		
+	</file>
+
+	<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="after" offset="1"><![CDATA[
+              <td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+		  <tr>
+            <td><?php echo $entry_cost; ?></td>
+            <td>
+<script type="text/javascript">
+function totalcost() {
+	if (document.getElementById('form').cost_amount.value != '' && document.getElementById('form').cost_amount.value >= '0') {
+		if (document.getElementById('form').cost_percentage.value != '' && document.getElementById('form').cost_percentage.value >='0') {
+			if (document.getElementById('form').cost_additional.value != '' && document.getElementById('form').cost_additional.value >='0') {
+				var totalcost = parseFloat(document.getElementById('form').cost_amount.value) + parseFloat((document.getElementById('form').cost_percentage.value / 100)*document.getElementById('form').price.value) + parseFloat(document.getElementById('form').cost_additional.value)
+				document.getElementById('form').cost.value = totalcost
+			}
+		}
+	}
+}
+</script>           
+  <table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td nowrap="nowrap"><input onKeyUp="totalcost(this.form);" type="text" name="cost" value="<?php echo $cost; ?>" style="text-align:right; background-color: #ffd7d7; border: thin solid #999;" /></td>
+    <td width="40" align="center" nowrap="nowrap">=</td>
+    <td nowrap="nowrap"><input onKeyUp="totalcost(this.form); if(!this.value) this.value=0; totalcost(this.form);" type="text" name="cost_amount" value="<?php echo $cost_amount; ?>" style="border: thin solid #999;" /></td>
+    <td width="50" align="center" nowrap="nowrap"><?php echo $text_cost_or; ?></td>
+    <td nowrap="nowrap"><input onKeyUp="totalcost(this.form); if(!this.value) this.value=0; totalcost(this.form);" type="text" name="cost_percentage" maxlength="5" value="<?php echo $cost_percentage; ?>" style="border: thin solid #999;" />%</td>
+    <td width="40" align="center" nowrap="nowrap">+</td>
+    <td nowrap="nowrap"><input onKeyUp="totalcost(this.form); if(!this.value) this.value=0; totalcost(this.form);" type="text" name="cost_additional" value="<?php echo $cost_additional; ?>" style="border: thin solid #999;" /></td>
+    <td width="40" align="center" nowrap="nowrap">+</td>
+    <td nowrap="nowrap" align="left"><div id="tabs"><a href="#tab-option"><?php echo $text_cost_option_cost; ?></a></div></td>    
+  </tr>
+  <tr>
+    <td align="center" nowrap="nowrap"><span class="help"><?php echo $text_cost; ?></span></td>
+    <td>&nbsp;</td>
+    <td align="center" nowrap="nowrap"><span class="help"><?php echo $text_cost_amount; ?></span></td>
+    <td>&nbsp;</td>
+    <td align="center" nowrap="nowrap"><span class="help"><?php echo $text_cost_percentage; ?></span></td>
+    <td>&nbsp;</td>
+    <td align="center" nowrap="nowrap"><span class="help"><?php echo $text_cost_additional; ?></span></td>
+    <td>&nbsp;</td>
+    <td align="left" nowrap="nowrap"><span class="help"><?php echo $text_cost_option; ?></span></td>    
+  </tr>
+  </table>
+          </td>
+          </tr> 
+<?php } else { ?>
+		  <input type="hidden" name="cost" value="<?php echo $cost; ?>" />
+		  <input type="hidden" name="cost_amount" value="<?php echo $cost_amount; ?>" />
+		  <input type="hidden" name="cost_percentage" value="<?php echo $cost_percentage; ?>" />
+		  <input type="hidden" name="cost_additional" value="<?php echo $cost_additional; ?>" />
+<?php } ?>			  
+            ]]></add>
+        </operation>
+		<operation>
+			<search position="after" index="1"><![CDATA[
+<td class="right"><?php echo $entry_price; ?></td>
+			]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>		
+				<td class="right"><?php echo $entry_option_cost; ?></td> 
+<?php } ?>	
+			]]></add>
+		</operation>	
+        <operation>		
+            <search position="after"><![CDATA[
+                    <input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][price]" value="<?php echo $product_option_value['price']; ?>" size="5" /></td>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+                  <td class="right"><select name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][cost_prefix]" style="background-color: #ffd7d7; border: thin solid #999;">
+                      <?php if ($product_option_value['cost_prefix'] == '+') { ?>
+                      <option value="+" selected="selected">+</option>
+                      <?php } else { ?>
+                      <option value="+">+</option>
+                      <?php } ?>
+                      <?php if ($product_option_value['cost_prefix'] == '-') { ?>
+                      <option value="-" selected="selected">-</option>
+                      <?php } else { ?>
+                      <option value="-">-</option>
+                      <?php } ?>
+                    </select>
+                    <input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][cost]" value="<?php echo $product_option_value['cost']; ?>" size="5" style="background-color: #ffd7d7; border: thin solid #999;" /></td> 
+<?php } else { ?>
+<?php if ($product_option_value['cost_prefix'] == '+') { ?>
+		  		  <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][cost_prefix]" value="+" />
+<?php } ?>
+<?php if ($product_option_value['cost_prefix'] == '-') { ?>
+		  		  <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][cost_prefix]" value="-" />
+<?php } ?>				  
+		  		  <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][cost]" value="<?php echo $product_option_value['cost']; ?>" />
+<?php } ?>						
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="7"><![CDATA[
+                  <td class="left"><a onclick="$('#option-value-row<?php echo $option_value_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+            ]]></search>
+            <add><![CDATA[
+                  <td class="left"><a onclick="$('#option-value-row<?php echo $option_value_row; ?>').remove();" class="button"><?php echo $button_remove; ?></a></td>
+                </tr>
+              </tbody>
+              <?php $option_value_row++; ?>
+              <?php } ?>
+              <tfoot>
+                <tr>
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+                  <td colspan="7"></td>
+<?php } else { ?>
+                  <td colspan="6"></td>	
+<?php } ?>					  
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+			html += '        <td class="right"><?php echo $entry_price; ?></td>';
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>			
+			html += '        <td class="right"><?php echo $entry_option_cost; ?></td>';
+<?php } ?>				
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[
+			html += '        <td colspan="6"></td>';
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>
+			html += '        <td colspan="7"></td>';
+<?php } else { ?>
+			html += '        <td colspan="6"></td>';
+<?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+	html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" size="5" /></td>';
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>			
+	html += '    <td class="right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][cost_prefix]" style="background-color: #ffd7d7; border: thin solid #999;">';
+	html += '      <option value="+">+</option>';
+	html += '      <option value="-">-</option>';
+	html += '    </select>';
+	html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][cost]" value="" size="5" style="background-color: #ffd7d7; border: thin solid #999;" /></td>';
+<?php } else { ?>
+	html += '    <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][cost_prefix]" value="" />';
+	html += '    <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][cost]" value="" />';
+<?php } ?>		
+            ]]></add>
+        </operation>												
+	</file>
+
+	<file name="admin/view/template/catalog/product_list.tpl">	
+        <operation error="skip">
+            <search position="after" offset="1"><![CDATA[
+              <a href="<?php echo $sort_price; ?>"><?php echo $column_price; ?></a>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) {?>
+              <td class="left"><?php if ($sort == 'p.cost') { ?>
+                <a href="<?php echo $sort_cost; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_cost; ?></a>
+				<?php } else { ?>
+                <a href="<?php echo $sort_cost; ?>"><?php echo $column_cost; ?></a>
+				<?php } ?></td>
+<?php } ?> 			
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="after"><![CDATA[
+              <td align="left"><input type="text" name="filter_price" value="<?php echo $filter_price; ?>" size="8"/></td>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) {?>			
+              <td align="left"><input type="text" name="filter_cost" value="<?php echo $filter_cost; ?>" size="8"/></td>
+<?php } ?>  			  
+            ]]></add>
+        </operation>			
+        <operation error="skip">
+            <search position="after" offset="4"><![CDATA[
+                <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) {?>
+              <td class="left"><?php echo $product['cost']; ?></td>
+<?php } ?>  
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="before"><![CDATA[
+	var filter_quantity = $('input[name=\'filter_quantity\']').attr('value');
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) {?>				
+	var filter_cost = $('input[name=\'filter_cost\']').attr('value');
+	
+	if (filter_cost) {
+		url += '&filter_cost=' + encodeURIComponent(filter_cost);
+	}
+<?php } ?>
+            ]]></add>
+        </operation>				
+	</file>
+
+	<file name="admin/view/template/sale/order_info.tpl">
+        <operation>
+            <search position="after"><![CDATA[
+<?php echo $header; ?>
+            ]]></search>
+            <add trim="false"><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>	
+<style type="text/css">
+.ajax-edit {
+   display: none;
+   float: right;
+   margin-right: 5px;
+}
+.ajax-edit input {
+   text-align: right;
+   cursor: text;
+   background-color: #ffd7d7;
+   width: 100px; 
+   border: thin solid #999  
+}
+.ajax-edit +span {
+   cursor: pointer;
+}
+
+.ajax-edit2 {
+   display: none;
+   float: left;
+   margin-right: 5px;
+}
+.ajax-edit2 input {
+   text-align: left;
+   cursor: text;
+   background-color: #ffd7d7;
+   width: 100px; 
+   border: thin solid #999  
+}
+.ajax-edit2 +span {
+   cursor: pointer;
+}
+</style>
+<?php if ($this->user->hasPermission('modify', 'sale/order')) { ?>	
+<script type="text/javascript"><!--
+                                $(document).ready(function() {
+                                   $('.ajax-edit').each(function(index, wrapper) {
+                                        $(this).siblings().click(function() {
+                                            $(wrapper).show();
+                                            $(wrapper).siblings().hide();
+                                        })
+                                   });
+                                })
+
+                                function save_cost(id) {
+                                    var input_cost = $('#cost-'+id+' input');
+                                    var cost = $(input_cost).val();
+                                    $(cost).css('cursor','progress');
+                                    $.ajax({
+                                      url: 'index.php?route=sale/order/saveCost&order_product_id='+id+'&cost='+cost+'&token=<?php echo $token; ?>',
+                                      dataType: 'html',
+                                      data: {},
+                                      success: function(cost) { 
+                                         $('#cost-'+id).next().html(cost);
+                                         close_cost(id);
+                                      }
+                                    });
+                                    $(input_cost).css('cursor','default');
+                                }
+
+                                function close_cost(id) {
+                                     $('.ajax-edit input').blur();
+                                     $('#cost-'+id).siblings().show();
+                                     $('#cost-'+id).hide();
+                                }
+//--></script> 
+<script type="text/javascript"><!--
+                                $(document).ready(function() {
+                                   $('.ajax-edit2').each(function(index, wrapper) {
+                                        $(this).siblings().click(function() {
+                                            $(wrapper).show();
+                                            $(wrapper).siblings().hide();
+                                        })
+                                   });
+                                })
+
+                                function save_payment_cost(id) {
+                                    var input_payment_cost = $('#payment_cost-'+id+' input');
+                                    var payment_cost = $(input_payment_cost).val();
+                                    $(payment_cost).css('cursor','progress');
+                                    $.ajax({
+                                      url: 'index.php?route=sale/order/savePaymentCost&order_id='+id+'&payment_cost='+payment_cost+'&token=<?php echo $token; ?>',
+                                      dataType: 'html',
+                                      data: {},
+                                      success: function(payment_cost) { 
+                                         $('#payment_cost-'+id).next().html(payment_cost);
+                                         close_payment_cost(id);
+                                      }
+                                    });
+                                    $(input_payment_cost).css('cursor','default');
+                                }
+
+                                function close_payment_cost(id) {
+                                     $('.ajax-edit2 input').blur();
+                                     $('#payment_cost-'+id).siblings().show();
+                                     $('#payment_cost-'+id).hide();
+                                }
+//--></script> 
+<script type="text/javascript"><!--
+                                $(document).ready(function() {
+                                   $('.ajax-edit2').each(function(index, wrapper) {
+                                        $(this).siblings().click(function() {
+                                            $(wrapper).show();
+                                            $(wrapper).siblings().hide();
+                                        })
+                                   });
+                                })
+
+                                function save_shipping_cost(id) {
+                                    var input_shipping_cost = $('#shipping_cost-'+id+' input');
+                                    var shipping_cost = $(input_shipping_cost).val();
+                                    $(shipping_cost).css('cursor','progress');
+                                    $.ajax({
+                                      url: 'index.php?route=sale/order/saveShippingCost&order_id='+id+'&shipping_cost='+shipping_cost+'&token=<?php echo $token; ?>',
+                                      dataType: 'html',
+                                      data: {},
+                                      success: function(shipping_cost) { 
+                                         $('#shipping_cost-'+id).next().html(shipping_cost);
+                                         close_shipping_cost(id);
+                                      }
+                                    });
+                                    $(input_shipping_cost).css('cursor','default');
+                                }
+
+                                function close_shipping_cost(id) {
+                                     $('.ajax-edit2 input').blur();
+                                     $('#shipping_cost-'+id).siblings().show();
+                                     $('#shipping_cost-'+id).hide();
+                                }
+//--></script> 
+<?php } ?>
+<?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after" offset="1"><![CDATA[
+            <td><?php echo $payment_method; ?></td>
+            ]]></search>
+            <add trim="false"><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+          <tr>
+            <td><?php echo $entry_payment_cost; ?></td>
+            <td>
+				<span class="ajax-edit2" id="payment_cost-<?php echo $order_id; ?>" value="<?php echo $order_id; ?>">
+				<input type="text" value="<?php echo $payment_cost; ?>"><br>
+    			<a onclick="save_payment_cost(<?php echo $order_id; ?>)"><?php echo $text_save ?></a>&nbsp|&nbsp<a onclick="close_payment_cost(<?php echo $order_id; ?>)"; return false;><?php echo $text_close ?></a>
+				</span>            
+            <span style="color: #F00"><?php echo $payment_cost; ?></span>
+            </td>
+          </tr>  
+<?php } ?>
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="after" offset="2"><![CDATA[
+            <td><?php echo $shipping_method; ?></td>
+            ]]></search>
+            <add trim="false"><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+          <tr>
+            <td><?php echo $entry_shipping_cost; ?></td>
+            <td>
+				<span class="ajax-edit2" id="shipping_cost-<?php echo $order_id; ?>" value="<?php echo $order_id; ?>">
+				<input type="text" value="<?php echo $shipping_cost; ?>"><br>
+    			<a onclick="save_shipping_cost(<?php echo $order_id; ?>)"><?php echo $text_save ?></a>&nbsp|&nbsp<a onclick="close_shipping_cost(<?php echo $order_id; ?>)"; return false;><?php echo $text_close ?></a>
+				</span>            
+            <span style="color: #F00"><?php echo $shipping_cost; ?></span>
+            </td>
+          </tr>    
+<?php } ?>
+            ]]></add>
+        </operation>		
+        <operation>
+            <search position="after"><![CDATA[
+              <td class="right"><?php echo $column_price; ?></td>
+            ]]></search>
+            <add trim="false"><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+                <td class="right"><?php echo $column_cost; ?></td>
+<?php } ?>
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="after"><![CDATA[
+              <td class="right"><?php echo $product['price']; ?></td>
+            ]]></search>
+            <add trim="false"><![CDATA[	
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+				<td class="right">
+				<?php if ($this->user->hasPermission('modify', 'sale/order')) {?>
+				<span class="ajax-edit" id="cost-<?php echo $product['order_product_id']; ?>" value="<?php echo $product['order_product_id']; ?>">
+				<input type="text" value="<?php echo $product['cost']; ?>"><br>
+    			<a onclick="save_cost(<?php echo $product['order_product_id']; ?>)"><?php echo $text_save ?></a>&nbsp|&nbsp<a onclick="close_cost(<?php echo $product['order_product_id']; ?>)"; return false;><?php echo $text_close ?></a>
+				</span>
+				<?php } ?>
+				<span style="color: #F00"><?php echo $product['cost']; ?></span>
+				</td>
+<?php } ?>					
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="replace"><![CDATA[
+              <td colspan="4" class="right"><?php echo $totals['title']; ?>:</td>
+            ]]></search>
+            <add trim="false"><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+              <td colspan="5" class="right"><?php echo $totals['title']; ?>:</td>
+<?php } else { ?>
+              <td colspan="4" class="right"><?php echo $totals['title']; ?>:</td>
+<?php } ?>				  
+            ]]></add>
+        </operation>				
+	</file>
+	
+	<file name="admin/view/template/sale/order_form.tpl">
+		<operation>
+			<search position="after" offset="2"><![CDATA[
+                <span class="error"><?php echo $error_payment_zone; ?></span>
+			]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+		       <tr>
+		         <td><?php echo $entry_payment_cost; ?></td>
+		         <td><input style="background-color: #ffd7d7; border: thin solid #999;" type="text" name="payment_cost" value="<?php echo $payment_cost; ?>" />
+		           <?php if ($error_payment_cost) { ?>
+		           <span class="error"><?php echo $error_payment_cost; ?></span>
+		           <?php } ?></td>				   
+		       </tr>
+<?php } else { ?>
+<input type="hidden" name="payment_cost" value="<?php echo $payment_cost; ?>" />
+<?php } ?>			    
+			]]></add>
+		</operation>				
+		<operation>
+			<search position="after" offset="2"><![CDATA[
+                <span class="error"><?php echo $error_shipping_zone; ?></span>
+			]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>				
+		       <tr>
+		         <td><?php echo $entry_shipping_cost; ?></td>
+		         <td><input style="background-color: #ffd7d7; border: thin solid #999;" type="text" name="shipping_cost" value="<?php echo $shipping_cost; ?>" />
+		           <?php if ($error_shipping_cost) { ?>
+		           <span class="error"><?php echo $error_shipping_cost; ?></span>
+		           <?php } ?></td>				   
+		       </tr>
+<?php } else { ?>
+<input type="hidden" name="shipping_cost" value="<?php echo $shipping_cost; ?>" />
+<?php } ?>			    
+			]]></add>
+		</operation>
+        <operation>
+            <search position="after" index="1"><![CDATA[
+                <td class="right"><?php echo $column_price; ?></td>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>
+                <td class="right"><?php echo $column_cost; ?></td>
+<?php } ?>
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="after"><![CDATA[
+<input type="hidden" name="order_product[<?php echo $product_row; ?>][price]" value="<?php echo $order_product['price']; ?>" /></td>
+            ]]></search>
+            <add><![CDATA[	
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+				<td class="right"><input style="background-color:#ffd7d7; border:thin solid #999; text-align:right; width:80px;" type="text" name="order_product[<?php echo $product_row; ?>][cost]" value="<?php echo $order_product['cost']; ?>" /></td>
+<?php } else { ?>
+<input type="hidden" name="order_product[<?php echo $product_row; ?>][cost]" value="<?php echo $order_product['cost']; ?>" />
+<?php } ?>	
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" index="1"><![CDATA[
+                <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+            ]]></search>
+            <add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>					
+                <td class="center" colspan="7"><?php echo $text_no_results; ?></td>
+<?php } else { ?>
+                <td class="center" colspan="6"><?php echo $text_no_results; ?></td>
+<?php } ?>	
+            ]]></add>
+        </operation>
+		<operation>
+			<search position="after"><![CDATA[
+				$('select[name=\'payment_country_id\']').attr('value', json['country_id']);
+			]]></search>
+			<add><![CDATA[
+				$('input[name=\'payment_cost\']').attr('value', json['cost']); 
+			]]></add>
+		</operation>				
+		<operation>
+			<search position="after"><![CDATA[
+				$('select[name=\'shipping_country_id\']').attr('value', json['country_id']);
+			]]></search>
+			<add><![CDATA[
+				$('input[name=\'shipping_cost\']').attr('value', json['cost']); 
+			]]></add>
+		</operation>			
+		<operation>
+			<search position="before"><![CDATA[
+					if (json['error']['payment']['postcode']) {
+			]]></search>
+			<add><![CDATA[
+					if (json['error']['payment']['cost']) {
+						$('input[name=\'payment_cost\']').after('<span class="error">' + json['error']['payment']['cost'] + '</span>');
+					}
+			]]></add>
+		</operation>				
+		<operation>
+			<search position="before"><![CDATA[
+					if (json['error']['shipping']['postcode']) {
+			]]></search>
+			<add><![CDATA[
+					if (json['error']['shipping']['cost']) {
+						$('input[name=\'shipping_cost\']').after('<span class="error">' + json['error']['shipping']['cost'] + '</span>');
+					}
+			]]></add>
+		</operation>		
+        <operation>
+            <search position="replace"><![CDATA[
+					html += '  <td class="right">' + product['total'] + '<input type="hidden" name="order_product[' + product_row + '][total]" value="' + product['total'] + '" /><input type="hidden" name="order_product[' + product_row + '][tax]" value="' + product['tax'] + '" /><input type="hidden" name="order_product[' + product_row + '][reward]" value="' + product['reward'] + '" /></td>';
+            ]]></search>
+            <add><![CDATA[
+					html += '  <td class="right">' + product['total'] + '<input type="hidden" name="order_product[' + product_row + '][total]" value="' + product['total'] + '" /><input type="hidden" name="order_product[' + product_row + '][tax]" value="' + product['tax'] + '" /><input type="hidden" name="order_product[' + product_row + '][reward]" value="' + product['reward'] + '" /><input type="hidden" name="order_product[' + product_row + '][cost]" value="' + product['cost'] + '" /></td>';
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="after"><![CDATA[
+						option: item.option,
+            ]]></search>
+            <add><![CDATA[
+						cost: item.cost,
+            ]]></add>
+        </operation>	
+		<operation>
+			<search position="after"><![CDATA[
+					html += '  <td class="right">' + product['price'] + '<input type="hidden" name="order_product[' + product_row + '][price]" value="' + product['price'] + '" /></td>';
+			]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>
+					html += '  <td class="right"><input style="background-color:#ffd7d7; border:thin solid #999; text-align:right; width:80px;" type="text" name="order_product[' + product_row + '][cost]" value="' + product['cost'] + '" /></td>';
+<?php } ?>	
+			]]></add>
+		</operation>	
+		<operation>
+			<search position="replace" index="1"><![CDATA[
+				html += '  <td colspan="6" class="center"><?php echo $text_no_results; ?></td>';
+			]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('access', 'module/adv_profit_reports')) { ?>
+				html += '  <td colspan="7" class="center"><?php echo $text_no_results; ?></td>';
+<?php } else { ?>
+				html += '  <td colspan="6" class="center"><?php echo $text_no_results; ?></td>';
+<?php } ?>		
+			]]></add>
+		</operation>																		
+	</file>
+
+	<file name="catalog/controller/checkout/cart.php">
+        <operation>
+            <search position="after"><![CDATA[
+=> $price,
+            ]]></search>
+            <add><![CDATA[
+          			'cost'     => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+				
+	<file name="catalog/controller/checkout/confirm.php">
+        <operation>
+            <search position="after"><![CDATA[
+$data = array();
+            ]]></search>
+            <add><![CDATA[
+			// payment cost
+			if ($this->config->get('adv_payment_cost_status') && $this->config->get('adv_payment_cost_type') && isset($this->session->data['payment_method']['code']) && $this->cart->hasProducts()) {
+				$getPaymentTypes = unserialize($this->config->get('adv_payment_cost_type'));
+			  if ($getPaymentTypes) {
+				  foreach ($getPaymentTypes as $payment_type) {
+					if ($this->session->data['payment_method']['code'] == $payment_type['pc_paymentkey']) {			
+						$address = array();
+							if (isset($this->session->data['payment_address_id']) && $this->session->data['payment_address_id']) { 
+								$this->load->model('account/address');
+								$address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+								
+								$country_id	= (isset($address['country_id'])) ? $address['country_id'] : 0;
+								$zone_id 	= (isset($address['zone_id'])) ? $address['zone_id'] : 0;
+								
+							} else { 
+								$country_id	= (isset($this->session->data['guest']['payment']['country_id'])) ? $this->session->data['guest']['payment']['country_id'] : 0;
+								$zone_id 	= (isset($this->session->data['guest']['payment']['zone_id'])) ? $this->session->data['guest']['payment']['zone_id'] : 0;
+							}
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$payment_type['pc_geozone'] . "' AND country_id = '" . (int)$country_id . "' AND (zone_id = '" . (int)$zone_id . "' OR zone_id = '0')");
+						
+							if (!$payment_type['pc_geozone']) {
+								$status = true;
+							} elseif ($query->num_rows) {
+								$status = true;
+							} else {
+								$status = false;
+							}		
+			
+							if (($total > $this->config->get('adv_payment_cost_total')) && ($status) && ($this->cart->getSubTotal() > 0)) {
+								$data['payment_cost'] = ($payment_type['pc_percentage']*$total)/100 + $payment_type['pc_fixed'];
+							} else {
+								$data['payment_cost'] = 0;
+							}
+							
+					} else {
+						$data['payment_cost'] = 0;	
+					}
+				
+				  }
+				} else {
+					$data['payment_cost'] = 0;	
+				}
+			} else {
+				$data['payment_cost'] = 0;	
+			}
+
+
+			// shipping cost
+			if ($this->customer->isLogged()) {
+				$this->load->model('account/address');
+				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
+			} elseif (isset($this->session->data['guest'])) {
+				$shipping_address = $this->session->data['guest']['shipping'];
+			}	
+			
+			$query = $this->db->query("SELECT geo_zone_id FROM " . DB_PREFIX . "zone_to_geo_zone WHERE country_id = '" . (int)$shipping_address['country_id'] . "' AND (zone_id = '" . (int)$shipping_address['zone_id'] . "' OR zone_id = '0')");
+
+			if ($query->rows) {	
+				foreach ($query->rows as $result) {
+					if (($this->config->get('adv_shipping_cost_weight_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate') != '') && $this->cart->hasProducts()) {
+				
+						if ($total > $this->config->get('adv_shipping_cost_total')) {
+							$status = true;
+						} elseif ($total < $this->config->get('adv_shipping_cost_total')) {
+							$status = false;						
+						}
+				
+						if (($status) && ($this->cart->getSubTotal() > 0)) {
+							$weight = $this->cart->getWeight();
+				
+							$rates = explode(',', $this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate'));
+				
+							foreach ($rates as $rate) {
+								$adv_shipping_cost_data = explode(':', $rate);
+				
+								if ($adv_shipping_cost_data[0] >= $weight) {
+									if (isset($adv_shipping_cost_data[1])) {
+										$data['shipping_cost'] = $adv_shipping_cost_data[1];
+									}
+									break;
+								}
+							}
+							
+						} else {
+						$data['shipping_cost'] = 0;
+						}
+					
+					} else {
+						$data['shipping_cost'] = 0;
+					}				
+				}
+			} else {
+				$data['shipping_cost'] = 0;
+			}
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="after"><![CDATA[
+=> $product['price'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>				
+	</file>
+
+	<file name="catalog/controller/checkout/manual.php">
+        <operation>
+            <search position="after"><![CDATA[
+=> $product['price'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'       => $product['cost'],
+            ]]></add>
+        </operation>
+	</file>	
+		
+	<file name="catalog/model/checkout/order.php">
+        <operation>
+            <search position="replace"><![CDATA[
+, total = '" . (float)$data['total'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, total = '" . (float)(isset($data['total']) ? $data['total'] : 0) . "', payment_cost = '" . (float)(isset($data['payment_cost']) ? $data['payment_cost']:0) . "', shipping_cost = '" . (float)(isset($data['shipping_cost']) ? $data['shipping_cost'] : 0) . "'
+            ]]></add>
+        </operation>		
+        <operation>
+            <search position="replace"><![CDATA[
+, price = '" . (float)$product['price'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, price = '" . (float)(isset($product['price']) ? $product['price']:0) . "', cost = '" . (float)(isset($product['cost']) ? $product['cost'] : 0 ). "'
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+=> $order_query->row['total'],
+            ]]></search>
+            <add><![CDATA[
+				'payment_cost'            => $order_query->row['payment_cost'],	
+				'shipping_cost'           => $order_query->row['shipping_cost'],
+            ]]></add>
+        </operation>		
+	</file>	
+
+	<file name="catalog/controller/payment/pp_standard.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>	
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $total,
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>				
+	</file>
+
+
+<!-- START OF MODIFICATION - Simple and quick one page checkout and registration (developer deeman) -->
+
+	<file name="catalog/controller/checkout/simplecheckout.php" error="skip">
+        <operation>
+            <search position="after"><![CDATA[
+$data = array();
+            ]]></search>
+            <add><![CDATA[
+			// payment cost
+			$payment_method = $this->simple->payment_method;
+			if ($this->config->get('adv_payment_cost_status') && $this->config->get('adv_payment_cost_type') && isset($payment_method['code']) && $this->cart->hasProducts()) {
+				$getPaymentTypes = unserialize($this->config->get('adv_payment_cost_type'));
+			  if ($getPaymentTypes) {
+				  foreach ($getPaymentTypes as $payment_type) {
+					if ($payment_method['code'] == $payment_type['pc_paymentkey']) {			
+						$address = array();
+							if (isset($this->session->data['payment_address_id']) && $this->session->data['payment_address_id']) { 
+								$this->load->model('account/address');
+								$address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+								
+								$country_id	= (isset($address['country_id'])) ? $address['country_id'] : 0;
+								$zone_id 	= (isset($address['zone_id'])) ? $address['zone_id'] : 0;
+								
+							} else { 
+								$country_id	= (isset($this->session->data['guest']['payment']['country_id'])) ? $this->session->data['guest']['payment']['country_id'] : 0;
+								$zone_id 	= (isset($this->session->data['guest']['payment']['zone_id'])) ? $this->session->data['guest']['payment']['zone_id'] : 0;
+							}
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$payment_type['pc_geozone'] . "' AND country_id = '" . (int)$country_id . "' AND (zone_id = '" . (int)$zone_id . "' OR zone_id = '0')");
+						
+							if (!$payment_type['pc_geozone']) {
+								$status = true;
+							} elseif ($query->num_rows) {
+								$status = true;
+							} else {
+								$status = false;
+							}		
+			
+							if (($total > $this->config->get('adv_payment_cost_total')) && ($status) && ($this->cart->getSubTotal() > 0)) {
+								$data['payment_cost'] = ($payment_type['pc_percentage']*$total)/100 + $payment_type['pc_fixed'];
+							} else {
+								$data['payment_cost'] = 0;
+							}
+							
+					} else {
+						$data['payment_cost'] = 0;	
+					}
+				
+				  }
+				} else {
+					$data['payment_cost'] = 0;	
+				}
+			} else {
+				$data['payment_cost'] = 0;	
+			}
+
+
+			// shipping cost
+			if ($this->customer->isLogged()) {
+				$this->load->model('account/address');
+				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
+			} elseif (isset($this->session->data['guest'])) {
+				$shipping_address = $this->session->data['guest']['shipping'];
+			}	
+			
+			$query = $this->db->query("SELECT geo_zone_id FROM " . DB_PREFIX . "zone_to_geo_zone WHERE country_id = '" . (int)$shipping_address['country_id'] . "' AND (zone_id = '" . (int)$shipping_address['zone_id'] . "' OR zone_id = '0')");
+
+			if ($query->rows) {	
+				foreach ($query->rows as $result) {
+					if (($this->config->get('adv_shipping_cost_weight_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate') != '') && $this->cart->hasProducts()) {
+				
+						if ($total > $this->config->get('adv_shipping_cost_total')) {
+							$status = true;
+						} elseif ($total < $this->config->get('adv_shipping_cost_total')) {
+							$status = false;						
+						}
+				
+						if (($status) && ($this->cart->getSubTotal() > 0)) {
+							$weight = $this->cart->getWeight();
+				
+							$rates = explode(',', $this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate'));
+				
+							foreach ($rates as $rate) {
+								$adv_shipping_cost_data = explode(':', $rate);
+				
+								if ($adv_shipping_cost_data[0] >= $weight) {
+									if (isset($adv_shipping_cost_data[1])) {
+										$data['shipping_cost'] = $adv_shipping_cost_data[1];
+									}
+									break;
+								}
+							}
+							
+						} else {
+						$data['shipping_cost'] = 0;
+						}
+					
+					} else {
+						$data['shipping_cost'] = 0;
+					}				
+				}
+			} else {
+				$data['shipping_cost'] = 0;
+			}
+            ]]></add>
+        </operation>			
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['price'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+	
+	<file name="catalog/controller/checkout/simplecheckout_cart.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $price,
+            ]]></search>
+            <add><![CDATA[
+'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+
+	<file name="catalog/controller/checkout/simplecheckout_customer.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['price'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+	
+<!-- END OF MODIFICATION - Simple and quick one page checkout and registration (developer deeman) -->	
+		
+		
+<!-- START OF MODIFICATION - One Page Checkout (developer bingo)
+	
+		<file name="catalog/controller/onecheckout/cart.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+          			'cost'     => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+	
+	<file name="catalog/controller/onecheckout/confirm.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>	
+        <operation error="skip">
+            <search position="after"><![CDATA[
+$data = array();
+            ]]></search>
+            <add><![CDATA[
+			// payment cost
+			if ($this->config->get('adv_payment_cost_status') && $this->config->get('adv_payment_cost_type') && isset($this->session->data['payment_method']['code']) && $this->cart->hasProducts()) {
+				$getPaymentTypes = unserialize($this->config->get('adv_payment_cost_type'));
+			  if ($getPaymentTypes) {
+				  foreach ($getPaymentTypes as $payment_type) {
+					if ($this->session->data['payment_method']['code'] == $payment_type['pc_paymentkey']) {			
+						$address = array();
+							if (isset($this->session->data['payment_address_id']) && $this->session->data['payment_address_id']) { 
+								$this->load->model('account/address');
+								$address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+								
+								$country_id	= (isset($address['country_id'])) ? $address['country_id'] : 0;
+								$zone_id 	= (isset($address['zone_id'])) ? $address['zone_id'] : 0;
+								
+							} else { 
+								$country_id	= (isset($this->session->data['guest']['payment']['country_id'])) ? $this->session->data['guest']['payment']['country_id'] : 0;
+								$zone_id 	= (isset($this->session->data['guest']['payment']['zone_id'])) ? $this->session->data['guest']['payment']['zone_id'] : 0;
+							}
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$payment_type['pc_geozone'] . "' AND country_id = '" . (int)$country_id . "' AND (zone_id = '" . (int)$zone_id . "' OR zone_id = '0')");
+						
+							if (!$payment_type['pc_geozone']) {
+								$status = true;
+							} elseif ($query->num_rows) {
+								$status = true;
+							} else {
+								$status = false;
+							}		
+			
+							if (($total > $this->config->get('adv_payment_cost_total')) && ($status) && ($this->cart->getSubTotal() > 0)) {
+								$data['payment_cost'] = ($payment_type['pc_percentage']*$total)/100 + $payment_type['pc_fixed'];
+							} else {
+								$data['payment_cost'] = 0;
+							}
+							
+					} else {
+						$data['payment_cost'] = 0;	
+					}
+				
+				  }
+				} else {
+					$data['payment_cost'] = 0;	
+				}
+			} else {
+				$data['payment_cost'] = 0;	
+			}
+
+
+			// shipping cost
+			if ($this->customer->isLogged()) {
+				$this->load->model('account/address');
+				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
+			} elseif (isset($this->session->data['guest'])) {
+				$shipping_address = $this->session->data['guest']['shipping'];
+			}	
+			
+			$query = $this->db->query("SELECT geo_zone_id FROM " . DB_PREFIX . "zone_to_geo_zone WHERE country_id = '" . (int)$shipping_address['country_id'] . "' AND (zone_id = '" . (int)$shipping_address['zone_id'] . "' OR zone_id = '0')");
+
+			if ($query->rows) {	
+				foreach ($query->rows as $result) {
+					if (($this->config->get('adv_shipping_cost_weight_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate') != '') && $this->cart->hasProducts()) {
+				
+						if ($total > $this->config->get('adv_shipping_cost_total')) {
+							$status = true;
+						} elseif ($total < $this->config->get('adv_shipping_cost_total')) {
+							$status = false;						
+						}
+				
+						if (($status) && ($this->cart->getSubTotal() > 0)) {
+							$weight = $this->cart->getWeight();
+				
+							$rates = explode(',', $this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate'));
+				
+							foreach ($rates as $rate) {
+								$adv_shipping_cost_data = explode(':', $rate);
+				
+								if ($adv_shipping_cost_data[0] >= $weight) {
+									if (isset($adv_shipping_cost_data[1])) {
+										$data['shipping_cost'] = $adv_shipping_cost_data[1];
+									}
+									break;
+								}
+							}
+							
+						} else {
+						$data['shipping_cost'] = 0;
+						}
+					
+					} else {
+						$data['shipping_cost'] = 0;
+					}				
+				}
+			} else {
+				$data['shipping_cost'] = 0;
+			}
+            ]]></add>
+        </operation>						
+	</file>
+
+	<file name="catalog/model/onecheckout/checkout.php" error="skip">
+        <operation error="skip">
+            <search position="replace"><![CDATA[
+, total = '" . (float)$data['total'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, total = '" . (float)$data['total'] . "', payment_cost = '" . (float)$data['payment_cost'] . "', shipping_cost = '" . (float)$data['shipping_cost'] . "'
+            ]]></add>
+        </operation>	
+        <operation error="skip">
+            <search position="replace"><![CDATA[
+, price = '" . (float)$product['price'] . "'
+            ]]></search>
+            <add trim="true"><![CDATA[
+, price = '" . (float)$product['price'] . "', cost = '" . (float)$product['cost'] . "'
+            ]]></add>
+        </operation>
+	</file>	
+	
+END OF MODIFICATION - One Page Checkout (developer bingo) -->		
+
+
+<!-- START OF MODIFICATION - Quick Checkout - One Page Efficient Checkout Experience (developer MarketInSG)
+	
+		<file name="catalog/controller/quickcheckout/cart.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+          			'cost'     => $product['cost'],
+            ]]></add>
+        </operation>			
+	</file>
+	
+	<file name="catalog/controller/quickcheckout/confirm.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+					'cost'		 => $product['cost'],
+            ]]></add>
+        </operation>	
+        <operation error="skip">
+            <search position="after"><![CDATA[
+$data = array();
+            ]]></search>
+            <add><![CDATA[
+			// payment cost
+			if ($this->config->get('adv_payment_cost_status') && $this->config->get('adv_payment_cost_type') && isset($this->session->data['payment_method']['code']) && $this->cart->hasProducts()) {
+				$getPaymentTypes = unserialize($this->config->get('adv_payment_cost_type'));
+			  if ($getPaymentTypes) {
+				  foreach ($getPaymentTypes as $payment_type) {
+					if ($this->session->data['payment_method']['code'] == $payment_type['pc_paymentkey']) {			
+						$address = array();
+							if (isset($this->session->data['payment_address_id']) && $this->session->data['payment_address_id']) { 
+								$this->load->model('account/address');
+								$address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+								
+								$country_id	= (isset($address['country_id'])) ? $address['country_id'] : 0;
+								$zone_id 	= (isset($address['zone_id'])) ? $address['zone_id'] : 0;
+								
+							} else { 
+								$country_id	= (isset($this->session->data['guest']['payment']['country_id'])) ? $this->session->data['guest']['payment']['country_id'] : 0;
+								$zone_id 	= (isset($this->session->data['guest']['payment']['zone_id'])) ? $this->session->data['guest']['payment']['zone_id'] : 0;
+							}
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$payment_type['pc_geozone'] . "' AND country_id = '" . (int)$country_id . "' AND (zone_id = '" . (int)$zone_id . "' OR zone_id = '0')");
+						
+							if (!$payment_type['pc_geozone']) {
+								$status = true;
+							} elseif ($query->num_rows) {
+								$status = true;
+							} else {
+								$status = false;
+							}		
+			
+							if (($total > $this->config->get('adv_payment_cost_total')) && ($status) && ($this->cart->getSubTotal() > 0)) {
+								$data['payment_cost'] = ($payment_type['pc_percentage']*$total)/100 + $payment_type['pc_fixed'];
+							} else {
+								$data['payment_cost'] = 0;
+							}
+							
+					} else {
+						$data['payment_cost'] = 0;	
+					}
+				
+				  }
+				} else {
+					$data['payment_cost'] = 0;	
+				}
+			} else {
+				$data['payment_cost'] = 0;	
+			}
+
+
+			// shipping cost
+			if ($this->customer->isLogged()) {
+				$this->load->model('account/address');
+				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);	
+			} elseif (isset($this->session->data['guest'])) {
+				$shipping_address = $this->session->data['guest']['shipping'];
+			}	
+			
+			$query = $this->db->query("SELECT geo_zone_id FROM " . DB_PREFIX . "zone_to_geo_zone WHERE country_id = '" . (int)$shipping_address['country_id'] . "' AND (zone_id = '" . (int)$shipping_address['zone_id'] . "' OR zone_id = '0')");
+
+			if ($query->rows) {	
+				foreach ($query->rows as $result) {
+					if (($this->config->get('adv_shipping_cost_weight_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate') != '') && $this->cart->hasProducts()) {
+				
+						if ($total > $this->config->get('adv_shipping_cost_total')) {
+							$status = true;
+						} elseif ($total < $this->config->get('adv_shipping_cost_total')) {
+							$status = false;						
+						}
+				
+						if (($status) && ($this->cart->getSubTotal() > 0)) {
+							$weight = $this->cart->getWeight();
+				
+							$rates = explode(',', $this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate'));
+				
+							foreach ($rates as $rate) {
+								$adv_shipping_cost_data = explode(':', $rate);
+				
+								if ($adv_shipping_cost_data[0] >= $weight) {
+									if (isset($adv_shipping_cost_data[1])) {
+										$data['shipping_cost'] = $adv_shipping_cost_data[1];
+									}
+									break;
+								}
+							}
+							
+						} else {
+						$data['shipping_cost'] = 0;
+						}
+					
+					} else {
+						$data['shipping_cost'] = 0;
+					}				
+				}
+			} else {
+				$data['shipping_cost'] = 0;
+			}
+            ]]></add>
+        </operation>						
+	</file>
+	
+END OF MODIFICATION - Quick Checkout - One Page Efficient Checkout Experience (developer MarketInSG) -->
+
+
+<!-- START OF MODIFICATION - UberCheckout (developer qphoria)
+
+	<file name="catalog/controller/checkout/checkout_two.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+=> $product['model'],
+            ]]></search>
+            <add><![CDATA[
+				'cost'   	 => $product['cost'],
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="after"><![CDATA[
+$data = array();
+            ]]></search>
+            <add><![CDATA[
+			// payment cost
+			if ($this->config->get('adv_payment_cost_status') && $this->config->get('adv_payment_cost_type') && isset($this->session->data['payment_method']['code']) && $this->cart->hasProducts()) {
+				$getPaymentTypes = unserialize($this->config->get('adv_payment_cost_type'));
+			  if ($getPaymentTypes) {
+				  foreach ($getPaymentTypes as $payment_type) {
+					if ($this->session->data['payment_method']['code'] == $payment_type['pc_paymentkey']) {			
+						$address = array();
+							if (isset($this->session->data['payment_address_id']) && $this->session->data['payment_address_id']) { 
+								$this->load->model('account/address');
+								$address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
+								
+								$country_id	= (isset($address['country_id'])) ? $address['country_id'] : 0;
+								$zone_id 	= (isset($address['zone_id'])) ? $address['zone_id'] : 0;
+								
+							} else { 
+								$country_id	= (isset($this->session->data['guest']['payment']['country_id'])) ? $this->session->data['guest']['payment']['country_id'] : 0;
+								$zone_id 	= (isset($this->session->data['guest']['payment']['zone_id'])) ? $this->session->data['guest']['payment']['zone_id'] : 0;
+							}
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$payment_type['pc_geozone'] . "' AND country_id = '" . (int)$country_id . "' AND (zone_id = '" . (int)$zone_id . "' OR zone_id = '0')");
+						
+							if (!$payment_type['pc_geozone']) {
+								$status = true;
+							} elseif ($query->num_rows) {
+								$status = true;
+							} else {
+								$status = false;
+							}		
+			
+							if (($total > $this->config->get('adv_payment_cost_total')) && ($status) && ($this->cart->getSubTotal() > 0)) {
+								$data['payment_cost'] = ($payment_type['pc_percentage']*$total)/100 + $payment_type['pc_fixed'];
+							} else {
+								$data['payment_cost'] = 0;
+							}
+							
+					} else {
+						$data['payment_cost'] = 0;	
+					}
+				
+				  }
+				} else {
+					$data['payment_cost'] = 0;	
+				}
+			} else {
+				$data['payment_cost'] = 0;	
+			}
+
+
+			// shipping cost
+			if ($this->customer->isLogged() && !isset($this->session->data['shipping_address_id'])) {
+				$this->session->data['shipping_address_id'] = $this->customer->getAddressId();
+			}
+
+			if ($this->customer->isLogged() && isset($this->session->data['shipping_address_id'])) {
+				$this->load->model('account/address');
+				$shipping_address = $this->model_account_address->getAddress($this->session->data['shipping_address_id']);
+				$this->data['shipping_address_id'] = $this->session->data['shipping_address_id'];
+			} elseif (isset($this->session->data['guest']['shipping'])) {
+				$shipping_address = $this->session->data['guest']['shipping'];
+			} elseif (isset($this->session->data['guest']['payment'])) {
+				$shipping_address = $this->session->data['guest']['payment'];
+			}
+
+			if (!isset($shipping_address['firstname'])) {
+				$shipping_address = reset($this->data['addresses']);
+			}
+			
+			$query = $this->db->query("SELECT geo_zone_id FROM " . DB_PREFIX . "zone_to_geo_zone WHERE country_id = '" . (int)$shipping_address['country_id'] . "' AND (zone_id = '" . (int)$shipping_address['zone_id'] . "' OR zone_id = '0')");
+
+			if ($query->rows) {	
+				foreach ($query->rows as $result) {
+					if (($this->config->get('adv_shipping_cost_weight_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_status') == '1') && ($this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate') != '') && $this->cart->hasProducts()) {
+				
+						if ($total > $this->config->get('adv_shipping_cost_total')) {
+							$status = true;
+						} elseif ($total < $this->config->get('adv_shipping_cost_total')) {
+							$status = false;						
+						}
+				
+						if (($status) && ($this->cart->getSubTotal() > 0)) {
+							$weight = $this->cart->getWeight();
+				
+							$rates = explode(',', $this->config->get('adv_shipping_cost_weight_' . $result['geo_zone_id'] . '_rate'));
+				
+							foreach ($rates as $rate) {
+								$adv_shipping_cost_data = explode(':', $rate);
+				
+								if ($adv_shipping_cost_data[0] >= $weight) {
+									if (isset($adv_shipping_cost_data[1])) {
+										$data['shipping_cost'] = $adv_shipping_cost_data[1];
+									}
+									break;
+								}
+							}
+							
+						} else {
+						$data['shipping_cost'] = 0;
+						}
+					
+					} else {
+						$data['shipping_cost'] = 0;
+					}				
+				}
+			} else {
+				$data['shipping_cost'] = 0;
+			}
+            ]]></add>
+        </operation>
+	</file>
+	
+END OF MODIFICATION - UberCheckout (developer qphoria) -->	
+
+
+<!-- START OF MODIFICATION - PayPal Express Checkout (developer webprojectsol)
+
+	<file name="catalog/controller/payment/paypal_express.php" error="skip">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+$request .= '&L_PAYMENTREQUEST_0_QTY' . $n . '=' . urlencode($product['quantity']);
+            ]]></search>
+            <add><![CDATA[
+						$request .= '&L_PAYMENTREQUEST_0_COST' . $n . '=' . urlencode($product['cost']);
+            ]]></add>
+        </operation>			
+	</file>
+
+END OF MODIFICATION - PayPal Express Checkout (developer webprojectsol) -->	
+
+	<file name="system/library/cart.php">
+        <operation>
+            <search position="after"><![CDATA[
+					$option_price = 0;
+            ]]></search>
+            <add><![CDATA[
+      				$option_cost = 0;
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[
+, pov.price_prefix
+            ]]></search>
+            <add trim="true"><![CDATA[
+, pov.price_prefix, pov.cost, pov.cost_prefix
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="before"><![CDATA[
+									if ($option_value_query->row['points_prefix'] == '+') {
+            ]]></search>
+            <add><![CDATA[
+									if ($option_value_query->row['cost_prefix'] == '+') {
+										$option_cost += $option_value_query->row['cost'];
+									} elseif ($option_value_query->row['cost_prefix'] == '-') {
+										$option_cost -= $option_value_query->row['cost'];
+									}
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="after"><![CDATA[
+										=> $option_value_query->row['price_prefix'],
+            ]]></search>
+            <add><![CDATA[
+										'cost'                    => $option_value_query->row['cost'],
+										'cost_prefix'             => $option_value_query->row['cost_prefix'],
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="after"><![CDATA[
+									'price_prefix'            => '',
+            ]]></search>
+            <add><![CDATA[
+									'cost'                    => '',
+									'cost_prefix'             => '',
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="after"><![CDATA[
+					$price = $product_query->row['price'];
+            ]]></search>
+            <add><![CDATA[
+					$cost = $product_query->row['cost'];
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+						=> ($price + $option_price),
+            ]]></search>
+            <add><![CDATA[
+						'cost'            => ($cost + $option_cost),
+            ]]></add>
+        </operation>		
+	</file>			
+</modification>

@@ -1,0 +1,1 @@
+2016-01-30 21:40:09 - Unclosed string at position: 254 in file: /customers/d/d/e/smartviking.no/httpd.www/system/nitro/temp/js/3ed687ff4d2ca800ad1555cc39dcbcd5.js

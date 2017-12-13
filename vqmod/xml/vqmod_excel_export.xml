@@ -1,0 +1,38 @@
+<modification>
+	<id>VQMOD EXCEL EXPORT</id>
+	<version>1.5.x</version>
+	<vqmver>2.0</vqmver>
+	<author>DEAWid</author>
+	
+	
+	<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['title'] = $this->document->getTitle(); ]]></search>
+			<add><![CDATA[
+  //excel export - start
+		$this->load->language('tool/excel_export');
+		$this->data['text_excel_export'] = $this->language->get('heading_title');
+		
+		$token = "";
+		if(isset($this->session->data['token'])){
+      $token = 'token=' . $this->session->data['token'];
+    }
+		
+		$this->data['excel_export'] = $this->url->link('tool/excel_export', $token, 'SSL');
+	//excel export - end
+      ]]></add>
+		</operation>
+	</file>
+	
+	
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>]]></search>
+			<add><![CDATA[
+<li><a href="<?php echo $excel_export; ?>"><?php echo $text_excel_export; ?></a></li> 
+      ]]></add>
+		</operation>
+	</file>
+
+
+</modification>

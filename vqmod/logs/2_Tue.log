@@ -1,0 +1,150 @@
+---------- Date: 2017-12-12 15:34:10 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 15:34:26 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 15:39:00 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 16:00:37 ~ IP : 40.77.167.74 ----------
+REQUEST URI : /hobby-no/lommelerke-sett-jack-daniels-no.html
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/smart_microdata.xml
+   id        : Smart Microdata
+   version   : 1.0
+   vqmver    : 2.3.0
+   author    : ovife21
+
+File Name    : catalog/view/theme/*/template/product/category.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <h1
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 16:34:00 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 16:34:20 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 16:34:58 ~ IP : 193.202.110.19 ----------
+REQUEST URI : /admin/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 16:46:13 ~ IP : 90.149.53.73 ----------
+REQUEST URI : /mote-and-stil-no/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/smart_microdata.xml
+   id        : Smart Microdata
+   version   : 1.0
+   vqmver    : 2.3.0
+   author    : ovife21
+
+File Name    : catalog/view/theme/*/template/product/category.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <h1
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 18:08:25 ~ IP : 90.149.53.73 ----------
+REQUEST URI : /admin/index.php?route=tool/nitro&amp;token=2160343c88f2baa2cb1658a75885646b
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/nitro_db.xml
+   id        : NitroPack Database Singleton
+   version   : 1.8.12
+   vqmver    : 2.x
+   author    : iSenseLabs | http://isenselabs.com
+
+File Name    : system/library/db.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (SKIPPED): if (file_exists($file)) {
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2017-12-12 18:08:54 ~ IP : 90.149.53.73 ----------
+REQUEST URI : /helse-no/
+MOD DETAILS:
+   modFile   : /customers/d/d/e/smartviking.no/httpd.www/vqmod/xml/smart_microdata.xml
+   id        : Smart Microdata
+   version   : 1.0
+   vqmver    : 2.3.0
+   author    : ovife21
+
+File Name    : catalog/view/theme/*/template/product/category.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <h1
+
+----------------------------------------------------------------------
+
+

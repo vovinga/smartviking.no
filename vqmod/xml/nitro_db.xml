@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<id>NitroPack Database Singleton</id>
+	<version>1.8.12</version>
+	<vqmver>2.x</vqmver>
+	<author>iSenseLabs | http://isenselabs.com</author>
+
+	<file name="system/library/db.php">
+		<operation error="log">
+			<search position="before"><![CDATA[if (file_exists($file)) {]]></search>
+			<add><![CDATA[
+                if (class_exists('NitroDb') && defined('VERSION')) {
+                    $this->driver = NitroDb::getInstance();
+                    if ($this->driver) return;
+                }
+			]]></add>
+		</operation>
+	</file>
+</modification>

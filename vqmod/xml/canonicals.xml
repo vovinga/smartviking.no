@@ -1,0 +1,137 @@
+
+<!--
+/*******************************************************************************
+*                                 Opencart SEO Pack                            *
+*                             Copyright : Ovidiu Fechete                       *
+*                              email: ovife21@gmail.com                        *
+*                Below source-code or any part of the source-code              *
+*                          cannot be resold or distributed.                    *
+*******************************************************************************/
+-->
+
+<modification>
+
+	<id>Category Canonical</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>ovife21</author>
+	
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setKeywords($category_info['meta_keyword']);]]></search>
+			<add><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_categories'])) {
+					$pathx = explode('_', $this->request->get['path']);
+					$pathx = end($pathx);
+					$this->document->addLink($this->url->link('product/category', 'path=' . $pathx ), 'canonical');
+					}
+			]]></add>
+		</operation>		
+	</file>
+	<file name="catalog/controller/product/manufacturer.php">
+		<operation>
+			<search position="after"><![CDATA[$this->load->model('tool/image');]]></search>
+			<add><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_brands'])) {
+					if (isset($this->request->get['manufacturer_id'])) {$this->document->addLink($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id']), 'canonical');}
+					}]]></add>
+		</operation>		
+	</file>
+	<file name="catalog/controller/information/information.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle]]></search>
+			<add><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_info'])) {
+					$this->document->addLink($this->url->link('information/information', 'information_id=' .  $information_id), 'canonical');
+					}]]></add>
+		</operation>		
+	</file>
+	<file name="catalog/controller/product/special.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle]]></search>
+			<add><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_specials'])) {
+					$this->document->addLink($this->url->link('product/special'), 'canonical');
+					}]]></add>
+		</operation>		
+	</file>
+	<file name="catalog/controller/common/home.php">
+		<operation>
+			<search position="after"><![CDATA[$this->document->setTitle]]></search>
+			<add><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_home'])) {
+					$this->document->addLink($this->config->get('config_url'), 'canonical');
+					}]]></add>
+		</operation>		
+	</file>
+		<file name="catalog/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['links']]]></search>
+			<add><![CDATA[
+				$this->data['robots'] = '';
+				$extendedseo = $this->config->get('extendedseo');
+				if (isset($extendedseo['robots'])) {
+					$this->data['robots'] = '<meta name="robots" content="index">';
+					}
+				
+				foreach ($this->data['links'] as $link) { 
+					if ($link['rel']=='canonical') {$hasCanonical = true;
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$link['href']."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+					}
+				}
+				
+				if (isset($this->request->get['route']) && !isset($hasCanonical) && (strpos($this->request->get['route'], 'error') === false)) {
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$this->url->link($this->request->get['route'])."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+				}
+				
+				$this->data['canonical_link'] = '';
+				$canonicals = $this->config->get('canonicals'); 
+				if (!isset($hasCanonical) && isset($this->request->get['route']) && (isset($canonicals['canonicals_extended']))) {
+					$this->data['canonical_link'] = $this->url->link($this->request->get['route']);					
+					}
+				
+				]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['text_home']]]></search>
+			<add><![CDATA[
+			$extendedseo = $this->config->get('extendedseo'); 
+			if ((isset($extendedseo['trim_descriptions'])) && ($this->data['description']) && (strlen($this->data['description']) > 160)) {
+				$pos=strpos($this->data['description'], ' ', 156);
+				$this->data['description'] = substr($this->data['description'],0,156). ' ...'; 
+			}
+			if ((isset($extendedseo['trim_titles'])) && ($this->data['title']) && (strlen($this->data['title']) > 60)) {
+				$pos=strpos($this->data['title'], ' ', 56);
+				$this->data['title'] = substr($this->data['title'],0,56). ' ...'; 
+			}
+			]]></add>
+		</operation>		
+				
+	</file>
+
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[base href]]></search>
+			<add><![CDATA[
+				<?php foreach ($links as $link) { if ($link['rel']=='canonical') {$hasCanonical = true;} } 
+				$canonicals = $this->config->get('canonicals');
+				if (!isset($hasCanonical) && isset($this->request->get['route']) && (isset($canonicals['canonicals_extended']))) {echo '<link href="'.$this->url->link($this->request->get['route']).'" rel="canonical" />';}
+				?> 
+				<?php if ($robots) {echo $robots;} ?>
+
+				]]></add>
+		</operation>		
+	</file>
+</modification>
+
+
+

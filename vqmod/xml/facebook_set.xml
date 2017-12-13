@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<modification>
+	<id>OpenCart Facebook Set</id>
+	<version>1.4.x and 1.5.x</version>
+	<vqmver>2.2.1</vqmver>
+	<author>vqmod.com</author>
+	<file name="catalog/controller/common/header.php">
+        <operation>
+                <search position="before"><![CDATA[
+$this->children = array(
+                ]]></search>
+                <add><![CDATA[		/* Start Facebook Set */
+		// Add rewrite to url class
+		if ($this->config->get('config_seo_url')) {
+			// Decode URL
+			if (isset($this->request->get['_route_'])) {
+				$parts = explode('/', $this->request->get['_route_']);
+				
+				foreach ($parts as $part) {
+					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
+					
+					if ($query->num_rows) {
+						$url = explode('=', $query->row['query']);
+						
+						if ($url[0] == 'product_id') {
+							$this->request->get['product_id'] = $url[1];							
+						}
+						
+						if ($url[0] == 'category_id') {
+							if (!isset($this->request->get['path'])) {
+								$this->request->get['path'] = $url[1];
+							} else {
+								$this->request->get['path'] .= '_' . $url[1];
+							}
+						}	
+						
+						if ($url[0] == 'manufacturer_id') {
+							$this->request->get['manufacturer_id'] = $url[1];
+						}
+						
+						if ($url[0] == 'information_id') {
+							$this->request->get['information_id'] = $url[1];
+						}	
+					} else {
+						$this->request->get['route'] = 'error/not_found';	
+					}
+				}
+				
+				if (isset($this->request->get['product_id'])) {
+					$this->request->get['route'] = 'product/product';
+				} elseif (isset($this->request->get['path'])) {
+					$this->request->get['route'] = 'product/category';
+				} elseif (isset($this->request->get['manufacturer_id'])) {
+					$this->request->get['route'] = 'product/manufacturer/info';
+				} elseif (isset($this->request->get['information_id'])) {
+					$this->request->get['route'] = 'information/information';
+				}
+			}
+		}
+		
+		$this->load->model("setting/setting");
+		$facebook_login_config= $this->model_setting_setting->getSetting("facebook_set");
+		$route= ( isset($this->request->get['route']) ) ? $this->request->get['route'] : "";
+		$theme= $this->config->get('config_template');
+		$this->data['fbset']= array();
+		$this->data['fbset']= $facebook_login_config;
+		
+		/* Start Facebook Social Shopping */		
+		$add_to_html_tag= "";
+		$fb_social_shopping_selector= "";
+		$page_product_status= 0;		
+		if( $route == "product/product" ){
+			$product_url= $this->url->link("product/product", 'product_id=' . $this->request->get['product_id'], "SSL");
+			$fb_social_shopping= array( 'fb_like', 'fb_send', 'fb_comment');
+			$ct_fbml= 0;
+			foreach( $fb_social_shopping as $item ){
+				$field= "config_manages_" . $item;
+				if( isset($facebook_login_config[$field]['display']) && $facebook_login_config[$field]['display'] ){
+					switch ($field){
+						case "config_manages_fb_like":
+						$facebook_login_config[$field]['html']= '<fb:like href="' . $product_url . 
+						'" send="true" width="470" show_faces="false"></fb:like>';
+						break;
+						case "config_manages_fb_comment":
+						$facebook_login_config[$field]['html']= '<fb:comments  class="xfbml" ' . 
+						'href="' . $product_url . '" width="470" num_posts="' . 
+						$facebook_login_config[$field]['number_post'] . '"></fb:comments>';
+						break;
+					}
+					$this->data['fbset'][$field]= $facebook_login_config[$field];
+					$ct_fbml++;
+				}
+			}
+			
+			// Adding FB XML namespace attribute
+			if( $ct_fbml ){
+				$add_to_html_tag= ' xmlns:fb="http://ogp.me/ns/fb#"';
+				$page_product_status= 1;
+				$selectors= array("product/product"=>".right");
+				$fb_social_shopping_selector= ( isset($selectors[$route]) ) ? $selectors[$route] : "";
+				
+				$fb_social_shopping= $facebook_login_config['config_manages_fb_comment'];
+				$style= ( isset($fb_social_shopping['position_type']) && $fb_social_shopping['position_type'] ) ? 1 : 0;
+				$fb_social_shopping_selector= ( $style ) ?  $fb_social_shopping_selector : 
+				$fb_social_shopping['position_selector'];
+			}
+		}
+		$this->data['fbset']['add_to_html_tag']= $add_to_html_tag;
+		$this->data['fbset']['social_shopping_selector']= $fb_social_shopping_selector;
+		$this->data['fbset']['page_product_status']= $page_product_status;
+		/* End Facebook Social Shopping */
+		// Start Facebook Login Configuration
+		$dir_vqmod= str_replace("system", "vqmod", DIR_SYSTEM);
+		$file_path= $dir_vqmod . "xml/facebook_set.xml";
+		$handle= fopen($file_path, "r+");
+		$xmlstr= fread($handle, filesize($file_path));
+		fclose($handle);
+		
+		if( class_exists("SimpleXMLElement") ){
+			$xmlconfig= new SimpleXMLElement($xmlstr);
+			$selected_theme= $this->config->get('config_template');
+			$tpl_name= (string)$xmlconfig->file[2]['name'];
+			$regex_tpl= "/^catalog\/view\/theme\/(\w+)\/template\/common\/header\.tpl$/";
+			$replacement= 'catalog/view/theme/' . $selected_theme . '/template/common/header.tpl';
+			$new_config_tpl_name= preg_replace($regex_tpl, $replacement, $tpl_name);
+			
+			if( $tpl_name != $new_config_tpl_name ){
+				// Change and Save XML Configuration
+				$xmlconfig->file[2]['name']= $new_config_tpl_name;
+				$xmlconfig->asXML($file_path);
+			}
+		}		
+		// End Facebook Login Configuration
+                ]]></add>
+        </operation>
+	</file>
+	<file name="catalog/view/theme/default/template/common/header.tpl">
+		<operation>
+                <search position="replace"><![CDATA[<html ]]></search>
+                <add><![CDATA[<html <?php echo $fbset['add_to_html_tag']; ?>]]></add>
+        </operation>
+        <operation>
+                <search position="after"><![CDATA[
+                <body>
+                ]]></search>
+                <add><![CDATA[<!-- Start Facebook Javascript SDK -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '<?php echo $fbset["config_settings"]["facebook_app_id"]; ?>', // App ID from the App Dashboard
+      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File for x-domain communication
+      status     : true, // check the login status upon init?
+      cookie     : true, // set sessions cookies to allow your server to access the session?
+      xfbml      : true  // parse XFBML tags on this page?
+    });
+	
+	
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+
+  // Load the SDK's source Asynchronously
+  // Note that the debug version is being actively developed and might 
+  // contain some type checks that are overly strict. 
+  // Please report such bugs using the bugs tool.
+  (function(d, debug){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document, /*debug*/ false));
+</script>
+<!-- End Facebook Javascript SDK -->
+<!-- Start Facebook Social Shopping -->
+<?php 
+if( $fbset['page_product_status'] ){
+$fb_social_like= $fbset['config_manages_fb_like']['html'];
+$fb_social_comment= $fbset['config_manages_fb_comment']['html'];
+?>
+<style>
+.btn-fb .fb_edge_widget_with_comment { margin-right: 10px; }
+.btn-fb div { float: left; }
+.fb_iframe_widget { line-height: normal; }
+.fb-box { color: #4D4D4D; border: 1px solid #E7E7E7; margin-bottom: 10px; }
+.fb-box div { padding: 8px; border-bottom: 1px solid #E7E7E7; }
+</style>
+<script>
+$(document).ready( function(){
+	fb_social_shopping_html= '<div class="fb-box">' +
+	'<div class="btn-fb">' +
+	'<?php echo $fb_social_like; ?>' +
+	'</div>' +
+	'<div>' +
+	'<?php echo $fb_social_comment; ?>' +
+	'</div>' +
+	'</div>';
+	
+	fb_social_shopping_selector= '<?php echo $fbset["social_shopping_selector"]; ?>';
+	$(fb_social_shopping_selector).append(fb_social_shopping_html);
+});
+</script>
+<?php
+}
+?>
+<!-- End Facebook Social Shopping -->
+]]></add>
+        </operation>
+	</file>
+</modification>

@@ -1,0 +1,1 @@
+{"smushed_images_count":0,"already_smushed_images_count":0,"total_images":561,"kb_saved":0,"last_smush_timestamp":0,"smushed_files":[{"filename":"\/customers\/d\/d\/e\/smartviking.no\/httpd.www\/image\/cache\/no_image-40x40.jpg","percent":9.12}],"messages":[]}

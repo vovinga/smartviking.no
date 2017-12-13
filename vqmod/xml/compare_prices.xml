@@ -1,0 +1,136 @@
+<modification>
+	<id>Compare prices module</id>
+	<version>1.4.x and 1.5.x</version>
+	<vqmver>1.0</vqmver>
+	<author>iSenseLabs</author>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[public function index() { ]]></search>
+			<add><![CDATA[
+			private function ComparePricesURL() {
+				if  ((isset($this->request->get['route'])) && ($this->request->get['route']=="product/product")) {
+				return $this->url->link("product/product","product_id=".$this->request->get['product_id'],"");
+				} else {
+				if (strpos(HTTP_SERVER,'www.') && strpos(HTTPS_SERVER,'www.')) {
+					$siteName = $_SERVER["SERVER_NAME"];
+				} else {
+				  $siteName = str_replace("www.", "", $_SERVER['SERVER_NAME']);
+				}
+				return "http://".$siteName.$_SERVER["REQUEST_URI"];  
+				}
+			}
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="after"><![CDATA[public function index() { ]]></search>
+			<add><![CDATA[
+			$this->data['ComparePricesCurrURL'] = $this->ComparePricesURL();
+			if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+				$this->data['data']['ComparePrices'] = str_replace('http', 'https', $this->config->get('ComparePrices'));
+			} else {
+				$this->data['data']['ComparePrices'] = $this->config->get('ComparePrices');
+			}
+			
+			if(!isset($this->data['data']['ComparePrices']['CustomText_'.$this->config->get('config_language')])){
+			$this->data['data']['ComparePrices']['CustomText'] = '';
+			} else {
+			$this->data['data']['ComparePrices']['CustomText'] = $this->data['data']['ComparePrices']['CustomText_'.$this->config->get('config_language')];
+			}
+			if(!isset($this->data['data']['ComparePrices']['SecondCustomText_'.$this->config->get('config_language')])){
+			$this->data['data']['ComparePrices']['SecondCustomText'] = '';
+			} else {
+			$this->data['data']['ComparePrices']['SecondCustomText'] = $this->data['data']['ComparePrices']['SecondCustomText_'.$this->config->get('config_language')];
+			}
+			
+			if ($this->customer->isLogged()) {
+				$this->load->model('account/customer');	
+				$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+				if (isset($customer_info)) {
+					$this->data['firstname'] = $customer_info['firstname'];
+					$this->data['lastname'] = $customer_info['lastname'];
+					$this->data['email'] = $customer_info['email'];
+				} else {
+					$this->data['firstname'] = '';
+					$this->data['lastname'] = '';
+					$this->data['email'] = '';
+				}
+			}
+			$this->language->load('module/compareprices');
+			$this->data['tab_ComparePrices'] = $this->language->get('tab_ComparePrices');
+			$this->data['pleaseFillInTheForm'] = $this->language->get('pleaseFillInTheForm');
+			$this->data['requiredFields'] = $this->language->get('requiredFields');
+			$this->data['yourName'] = $this->language->get('yourName');
+			$this->data['yourEmail'] = $this->language->get('yourEmail');
+			$this->data['priceInOtherStore'] = $this->language->get('priceInOtherStore');
+			$this->data['ourPrice'] = $this->language->get('ourPrice');
+			$this->data['linkToTheProduct'] = $this->language->get('linkToTheProduct');
+			$this->data['commentsOptional'] = $this->language->get('commentsOptional');
+			$this->data['isThereSomethingMoreWeShouldKnow'] = $this->language->get('isThereSomethingMoreWeShouldKnow');
+			$this->data['submitForm'] = $this->language->get('submitForm');
+			$this->data['errorRequiredFields'] = $this->language->get('errorRequiredFields');
+			$this->data['errorInvalidEmail'] = $this->language->get('errorInvalidEmail');
+			$this->data['successfulSubmit'] = $this->language->get('successfulSubmit');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation>
+			<search position="after" offset="1"><![CDATA[<a rel="nofollow" href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>]]></search>
+			<add><![CDATA[
+			<?php if (!empty($data['ComparePrices']['Enabled']) && $data['ComparePrices']['Enabled'] == 'yes' && $data['ComparePrices']['showInTab'] == 'yes') { ?>	
+			<a href="#tab-comparePrices"><?php echo $tab_ComparePrices; ?></a>			
+			<script>
+			$(document).ready(function() {
+			if (window.location.hash == "#tab-comparePrices") {
+					$('a[href="' + window.location.hash + '"]').click(); }
+			});
+			</script>
+			<?php } ?>
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="before"><![CDATA[<?php if ($tags) { ?>]]></search>
+			<add><![CDATA[
+			<?php if (!empty($data['ComparePrices']['Enabled']) && $data['ComparePrices']['Enabled'] == 'yes' && $data['ComparePrices']['showInTab'] == 'yes') { ?>
+			<div id="tab-comparePrices" class="tab-content">
+			            <div id="ComparePricesSuccess"></div>
+
+			<div id="ComparePrices">
+			<?php if (empty($special)) $final_price=$price; else $final_price=$special; ?>
+            <?php $ComparePricesName = (empty($firstname)) ? "" : $firstname." ".$lastname; ?>
+            <?php $ComparePricesEmail = (empty($email)) ? "" : $email; ?>
+			<div class="ComparePrices" style="width: <?php echo $data['ComparePrices']['Width']; ?>px;">		
+			<div style="width:50%;padding:10px;float:right;"><strong><?php echo $pleaseFillInTheForm; ?></strong>
+			<br /><small><span class="required">*</span> <?php echo $requiredFields; ?></small><br />
+			<form id="ComparePricesForm">
+			
+			  <table class="form">
+				<tr><td><span class="required">*</span> <?php echo $yourName; ?>:</td><td><input type="text" name="YourName" id="YourName" value="<?php echo $ComparePricesName; ?>"></td></tr>
+				<tr><td><span class="required">*</span> <?php echo $yourEmail; ?>:</td><td><input type="text" name="YourEmail" id="YourEmail" value="<?php echo $ComparePricesEmail; ?>"></td></tr>
+				<tr><td><span class="required">*</span> <?php echo $priceInOtherStore; ?>:<br/><small><?php echo $ourPrice; ?>: <strong><?php echo $final_price; ?><strong></small></td><td><input type="text" name="PriceInOtherStore" id="PriceInOtherStore"></td></tr>
+				<tr><td><span class="required">*</span> <?php echo $linkToTheProduct; ?>:</td><td><input type="text" name="LinkToTheProduct" id="LinkToTheProduct"></td></tr>
+				<tr><td colspan="2"><?php echo $commentsOptional; ?>:</td></tr>
+				<tr><td colspan="2"><textarea name="YourComments" id="YourComments" style="width:310px; height:70px;" placeholder="<?php echo $isThereSomethingMoreWeShouldKnow; ?>"></textarea>
+				<input type="hidden" name="CurrentProductURL" value="<?php echo $ComparePricesCurrURL; ?>">
+				<input type="hidden" name="CurrentProductName" value="<?php echo $heading_title; ?>">
+				<input type="hidden" name="CurrentProductPrice" value="<?php echo $final_price; ?>"></td></tr>
+				<tr><td colspan="2"><a id="ComparePricesSubmit" class="button"><?php echo $submitForm; ?></a></td></tr>
+			  </table>
+			</form>
+			</div>
+			<div style="width: 50%;padding: 10px;">
+			<?php echo html_entity_decode($data['ComparePrices']['CustomText']); ?>
+			<?php if ($data['ComparePrices']['CustomText']!="") { echo "<br /><br />".html_entity_decode($data['ComparePrices']['SecondCustomText']); } ?>
+			</div>
+			<div style="clear:both"></div>
+			</div>
+			</div>
+			</div>
+			<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>

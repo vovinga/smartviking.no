@@ -1,0 +1,117 @@
+/* ------------------------------------------
+CSS3 FACEBOOK-STYLE BUTTONS (Nicolas Gallagher)
+Licensed under Unlicense
+http://github.com/necolas/css3-facebook-buttons
+Facebook Login Style Standard 
+------------------------------------------ */
+.uibutton { 
+    position: relative; 
+    z-index: 1;
+    overflow: visible; 
+    display: inline-block; 
+    padding: 0.3em 0.6em 0.375em; 
+    border: 1px solid #999; 
+    border-bottom-color: #888;
+    margin: 0;
+    text-decoration: none; 
+    text-align: center;
+    font: bold 11px/normal 'lucida grande', tahoma, verdana, arial, sans-serif; 
+    white-space: nowrap; 
+    cursor: pointer; 
+    color: #333; 
+    background-color: #eee;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f6f6), to(#e4e4e3));
+    background-image: -moz-linear-gradient(#f5f6f6, #e4e4e3);
+    background-image: -o-linear-gradient(#f5f6f6, #e4e4e3);
+    background-image: linear-gradient(#f5f6f6, #e4e4e3);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f5f6f6', EndColorStr='#e4e4e3'); /* for IE 6 - 9 */
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #fff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #fff;
+    /* IE hacks */
+    zoom: 1; 
+    *display: inline; 
+}
+.uibutton:hover,
+.uibutton:focus,
+.uibutton:active {
+    border-color: #777 #777 #666;
+}
+.uibutton:active {
+    border-color: #aaa;
+    background: #ddd;
+    filter: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.uibutton::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+.uibutton.large {
+    font-size:13px;
+}
+.uibutton.confirm {
+    border-color: #29447E #29447E #1A356E;
+    color: #fff;
+    background-color: #5B74A8;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#637bad), to(#5872a7));
+    background-image: -moz-linear-gradient(#637bad, #5872a7);
+    background-image: -o-linear-gradient(#637bad, #5872a7);
+    background-image: linear-gradient(#637bad, #5872a7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#637bad', EndColorStr='#5872a7'); /* for IE 6 - 9 */
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8a9cc2;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8a9cc2;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 #8a9cc2;
+}
+.uibutton.confirm:active {
+    border-color: #29447E;
+    background: #4F6AA3;
+    filter: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+/* Facebook Login Style Standard */
+.icon { width: 32px; text-indent: -900em; color: #333; text-decoration: none; background-repeat: no-repeat; 
+line-height: 100%; white-space: nowrap; display: inline-block; position: relative; vertical-align: middle;
+margin: 0px; background-color: #325292;	 border-radius: 0px; border-top-right-radius: 5px; 
+border-bottom-right-radius: 5px; -webkit-border-radius: 0px; -webkit-border-top-right-radius: 5px; 
+-webkit-border-bottom-right-radius: 5px; -moz-border-radius: 0px; -moz-border-top-right-radius: 5px; 
+-moz-border-bottom-right-radius: 5px; color: white; background-position: left center; 
+padding: 12px 9px 8px 12px;	}
+.icon.facebook { background-image: url(../image/facebook-login/white_facebook.png); padding: 12px 0px 8px 0px; 
+border-radius: 0px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; 
+-webkit-border-radius: 0px; -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; 
+-moz-border-radius: 0px; -moz-border-top-left-radius: 5px; -moz-border-bottom-left-radius: 5px; 
+ border-right: 1px solid #304f87}
+.icon.icon-text { text-indent: 0; width: auto; border-left: 1px solid #637baa;
+left: -4px; border-radius: 0px; font-weight: bold; }
+.no-float { clear: both; }
+a.wrapper-icon { position: relative; display: inline-block; border: solid 1px #294C89; padding: 1px 0px 4px 0px; 
+background-color: #325292; border-radius: 5px;  }
+.embossed { -webkit-border-radius: 5px; -moz-border-radius: 5px; 
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.25), inset 0 -4px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.25), inset 0 -4px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -3px 0 rgba(0,0,0,.25), inset 0 -4px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1); }
+.wrapper-glossy:before { content: ""; width: 100%; height: 47%; position: absolute; top: 0;
+left: 0; background-color: #fff; opacity: 0.1; }
+.glossy:before {content: ""; width: 100%; height: 50%; position: absolute; top: 0;
+left: 0; background-color: #fff; opacity: 0.1; }
+.outer-box-icon {
+background: #fff; display: inline-block; box-shadow: inset 0px 1px 6px 1px #CCC;
+border-radius: 8px; border: 1px solid #CCC; border-bottom: none; padding: 6px; }
+.style2 { color: #fef4e9; border: none; background: #415b95;
+background: -webkit-gradient(linear, left top, left bottom, from(#4a66a5), to(#415b95));
+background: -moz-linear-gradient(top,  #4a66a5,  #415b95);
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4a66a5', endColorstr='#415b95'); }
+.wrapper-icon.style2 { border: 2px solid #2f4a83; padding: 0px; }
+a.style2:hover, a.style2:hover .facebook, a.style2:hover .icon-text { 
+background: -webkit-gradient(linear, left top, left bottom, from(#3a5fa9), to(#415b95));
+background: -moz-linear-gradient(top,  #3a5fa9,  #415b95);
+filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#3a5fa9', endColorstr='#415b95'); }
+a.style2:hover .facebook { background-image: url(../image/facebook-login/white_facebook.png); }
+a.fb-login:hover, a.fb-login:hover .facebook, a.fb-login:hover .icon-text{ background-color: #3a5fa9; }
+div.fb-login-box { margin-bottom: 10px; }
+.facebook-login-modal form div.alert { margin-top: 8px; }
