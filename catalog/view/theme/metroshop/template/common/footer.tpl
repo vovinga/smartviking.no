@@ -111,9 +111,9 @@ global $linkes;
   <div class="column">
     <span><?php echo $text_extra; ?></span>
     <ul>
-      <li><a <?php echo $linkes;?> href="<?php echo $manufacturer; ?>" title="<?php echo $text_manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
+      <!--li><a <?php echo $linkes;?> href="<?php echo $manufacturer; ?>" title="<?php echo $text_manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li-->
       <li><a <?php echo $linkes;?> href="<?php echo $voucher; ?>" title="<?php echo $text_voucher; ?>"><?php echo $text_voucher; ?></a></li>
-      <li><a <?php echo $linkes;?> href="<?php echo $affiliate; ?>" title="<?php echo $text_affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
+      <!--li><a <?php echo $linkes;?> href="<?php echo $affiliate; ?>" title="<?php echo $text_affiliate; ?>"><?php echo $text_affiliate; ?></a></li-->
       <li><a <?php echo $linkes;?> href="<?php echo $special; ?>" title="<?php echo $text_special; ?>"><?php echo $text_special; ?></a></li>
     </ul>
   </div>

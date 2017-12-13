@@ -1,0 +1,53 @@
+<extension>
+    <id>mbooth</id>
+    <name>Mbooth Module Manager</name>
+    <description>
+    Mbooth is an application to manage extensions on opencart. It uses XML files that list all the information about a module or theme. This module can download the extension or delete them. It can also update the opencart installation and keep trek of updates and install. It uses a backup restore system to rollback if an installtion was unsuccessful.
+    </description>
+    <type>module</type>
+    <version>2.1.2</version>
+    <opencart_version>1.5.1.3;1.5.2;1.5.3;1.5.4;1.5.5;1.5.6.4</opencart_version>
+    <mbooth_version>1.2</mbooth_version>
+    <author>Dreamvention</author>
+    <files>
+        <file>admin/controller/module/mbooth.php</file>
+        <file>admin/model/module/mbooth.php</file>
+        <file>admin/language/english/module/mbooth.php</file>
+        <file>admin/view/template/module/mbooth.tpl</file>
+        <file>admin/mbooth/xml/mbooth.xml</file>
+        <file>catalog/controller/module/mbooth.php</file>
+        <file>image/data/mbooth/info.png</file>
+        <file>admin/mbooth/download/index.php</file>
+        <file>admin/mbooth/backup/index.php</file>
+        <file>system/library/deploy.php</file>
+        <file>system/library/github_deploy.php</file>
+    </files>
+    <required>
+        <require>shopunity</require>
+    </required>
+    <updates>
+        <update version="2.1.2">
+            1. Updated deploy to work with owner
+        </update>
+        <update version="2.1.1">
+            1. Updated deploy to work with branch
+        </update>
+        <update version="2.1">
+            1. added support for Github
+            2. added support for Bitbucket
+        </update>
+        <update version="2.0">
+            1. Market added
+            2. Backup added
+            3. Log added
+        </update>
+        <update version="1.2">
+            1. Added support for Required modules<br/>
+            2. Added support for external download<br/>
+        </update>
+        <update version="1.1">
+            1. Added support for Directories
+        </update>
+        <update version="1.0"></update>
+    </updates>
+</extension>

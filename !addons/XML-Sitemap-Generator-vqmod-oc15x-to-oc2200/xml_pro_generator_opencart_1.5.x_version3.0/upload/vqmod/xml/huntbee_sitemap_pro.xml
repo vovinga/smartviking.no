@@ -1,0 +1,149 @@
+<modification>
+	<id>HUNTBEE SITEMAP PRO OC1.5.X</id>
+	<version>2.0</version>
+	<vqmver>2.X</vqmver>
+	<author>WEBGURUINDIA</author>
+	<!-- MENU LINK ADMIN -->
+	 	 <file name="admin/controller/common/header.php">
+            <operation>
+                <search position="after"><![CDATA[$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+                <add><![CDATA[$this->data['sitemap_link'] = $this->url->link('extension/hb_sitemap', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+            </operation>
+			
+			<operation>
+                <search position="after"><![CDATA[$this->data['text_feed'] = $this->language->get('text_feed');]]></search>
+                <add><![CDATA[$this->data['text_sitemap'] = $this->language->get('text_sitemap');]]></add>
+            </operation>
+        </file>		
+		
+		<file name="admin/language/*/common/header.php">
+            <operation>
+                <search position="before"><![CDATA[$_['text_feed']]]></search>
+                <add><![CDATA[$_['text_sitemap']                        = 'XML SITEMAP';]]></add>
+            </operation>
+        </file>
+		
+		<file name="admin/view/template/common/header.tpl">
+            <operation>
+                <search position="before"><![CDATA[<li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>]]>
+                </search>
+                <add><![CDATA[<li><a href="<?php echo $sitemap_link; ?>"><?php echo $text_sitemap; ?></a></li>]]>
+                </add>
+            </operation>
+        </file>
+		
+        <!-- ADMIN CHANGES  -->
+		 <file name="admin/controller/catalog/product.php">
+            <operation>
+                <search position="before"><![CDATA[$this->template = 'catalog/product_list.tpl';]]></search>
+                <add><![CDATA[$this->data['linkpsitemap'] = $this->url->link('extension/hb_sitemap/autogenerateproductmap', 'token=' . $this->session->data['token'], 'SSL');
+				$this->data['linktsitemap'] = $this->url->link('extension/hb_sitemap/autogeneratetagmap', 'token=' . $this->session->data['token'], 'SSL');
+				$this->data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>	
+        <file name="admin/controller/catalog/category.php">
+            <operation>
+                <search position="before"><![CDATA[$this->template = 'catalog/category_list.tpl';]]></search>
+                <add><![CDATA[
+				$this->data['linkcsitemap'] = $this->url->link('extension/hb_sitemap/autogeneratecategorymap', 'token=' . $this->session->data['token'], 'SSL');
+				$this->data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+        <file name="admin/controller/catalog/manufacturer.php">
+            <operation>
+                <search position="before"><![CDATA[$this->template = 'catalog/manufacturer_list.tpl';]]></search>
+                <add><![CDATA[
+				$this->data['linkbsitemap'] = $this->url->link('extension/hb_sitemap/autogeneratebrandmap', 'token=' . $this->session->data['token'], 'SSL');
+				$this->data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+        <file name="admin/controller/catalog/information.php">
+            <operation>
+                <search position="before"><![CDATA[$this->template = 'catalog/information_list.tpl';]]></search>
+                <add><![CDATA[
+				$this->data['linkisitemap'] = $this->url->link('extension/hb_sitemap/autogenerateinfomap', 'token=' . $this->session->data['token'], 'SSL');
+				$this->data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+		
+		<file name="admin/view/template/catalog/product_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if ($hb_sitemap_automatic == 1) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkpsitemap); ?>'
+					 });
+					$.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linktsitemap); ?>'
+					 });
+					 
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+
+		<file name="admin/view/template/catalog/category_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if ($hb_sitemap_automatic == 1) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkcsitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+        
+        <file name="admin/view/template/catalog/manufacturer_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if ($hb_sitemap_automatic == 1) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkbsitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+        
+        <file name="admin/view/template/catalog/information_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if ($hb_sitemap_automatic == 1) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkisitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+</modification>

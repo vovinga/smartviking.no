@@ -19,6 +19,7 @@ class Url {
             $route = 'checkout/simplecheckout';
         }*/
         
+		/*
         if ($route == 'checkout/checkout' && $get_route != 'checkout/checkout') {
             $route = 'checkout/simplecheckout';
         }
@@ -37,7 +38,8 @@ class Url {
 
         if ($route == 'account/address/insert' && $get_route != 'account/address/insert') {
             $route = 'account/simpleaddress/insert';
-        }       
+        }
+        */
         // SIMPLE END
         
 		if ($connection ==  'NONSSL') {

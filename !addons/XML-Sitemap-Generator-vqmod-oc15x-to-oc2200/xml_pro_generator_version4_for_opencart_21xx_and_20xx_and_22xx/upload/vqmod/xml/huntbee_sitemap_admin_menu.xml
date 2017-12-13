@@ -1,0 +1,41 @@
+<modification>
+	<id>HUNTBEE SITEMAP PRO OC2.X</id>
+	<version>7.1</version>
+	<vqmver>2.X</vqmver>
+	<author>HUNTBEE.COM</author>
+	<!-- MENU LINK ADMIN -->
+		<!-- MENU LINKS -->
+	 	 <file name="admin/controller/common/menu.php">
+            <operation error="skip">
+                <search position="after"><![CDATA[$data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+                <add><![CDATA[$data['sitemap_link'] = $this->url->link('extension/hb_sitemap', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+            </operation>
+			
+			<operation error="skip">
+                <search position="after"><![CDATA[$data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], true);]]></search>
+                <add><![CDATA[$data['sitemap_link'] = $this->url->link('extension/hb_sitemap', 'token=' . $this->session->data['token'], true);]]></add>
+            </operation>
+			
+			<operation error="log">
+                <search position="after"><![CDATA[$data['text_feed'] = $this->language->get('text_feed');]]></search>
+                <add><![CDATA[$data['text_sitemap'] = $this->language->get('text_sitemap');]]></add>
+            </operation>
+        </file>		
+		
+		<file name="admin/language/*/common/menu.php">
+            <operation error="log">
+                <search position="before"><![CDATA[$_['text_feed']]]></search>
+                <add><![CDATA[$_['text_sitemap']                        = 'XML Sitemap <i class="fa fa-sitemap" aria-hidden="true"></i>';]]></add>
+            </operation>
+        </file>
+		
+		<file name="admin/view/template/common/menu.tpl">
+            <operation error="log">
+                <search position="after"><![CDATA[<li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>]]>
+                </search>
+                <add><![CDATA[<li><a href="<?php echo $sitemap_link; ?>"><?php echo $text_sitemap; ?></a></li>]]>
+                </add>
+            </operation>
+        </file>
+ 	
+</modification>

@@ -1,0 +1,121 @@
+<modification>
+	<id>HUNTBEE SITEMAP PRO OC2.X</id>
+	<version>7.1</version>
+	<vqmver>2.X</vqmver>
+	<author>HUNTBEE.COM</author>
+        <!-- ADMIN CHANGES -->
+		 <file name="admin/controller/catalog/product.php">
+            <operation>
+                <search position="before"><![CDATA[$this->response->setOutput($this->load->view('catalog/product_list]]></search>
+                <add><![CDATA[$data['linkpsitemap'] = '../index.php?route=sitemap/hb_sitemap/productxmlcron&store_id=all&cron=1&passkey='.$this->config->get('hb_sitemap_passkey');
+				$data['linktsitemap'] = '../index.php?route=sitemap/hb_sitemap/producttagxmlcron&store_id=all&cron=1&passkey='.$this->config->get('hb_sitemap_passkey');
+				$data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>	
+        <file name="admin/controller/catalog/category.php">
+            <operation>
+                <search position="before"><![CDATA[$this->response->setOutput($this->load->view('catalog/category_list]]></search>
+                <add><![CDATA[
+				$data['linkcsitemap'] = '../index.php?route=sitemap/hb_sitemap/autogeneratecategorymap&passkey='.$this->config->get('hb_sitemap_passkey');
+				$data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+        <file name="admin/controller/catalog/manufacturer.php">
+            <operation>
+                <search position="before"><![CDATA[$this->response->setOutput($this->load->view('catalog/manufacturer_list]]></search>
+                <add><![CDATA[
+				$data['linkbsitemap'] = '../index.php?route=sitemap/hb_sitemap/autogeneratebrandmap&passkey='.$this->config->get('hb_sitemap_passkey');
+				$data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+        <file name="admin/controller/catalog/information.php">
+            <operation>
+                <search position="before"><![CDATA[$this->response->setOutput($this->load->view('catalog/information_list));]]></search>
+                <add><![CDATA[
+				$data['linkisitemap'] =  '../index.php?route=sitemap/hb_sitemap/autogenerateinfomap&passkey='.$this->config->get('hb_sitemap_passkey');
+				$data['hb_sitemap_automatic'] = $this->config->get('hb_sitemap_automatic');
+				]]></add>
+            </operation>
+        </file>
+		
+		<file name="admin/view/template/catalog/product_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if (($hb_sitemap_automatic == 1) and (isset($_GET['page']) == false)){?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkpsitemap); ?>'
+					 });
+					$.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linktsitemap); ?>'
+					 });
+					 
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+
+		<file name="admin/view/template/catalog/category_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if (($hb_sitemap_automatic == 1) and (isset($_GET['page']) == false)) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkcsitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+        
+        <file name="admin/view/template/catalog/manufacturer_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if (($hb_sitemap_automatic == 1) and (isset($_GET['page']) == false)) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkbsitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+        
+        <file name="admin/view/template/catalog/information_list.tpl">
+            <operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[<?php if (($hb_sitemap_automatic == 1) and (isset($_GET['page']) == false)) {?>
+				<script type="text/javascript">
+				$(document).ready( function () {
+				  $.ajax({
+						  type: 'post',
+						  url: '<?php echo htmlspecialchars_decode($linkisitemap); ?>'
+					 });
+				});
+				</script>
+				<?php } ?>]]>
+                </add>
+            </operation>
+        </file>
+	
+</modification>
